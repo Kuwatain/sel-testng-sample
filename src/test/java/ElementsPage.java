@@ -49,7 +49,7 @@ public class ElementsPage {
     private WebDriver driver;
 
     public ElementsPage(WebDriver driver) {
-        PageFactory.initElements(BaseTest.getDriver(), this);
+        PageFactory.initElements(driver, this);
         this.driver = driver;
     }
 

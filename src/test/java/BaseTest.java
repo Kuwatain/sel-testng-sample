@@ -7,23 +7,18 @@ import org.testng.annotations.BeforeMethod;
 import java.time.Duration;
 
 public class BaseTest {
-    protected static ThreadLocal<WebDriver> driverThread = new ThreadLocal<>();
+    static ThreadLocal<WebDriver> driverThread = new ThreadLocal<>();
 
     public static WebDriver getDriver() {
         return driverThread.get();
     }
 
-    protected ElementsPage elementsPage;
-    protected LandingPage landingPage;
-
     @BeforeMethod
     public void beforeMethod(ITestContext context) {
-        driverThread.set(new ChromeDriver());
-        getDriver().manage().window().maximize();
-        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-
-        elementsPage = new ElementsPage(getDriver());
-        landingPage = new LandingPage(getDriver());
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+        driverThread.set(driver);
     }
 
     @AfterMethod
@@ -31,5 +26,6 @@ public class BaseTest {
         if (driverThread.get() != null) {
             driverThread.get().quit();
         }
+        driverThread.remove();
     }
 }
