@@ -14,8 +14,8 @@ public class PiapaTest extends BaseTest {
     public void piapaTest(String name, String email, String current, String permanent) {
 
         getDriver().get("https://demoqa.com/");
-
-        landingPage.clickCategoryCards();
+        LandingPage landingPage = new LandingPage(getDriver());
+        ElementsPage elementsPage = landingPage.clickCategoryCards();
 
         elementsPage.clickMenuTextBox();
         elementsPage.fillForm(name, email, current, permanent);
@@ -30,9 +30,8 @@ public class PiapaTest extends BaseTest {
     @Test(dataProvider = "checkboxParam", dataProviderClass = DataProviders.class)
     public void checkBoxTest(ArrayList<String> checkBox) {
         getDriver().get("https://demoqa.com/");
-
-        landingPage.clickCategoryCards();
-
+        LandingPage landingPage = new LandingPage(getDriver());
+        ElementsPage elementsPage = landingPage.clickCategoryCards();
         elementsPage.clickMenuCheckBox();
         elementsPage.clickCheckBoxExpandAll();
 

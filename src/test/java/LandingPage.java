@@ -1,6 +1,5 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -11,11 +10,12 @@ public class LandingPage {
     public WebDriver driver;
 
     public LandingPage(WebDriver driver) {
-        PageFactory.initElements(BaseTest.getDriver(), this);
+        PageFactory.initElements(driver, this);
         this.driver = driver;
     }
 
-    public void clickCategoryCards() {
+    public ElementsPage clickCategoryCards() {
         elements.click();
+        return new ElementsPage(driver);
     }
 }
