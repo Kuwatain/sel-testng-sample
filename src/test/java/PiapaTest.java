@@ -5,17 +5,19 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class PiapaTest extends BaseTest {
 
     @Test(dataProvider = "Form params", dataProviderClass = DataProviders.class)
     public void piapaTest(String name, String email, String current, String permanent) {
 
-        getDriver().get("https://demoqa.com/");
         LandingPage landingPage = new LandingPage(getDriver());
-        ElementsPage elementsPage = landingPage.clickCategoryCards();
+        ElementsPage elementsPage = new ElementsPage(getDriver());
+
+        getDriver().get("https://demoqa.com/");
+
+        landingPage.clickCategoryCards();
 
         elementsPage.clickMenuTextBox();
         elementsPage.fillForm(name, email, current, permanent);
@@ -29,9 +31,11 @@ public class PiapaTest extends BaseTest {
 
     @Test(dataProvider = "checkboxParam", dataProviderClass = DataProviders.class)
     public void checkBoxTest(ArrayList<String> checkBox) {
-        getDriver().get("https://demoqa.com/");
         LandingPage landingPage = new LandingPage(getDriver());
-        ElementsPage elementsPage = landingPage.clickCategoryCards();
+        ElementsPage elementsPage = new ElementsPage(getDriver());
+
+        getDriver().get("https://demoqa.com/");
+        landingPage.clickCategoryCards();
         elementsPage.clickMenuCheckBox();
         elementsPage.clickCheckBoxExpandAll();
 
@@ -44,5 +48,52 @@ public class PiapaTest extends BaseTest {
         });
     }
 
+
+    @Test
+    public void radioButtonTest() {
+        LandingPage landingPage = new LandingPage(getDriver());
+        ElementsPage elementsPage = new ElementsPage(getDriver());
+
+        getDriver().get("https://demoqa.com/");
+        landingPage.clickCategoryCards();
+        elementsPage.clickMenuRadioButton();
+
+        elementsPage.clickYesRadioButton();
+        assertEquals(elementsPage.displayResultRadioButton.getText(), "You have selected Yes");
+
+        elementsPage.clickImpressiveRadioButton();
+        assertEquals(elementsPage.displayResultRadioButton.getText(), "You have selected Impressive");
+
+        assertFalse(elementsPage.noRadio.isEnabled());
+    }
+
+    @Test(dataProvider = "Web Tables param", dataProviderClass = DataProviders.class)
+    public void webTablesTest(
+            String firstName,
+            String lastName,
+            String email,
+            String age,
+            String salary,
+            String department
+    ) {
+        LandingPage landingPage = new LandingPage(getDriver());
+        ElementsPage elementsPage = new ElementsPage(getDriver());
+
+        getDriver().get("https://demoqa.com/");
+
+        landingPage.clickCategoryCards();
+        elementsPage.clickMenuWebTables();
+        elementsPage.clickAddButton();
+        elementsPage.fillTablesForm(
+                firstName,
+                lastName,
+                email,
+                age,
+                salary,
+                department
+        );
+        elementsPage.clickTablesButtonSubmit();
+
+    }
 
 }

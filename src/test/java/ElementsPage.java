@@ -38,6 +38,36 @@ public class ElementsPage {
     @FindBy(xpath = "//div[contains(@class, 'display-result mt-4')]")
     public List<WebElement> displayResult;
 
+    @FindBy(xpath = "//li[contains(., 'Radio Button')]")
+    private WebElement radioButton;
+    @FindBy(xpath = "//label[contains(@for, 'yesRadio')]")
+    private WebElement yesRadio;
+    @FindBy(xpath = "//label[contains(@for, 'impressiveRadio')]")
+    private WebElement impressiveRadio;
+    @FindBy(xpath = "//input[@id = 'noRadio']")
+    public WebElement noRadio;
+    @FindBy(xpath = "//p[contains(@class, 'mt-3')]")
+    public WebElement displayResultRadioButton;
+
+    @FindBy(xpath = "//li[contains(., 'Web Tables')]")
+    private WebElement webTables;
+    @FindBy(xpath = "//button[@id  = 'addNewRecordButton']")
+    private WebElement addButton;
+    @FindBy(xpath = "//input[@id  = 'firstName']")
+    private WebElement userTablesFirstName;
+    @FindBy(xpath = "//input[@id  = 'lastName']")
+    private WebElement userTablesLastName;
+    @FindBy(xpath = "//input[@id  = 'userEmail']")
+    private WebElement userTablesEmail;
+    @FindBy(xpath = "//input[@id  = 'age']")
+    private WebElement userTablesAge;
+    @FindBy(xpath = "//input[@id  = 'salary']")
+    private WebElement userTablesSalary;
+    @FindBy(xpath = "//input[@id  = 'department']")
+    private WebElement userTablesDepartment;
+    @FindBy(xpath = "//button[@id  = 'submit']")
+    private WebElement submitForm;
+
     private WebElement getCheckBox(String name) {
         return BaseTest.getDriver().findElement(By.xpath("//label[contains(@for, 'tree-node-" + name + "')]"));
     }
@@ -74,5 +104,46 @@ public class ElementsPage {
 
     public void clickCheckBoxExpandAll() {
         expandAll.click();
+    }
+
+    public void clickMenuRadioButton() {
+        radioButton.click();
+    }
+
+    public void clickYesRadioButton() {
+        yesRadio.click();
+    }
+
+    public void clickImpressiveRadioButton() {
+        impressiveRadio.click();
+    }
+
+    public void clickMenuWebTables() {
+        webTables.click();
+    }
+
+    public void clickAddButton() {
+        addButton.click();
+    }
+
+    public void fillTablesForm(
+            String firstName,
+            String lastName,
+            String email,
+            String age,
+            String salary,
+            String department
+    ) {
+        userTablesFirstName.sendKeys(firstName);
+        userTablesLastName.sendKeys(lastName);
+        userTablesEmail.sendKeys(email);
+        userTablesAge.sendKeys(age);
+        userTablesSalary.sendKeys(salary);
+        userTablesDepartment.sendKeys(department);
+    }
+
+
+    public void clickTablesButtonSubmit() {
+        submitForm.click();
     }
 }

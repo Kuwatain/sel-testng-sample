@@ -21,4 +21,11 @@ public class DataProviders {
                 {new ArrayList<>(asList("notes", "public", "private", "classified"))}
         };
     }
+
+    @DataProvider(name = "Web Tables param")
+    public static Object[][] webTablesParam() {
+        return new Object[][]{
+                {"Nikita", "Rachkov", "nikita@gmail.com", "24", "0", "Kazan"}
+        };
+    }
 }
