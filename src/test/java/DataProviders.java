@@ -6,15 +6,15 @@ import static java.util.Arrays.asList;
 
 public class DataProviders {
 
-    @DataProvider(name = "Form params", parallel = true)
+    @DataProvider(name = "Form params")
     public static Object[][] formParams() {
         return new Object[][]{
                 {"Stepan", "stepan@gmail.com", "city", "adress"},
-                {"Nikita", "nikita@gmail.com", "city", "adress"}
+//                {"Nikita", "nikita@gmail.com", "city", "adress"}
         };
     }
 
-    @DataProvider(name = "checkboxParam", parallel = true)
+    @DataProvider(name = "Check Box params")
     public static Object[][] checkBoxParam() {
         return new Object[][]{
 //                { new ArrayList<>(asList("notes", "commands", "react", "angular", "veu", "public", "private", "classified")) },

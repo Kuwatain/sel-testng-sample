@@ -1,9 +1,5 @@
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.testng.Assert.*;
 
@@ -12,10 +8,7 @@ public class PiapaTest extends BaseTest {
     @Test(dataProvider = "Form params", dataProviderClass = DataProviders.class)
     public void piapaTest(String name, String email, String current, String permanent) {
 
-        LandingPage landingPage = new LandingPage(getDriver());
-        ElementsPage elementsPage = new ElementsPage(getDriver());
-
-        getDriver().get("https://demoqa.com/");
+        driver.get("https://demoqa.com/");
 
         landingPage.clickCategoryCards();
 
@@ -29,41 +22,35 @@ public class PiapaTest extends BaseTest {
         assertEquals(elementsPage.resultPermanentAddress.getText(), "Permananet Address :" + permanent);
     }
 
-    @Test(dataProvider = "checkboxParam", dataProviderClass = DataProviders.class)
-    public void checkBoxTest(ArrayList<String> checkBox) {
-        LandingPage landingPage = new LandingPage(getDriver());
-        ElementsPage elementsPage = new ElementsPage(getDriver());
+    @Test(dataProvider = "Check Box params", dataProviderClass = DataProviders.class)
+    public void checkBoxTest(String[] checkBox) {
+        driver.get("https://demoqa.com/");
 
-        getDriver().get("https://demoqa.com/");
         landingPage.clickCategoryCards();
+
         elementsPage.clickMenuCheckBox();
         elementsPage.clickCheckBoxExpandAll();
 
-        checkBox.forEach(cbox -> {
-            elementsPage.clickCheckBox(cbox);
-            assertTrue(elementsPage.displayResult.get(0).getText().contains(cbox));
-
-            elementsPage.clickCheckBox(cbox);
-            assertEquals(elementsPage.displayResult.size(), 0);
-        });
+        for (int i = 0; i < checkBox.length; i++) {
+            elementsPage.clickCheckBox(checkBox[i]);
+            assertTrue(elementsPage.displayResultCheckBox.get(0).getText().contains(checkBox[i]));
+            elementsPage.clickCheckBox(checkBox[i]);
+            assertEquals(elementsPage.displayResultCheckBox.size(), 0);
+        }
     }
-
 
     @Test
     public void radioButtonTest() {
-        LandingPage landingPage = new LandingPage(getDriver());
-        ElementsPage elementsPage = new ElementsPage(getDriver());
+        driver.get("https://demoqa.com/");
 
-        getDriver().get("https://demoqa.com/");
         landingPage.clickCategoryCards();
+
         elementsPage.clickMenuRadioButton();
 
         elementsPage.clickYesRadioButton();
         assertEquals(elementsPage.displayResultRadioButton.getText(), "You have selected Yes");
-
         elementsPage.clickImpressiveRadioButton();
         assertEquals(elementsPage.displayResultRadioButton.getText(), "You have selected Impressive");
-
         assertFalse(elementsPage.noRadio.isEnabled());
     }
 
@@ -76,12 +63,10 @@ public class PiapaTest extends BaseTest {
             String salary,
             String department
     ) {
-        LandingPage landingPage = new LandingPage(getDriver());
-        ElementsPage elementsPage = new ElementsPage(getDriver());
-
-        getDriver().get("https://demoqa.com/");
+        driver.get("https://demoqa.com/");
 
         landingPage.clickCategoryCards();
+
         elementsPage.clickMenuWebTables();
         elementsPage.clickAddButton();
         elementsPage.fillTablesForm(
@@ -94,6 +79,15 @@ public class PiapaTest extends BaseTest {
         );
         elementsPage.clickTablesButtonSubmit();
 
-    }
+        TableHelper tableHelper = new TableHelper(driver);
 
+        WebElement rowNikita = tableHelper.findRow(email);
+
+        assertEquals(tableHelper.getFirstName(rowNikita), firstName);
+        assertEquals(tableHelper.getLastName(rowNikita), lastName);
+        assertEquals(tableHelper.getAge(rowNikita), age);
+        assertEquals(tableHelper.getEmail(rowNikita), email);
+        assertEquals(tableHelper.getSalary(rowNikita), salary);
+        assertEquals(tableHelper.getDepartment(rowNikita), department);
+    }
 }

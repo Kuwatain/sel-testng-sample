@@ -1,0 +1,39 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+public class TableHelper {
+    WebDriver driver;
+
+    public TableHelper(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    public WebElement findRow(String email) {
+        return driver.findElement(By.xpath("//div[@role='row'] [descendant::div[text()='" + email +"']]"));
+    }
+
+    public String getFirstName(WebElement row) {
+        return row.findElement(By.xpath("div[1]")).getText();
+    }
+
+    public String getLastName(WebElement row) {
+        return row.findElement(By.xpath("div[2]")).getText();
+    }
+
+    public String getAge(WebElement row) {
+        return row.findElement(By.xpath("div[3]")).getText();
+    }
+
+    public String getEmail(WebElement row) {
+        return row.findElement(By.xpath("div[4]")).getText();
+    }
+
+    public String getSalary(WebElement row) {
+        return row.findElement(By.xpath("div[5]")).getText();
+    }
+
+    public String getDepartment(WebElement row) {
+        return row.findElement(By.xpath("div[6]")).getText();
+    }
+}
