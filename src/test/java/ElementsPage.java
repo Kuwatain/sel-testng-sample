@@ -36,7 +36,7 @@ public class ElementsPage {
     private WebElement expandAll;
 
     @FindBy(xpath = "//div[contains(@class, 'display-result mt-4')]")
-    public List<WebElement> displayResult;
+    public List<WebElement> displayResultCheckBox;
 
     @FindBy(xpath = "//li[contains(., 'Radio Button')]")
     private WebElement radioButton;
@@ -69,7 +69,7 @@ public class ElementsPage {
     private WebElement submitForm;
 
     private WebElement getCheckBox(String name) {
-        return BaseTest.getDriver().findElement(By.xpath("//label[contains(@for, 'tree-node-" + name + "')]"));
+        return driver.findElement(By.xpath("//label[contains(@for, 'tree-node-" + name + "')]"));
     }
 
     public void clickCheckBox(String checkBoxName) {
