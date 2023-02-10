@@ -1,3 +1,4 @@
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
@@ -78,8 +79,15 @@ public class PiapaTest extends BaseTest {
         );
         elementsPage.clickTablesButtonSubmit();
 
+        TableHelper tableHelper = new TableHelper(driver);
 
+        WebElement rowNikita = tableHelper.findRow(email);
+
+        assertEquals(tableHelper.getFirstName(rowNikita), firstName);
+        assertEquals(tableHelper.getLastName(rowNikita), lastName);
+        assertEquals(tableHelper.getAge(rowNikita), age);
+        assertEquals(tableHelper.getEmail(rowNikita), email);
+        assertEquals(tableHelper.getSalary(rowNikita), salary);
+        assertEquals(tableHelper.getDepartment(rowNikita), department);
     }
-
-
 }
