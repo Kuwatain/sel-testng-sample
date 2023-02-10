@@ -14,6 +14,7 @@ public class BaseTest {
         driver.manage().window().maximize();
         landingPage = new LandingPage(driver);
         elementsPage = new ElementsPage(driver);
+
     }
 
     @AfterMethod
