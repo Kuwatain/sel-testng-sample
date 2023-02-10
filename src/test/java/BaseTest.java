@@ -16,7 +16,7 @@ public class BaseTest {
         elementsPage = new ElementsPage(driver);
     }
 
-    //    @AfterMethod
+    @AfterMethod
     public void afterMethod() {
         driver.quit();
     }
