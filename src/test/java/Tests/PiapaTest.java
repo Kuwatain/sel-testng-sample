@@ -1,4 +1,10 @@
+package Tests;
+
+import DataProviders.DataProviders;
+import Model.User;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
@@ -54,41 +60,47 @@ public class PiapaTest extends BaseTest {
         assertFalse(elementsPage.noRadio.isEnabled());
     }
 
-    @Test(dataProvider = "Web Tables param", dataProviderClass = DataProviders.class)
-    public void webTablesTest(
-            String firstName,
-            String lastName,
-            String email,
-            String age,
-            String salary,
-            String department
-    ) {
+    @Test(dataProvider = "webTablesParam", dataProviderClass = DataProviders.class)
+    public void webTablesTest(User userNikita, User userStepan) throws InterruptedException {
         driver.get("https://demoqa.com/");
 
         landingPage.clickCategoryCards();
 
         elementsPage.clickMenuWebTables();
         elementsPage.clickAddButton();
-        elementsPage.fillTablesForm(
-                firstName,
-                lastName,
-                email,
-                age,
-                salary,
-                department
-        );
+        elementsPage.fillTablesForm(userNikita);
         elementsPage.clickTablesButtonSubmit();
 
-        TableHelper tableHelper = new TableHelper(driver);
+        WebElement rowNikita = tableHelper.findRow(userNikita.getEmail()).get(0);
+        assertRowUser(userNikita, rowNikita);
 
-        WebElement rowNikita = tableHelper.findRow(email);
+        tableHelper.clickEditRecord(rowNikita);
 
-        assertEquals(tableHelper.getFirstName(rowNikita), firstName);
-        assertEquals(tableHelper.getLastName(rowNikita), lastName);
-        assertEquals(tableHelper.getAge(rowNikita), age);
-        assertEquals(tableHelper.getEmail(rowNikita), email);
-        assertEquals(tableHelper.getSalary(rowNikita), salary);
-        assertEquals(tableHelper.getDepartment(rowNikita), department);
+        elementsPage.fillTablesForm(userStepan);
+        elementsPage.clickTablesButtonSubmit();
+
+        WebElement rowStepan = tableHelper.findRow(userStepan.getEmail()).get(0);
+        assertRowUser(userStepan, rowStepan);
+
+        elementsPage.searchBoxForm.sendKeys(userStepan.getEmail());
+
+        assertNotNull(tableHelper.findRow(userStepan.getEmail()));
+
+        elementsPage.searchBoxForm.sendKeys(Keys.CONTROL + "A");
+        elementsPage.searchBoxForm.sendKeys(Keys.BACK_SPACE);
+        WebElement rowStepanNow = tableHelper.findRow(userStepan.getEmail()).get(0);
+        tableHelper.clickDeleteRecord(rowStepanNow);
+        Assert.assertEquals(tableHelper.findRow(userStepan.getEmail()).size(), 0);
+
+        assertEquals(tableHelper.findRow(userStepan.getEmail()).size(), 0);
+    }
+
+    private void assertRowUser(User user, WebElement row) {
+        Assert.assertEquals(tableHelper.getFirstName(row), user.getFirstName());
+        Assert.assertEquals(tableHelper.getLastName(row), user.getLastName());
+        Assert.assertEquals(tableHelper.getAge(row), user.getAge());
+        Assert.assertEquals(tableHelper.getEmail(row), user.getEmail());
+        Assert.assertEquals(tableHelper.getSalary(row), user.getSalary());
+        Assert.assertEquals(tableHelper.getDepartment(row), user.getDepartment());
     }
 }
-////privett

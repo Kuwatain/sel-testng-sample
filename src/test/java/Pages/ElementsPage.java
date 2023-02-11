@@ -1,3 +1,6 @@
+package Pages;
+
+import Model.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -5,6 +8,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
+
+import static Tests.BaseTest.sendText;
 
 public class ElementsPage {
     @FindBy(xpath = "//li[contains(.,'Text Box')]")
@@ -68,6 +73,9 @@ public class ElementsPage {
     @FindBy(xpath = "//button[@id  = 'submit']")
     private WebElement submitForm;
 
+    @FindBy(xpath = "//input[@id='searchBox']")
+    public WebElement searchBoxForm;
+
     private WebElement getCheckBox(String name) {
         return driver.findElement(By.xpath("//label[contains(@for, 'tree-node-" + name + "')]"));
     }
@@ -126,22 +134,14 @@ public class ElementsPage {
         addButton.click();
     }
 
-    public void fillTablesForm(
-            String firstName,
-            String lastName,
-            String email,
-            String age,
-            String salary,
-            String department
-    ) {
-        userTablesFirstName.sendKeys(firstName);
-        userTablesLastName.sendKeys(lastName);
-        userTablesEmail.sendKeys(email);
-        userTablesAge.sendKeys(age);
-        userTablesSalary.sendKeys(salary);
-        userTablesDepartment.sendKeys(department);
+    public void fillTablesForm(User user) {
+        sendText(userTablesFirstName, user.getFirstName());
+        sendText(userTablesLastName, user.getLastName());
+        sendText(userTablesEmail, user.getEmail());
+        sendText(userTablesAge, user.getAge());
+        sendText(userTablesSalary, user.getSalary());
+        sendText(userTablesDepartment, user.getDepartment());
     }
-
 
     public void clickTablesButtonSubmit() {
         submitForm.click();
