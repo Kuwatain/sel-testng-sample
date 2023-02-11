@@ -15,7 +15,20 @@ public class DataProviders {
 
     @DataProvider(name = "Check Box params")
     public static Object[][] checkBoxParams() {
-        String[] checkBox = new String[]{"notes", "commands", "react", "angular", "veu", "public", "private", "classified", "general", "wordFile", "excelFile"};
+        String[] checkBox = new String[]
+                {
+                        "notes",
+                        "commands",
+                        "react",
+                        "angular",
+                        "veu",
+                        "public",
+                        "private",
+                        "classified",
+                        "general",
+                        "wordFile",
+                        "excelFile"
+                };
         return new Object[][]{checkBox};
     }
 
@@ -23,8 +36,8 @@ public class DataProviders {
     public static Object[][] webTablesParam() {
         return new Object[][]{
                 {
-                    new User("Nikita", "Rachkov", "nikita@gmail.com", "24", "0", "Kazan"),
-                    new User("Stepan", "Igolkin", "stepan@gmail.com", "24", "500000", "Yerevan")
+                        new User("Nikita", "Rachkov", "nikita@gmail.com", "24", "0", "Kazan"),
+                        new User("Stepan", "Igolkin", "stepan@gmail.com", "24", "500000", "Yerevan")
                 },
         };
     }

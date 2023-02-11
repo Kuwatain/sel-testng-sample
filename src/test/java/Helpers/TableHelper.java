@@ -14,9 +14,8 @@ public class TableHelper {
     }
 
 
-
     public List<WebElement> findRow(String email) {
-        return driver.findElements(By.xpath("//div[@role='row'] [descendant::div[text()='" + email +"']]"));
+        return driver.findElements(By.xpath("//div[@role='row'] [descendant::div[text()='" + email + "']]"));
     }
 
     public String getFirstName(WebElement row) {
@@ -43,8 +42,11 @@ public class TableHelper {
         return row.findElement(By.xpath("div[6]")).getText();
     }
 
-    public void clickEditRecord(WebElement row) {row.findElement(By.xpath("div[7]//span[@title='Edit']")).click(); }
+    public void clickEditRecord(WebElement row) {
+        row.findElement(By.xpath("div[7]//span[@title='Edit']")).click();
+    }
 
-    public void clickDeleteRecord(WebElement row) {row.findElement(By.xpath("div[7]//span[@title='Delete']")).click(); }
-
+    public void clickDeleteRecord(WebElement row) {
+        row.findElement(By.xpath("div[7]//span[@title='Delete']")).click();
+    }
 }

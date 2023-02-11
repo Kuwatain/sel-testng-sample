@@ -16,7 +16,7 @@ public class LandingPage {
         this.driver = driver;
     }
 
-    public  void clickCategoryCards() {
+    public void clickCategoryCards() {
         elements.click();
     }
 }

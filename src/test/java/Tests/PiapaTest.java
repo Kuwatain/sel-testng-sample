@@ -86,16 +86,14 @@ public class PiapaTest extends BaseTest {
 
         assertNotNull(tableHelper.findRow(userStepan.getEmail()));
 
-
         elementsPage.searchBoxForm.sendKeys(Keys.CONTROL + "A");
         elementsPage.searchBoxForm.sendKeys(Keys.BACK_SPACE);
         WebElement rowStepanNow = tableHelper.findRow(userStepan.getEmail()).get(0);
         tableHelper.clickDeleteRecord(rowStepanNow);
         Assert.assertEquals(tableHelper.findRow(userStepan.getEmail()).size(), 0);
 
+        assertEquals(tableHelper.findRow(userStepan.getEmail()).size(), 0);
     }
-
-
 
     private void assertRowUser(User user, WebElement row) {
         Assert.assertEquals(tableHelper.getFirstName(row), user.getFirstName());

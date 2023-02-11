@@ -23,7 +23,6 @@ public class BaseTest {
         landingPage = new LandingPage(driver);
         elementsPage = new ElementsPage(driver);
         tableHelper = new TableHelper(driver);
-
     }
 
     @AfterMethod
@@ -36,7 +35,4 @@ public class BaseTest {
         element.clear();
         element.sendKeys(text);
     }
-
-
-
 }

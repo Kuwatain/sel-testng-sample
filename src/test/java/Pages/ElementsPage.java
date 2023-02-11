@@ -146,5 +146,4 @@ public class ElementsPage {
     public void clickTablesButtonSubmit() {
         submitForm.click();
     }
-
 }
