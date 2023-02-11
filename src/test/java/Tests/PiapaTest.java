@@ -103,5 +103,4 @@ public class PiapaTest extends BaseTest {
         Assert.assertEquals(tableHelper.getSalary(row), user.getSalary());
         Assert.assertEquals(tableHelper.getDepartment(row), user.getDepartment());
     }
-
 }

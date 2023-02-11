@@ -30,7 +30,6 @@ public class BaseTest {
         driver.quit();
     }
 
-
     public static void sendText(WebElement element, String text) {
         element.clear();
         element.sendKeys(text);
