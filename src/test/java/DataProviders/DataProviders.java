@@ -1,8 +1,7 @@
+package DataProviders;
+
+import Model.User;
 import org.testng.annotations.DataProvider;
-
-import java.util.ArrayList;
-
-import static java.util.Arrays.asList;
 
 public class DataProviders {
 

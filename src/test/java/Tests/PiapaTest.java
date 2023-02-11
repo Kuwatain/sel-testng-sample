@@ -1,5 +1,10 @@
+package Tests;
+
+import DataProviders.DataProviders;
+import Model.User;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
@@ -86,19 +91,19 @@ public class PiapaTest extends BaseTest {
         elementsPage.searchBoxForm.sendKeys(Keys.BACK_SPACE);
         WebElement rowStepanNow = tableHelper.findRow(userStepan.getEmail()).get(0);
         tableHelper.clickDeleteRecord(rowStepanNow);
-        assertEquals(tableHelper.findRow(userStepan.getEmail()).size(), 0);
+        Assert.assertEquals(tableHelper.findRow(userStepan.getEmail()).size(), 0);
 
     }
 
 
 
     private void assertRowUser(User user, WebElement row) {
-        assertEquals(tableHelper.getFirstName(row), user.getFirstName());
-        assertEquals(tableHelper.getLastName(row), user.getLastName());
-        assertEquals(tableHelper.getAge(row), user.getAge());
-        assertEquals(tableHelper.getEmail(row), user.getEmail());
-        assertEquals(tableHelper.getSalary(row), user.getSalary());
-        assertEquals(tableHelper.getDepartment(row), user.getDepartment());
+        Assert.assertEquals(tableHelper.getFirstName(row), user.getFirstName());
+        Assert.assertEquals(tableHelper.getLastName(row), user.getLastName());
+        Assert.assertEquals(tableHelper.getAge(row), user.getAge());
+        Assert.assertEquals(tableHelper.getEmail(row), user.getEmail());
+        Assert.assertEquals(tableHelper.getSalary(row), user.getSalary());
+        Assert.assertEquals(tableHelper.getDepartment(row), user.getDepartment());
     }
 
 }

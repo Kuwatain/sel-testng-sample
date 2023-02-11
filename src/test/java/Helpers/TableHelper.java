@@ -1,3 +1,5 @@
+package Helpers;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -41,8 +43,8 @@ public class TableHelper {
         return row.findElement(By.xpath("div[6]")).getText();
     }
 
-    public void clickEditRecord(WebElement row) {row.findElement(By.xpath("div[7]//span[1]")).click(); }
+    public void clickEditRecord(WebElement row) {row.findElement(By.xpath("div[7]//span[@title='Edit']")).click(); }
 
-    public void clickDeleteRecord(WebElement row) {row.findElement(By.xpath("div[7]//span[2]")).click(); }
+    public void clickDeleteRecord(WebElement row) {row.findElement(By.xpath("div[7]//span[@title='Delete']")).click(); }
 
 }

@@ -1,3 +1,6 @@
+package Pages;
+
+import Model.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -5,6 +8,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
+
+import static Tests.BaseTest.sendText;
 
 public class ElementsPage {
     @FindBy(xpath = "//li[contains(.,'Text Box')]")
@@ -130,23 +135,12 @@ public class ElementsPage {
     }
 
     public void fillTablesForm(User user) {
-        userTablesFirstName.clear();
-        userTablesFirstName.sendKeys(user.getFirstName());
-
-        userTablesLastName.clear();
-        userTablesLastName.sendKeys(user.getLastName());
-
-        userTablesEmail.clear();
-        userTablesEmail.sendKeys(user.getEmail());
-
-        userTablesAge.clear();
-        userTablesAge.sendKeys(user.getAge());
-
-        userTablesSalary.clear();
-        userTablesSalary.sendKeys(user.getSalary());
-
-        userTablesDepartment.clear();
-        userTablesDepartment.sendKeys(user.getDepartment());
+        sendText(userTablesFirstName, user.getFirstName());
+        sendText(userTablesLastName, user.getLastName());
+        sendText(userTablesEmail, user.getEmail());
+        sendText(userTablesAge, user.getAge());
+        sendText(userTablesSalary, user.getSalary());
+        sendText(userTablesDepartment, user.getDepartment());
     }
 
     public void clickTablesButtonSubmit() {
