@@ -68,6 +68,11 @@ public class ElementsPage {
     @FindBy(xpath = "//button[@id  = 'submit']")
     private WebElement submitForm;
 
+    @FindBy(xpath = "//input[@id='searchBox']")
+    public WebElement searchBoxForm;
+    @FindBy(xpath = "//div[@class ='input-group-append']")
+    private WebElement searchButton;
+
     private WebElement getCheckBox(String name) {
         return driver.findElement(By.xpath("//label[contains(@for, 'tree-node-" + name + "')]"));
     }
@@ -142,8 +147,21 @@ public class ElementsPage {
         userTablesDepartment.sendKeys(department);
     }
 
+    public void clearTablesForm() {
+        userTablesFirstName.clear();
+        userTablesLastName.clear();
+        userTablesEmail.clear();
+        userTablesAge.clear();
+        userTablesSalary.clear();
+        userTablesDepartment.clear();
+    }
+
 
     public void clickTablesButtonSubmit() {
         submitForm.click();
+    }
+
+    public void clickSearchButton() {
+        searchButton.click();
     }
 }

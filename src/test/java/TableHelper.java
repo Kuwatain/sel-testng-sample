@@ -9,6 +9,8 @@ public class TableHelper {
         this.driver = driver;
     }
 
+
+
     public WebElement findRow(String email) {
         return driver.findElement(By.xpath("//div[@role='row'] [descendant::div[text()='" + email +"']]"));
     }
@@ -36,4 +38,8 @@ public class TableHelper {
     public String getDepartment(WebElement row) {
         return row.findElement(By.xpath("div[6]")).getText();
     }
+
+
+    public void clickEditRecord(WebElement row) {  row.findElement(By.xpath("div[7] // span[1]")).click(); }
+
 }

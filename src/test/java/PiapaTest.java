@@ -54,7 +54,7 @@ public class PiapaTest extends BaseTest {
         assertFalse(elementsPage.noRadio.isEnabled());
     }
 
-    @Test(dataProvider = "Web Tables param", dataProviderClass = DataProviders.class)
+    @Test(dataProvider = "Web Tables params1", dataProviderClass = DataProviders.class)
     public void webTablesTest(
             String firstName,
             String lastName,
@@ -89,6 +89,32 @@ public class PiapaTest extends BaseTest {
         assertEquals(tableHelper.getEmail(rowNikita), email);
         assertEquals(tableHelper.getSalary(rowNikita), salary);
         assertEquals(tableHelper.getDepartment(rowNikita), department);
+
+        tableHelper.clickEditRecord(rowNikita);
+        elementsPage.clearTablesForm();
+
+
+//        elementsPage.fillTablesForm(
+//                firstName,
+//                lastName,
+//                email,
+//                age,
+//                salary,
+//                department
+//        );
+//        elementsPage.clickTablesButtonSubmit();
+//
+//        WebElement rowStepan= tableHelper.findRow(email);
+//
+//        assertEquals(tableHelper.getFirstName(rowStepan), firstName);
+//        assertEquals(tableHelper.getLastName(rowStepan), lastName);
+//        assertEquals(tableHelper.getAge(rowStepan), age);
+//        assertEquals(tableHelper.getEmail(rowStepan), email);
+//        assertEquals(tableHelper.getSalary(rowStepan), salary);
+//        assertEquals(tableHelper.getDepartment(rowStepan), department);
+
+//        elementsPage.searchBoxForm.sendKeys("24");
+//        elementsPage.clickSearchButton();
+
     }
 }
-////privett
