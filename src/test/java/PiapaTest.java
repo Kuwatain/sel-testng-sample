@@ -54,67 +54,39 @@ public class PiapaTest extends BaseTest {
         assertFalse(elementsPage.noRadio.isEnabled());
     }
 
-    @Test(dataProvider = "Web Tables params1", dataProviderClass = DataProviders.class)
-    public void webTablesTest(
-            String firstName,
-            String lastName,
-            String email,
-            String age,
-            String salary,
-            String department
-    ) {
+    @Test(dataProvider = "webTablesParam", dataProviderClass = DataProviders.class)
+    public void webTablesTest(User userNikita, User userStepan) {
         driver.get("https://demoqa.com/");
 
         landingPage.clickCategoryCards();
 
         elementsPage.clickMenuWebTables();
         elementsPage.clickAddButton();
-        elementsPage.fillTablesForm(
-                firstName,
-                lastName,
-                email,
-                age,
-                salary,
-                department
-        );
+        elementsPage.fillTablesForm(userNikita);
         elementsPage.clickTablesButtonSubmit();
 
-        TableHelper tableHelper = new TableHelper(driver);
-
-        WebElement rowNikita = tableHelper.findRow(email);
-
-        assertEquals(tableHelper.getFirstName(rowNikita), firstName);
-        assertEquals(tableHelper.getLastName(rowNikita), lastName);
-        assertEquals(tableHelper.getAge(rowNikita), age);
-        assertEquals(tableHelper.getEmail(rowNikita), email);
-        assertEquals(tableHelper.getSalary(rowNikita), salary);
-        assertEquals(tableHelper.getDepartment(rowNikita), department);
+        WebElement rowNikita = tableHelper.findRow(userNikita.getEmail());
+        assertRowUser(userNikita, rowNikita);
 
         tableHelper.clickEditRecord(rowNikita);
-        elementsPage.clearTablesForm();
 
+        elementsPage.fillTablesForm(userStepan);
+        elementsPage.clickTablesButtonSubmit();
 
-//        elementsPage.fillTablesForm(
-//                firstName,
-//                lastName,
-//                email,
-//                age,
-//                salary,
-//                department
-//        );
-//        elementsPage.clickTablesButtonSubmit();
-//
-//        WebElement rowStepan= tableHelper.findRow(email);
-//
-//        assertEquals(tableHelper.getFirstName(rowStepan), firstName);
-//        assertEquals(tableHelper.getLastName(rowStepan), lastName);
-//        assertEquals(tableHelper.getAge(rowStepan), age);
-//        assertEquals(tableHelper.getEmail(rowStepan), email);
-//        assertEquals(tableHelper.getSalary(rowStepan), salary);
-//        assertEquals(tableHelper.getDepartment(rowStepan), department);
+        WebElement rowStepan = tableHelper.findRow(userStepan.getEmail());
+        assertRowUser(userStepan, rowStepan);
 
-//        elementsPage.searchBoxForm.sendKeys("24");
-//        elementsPage.clickSearchButton();
+        elementsPage.searchBoxForm.sendKeys(userStepan.getEmail());
 
+        assertNotNull(tableHelper.findRow(userStepan.getEmail()));
+    }
+
+    private void assertRowUser(User user, WebElement row) {
+        assertEquals(tableHelper.getFirstName(row), user.getFirstName());
+        assertEquals(tableHelper.getLastName(row), user.getLastName());
+        assertEquals(tableHelper.getAge(row), user.getAge());
+        assertEquals(tableHelper.getEmail(row), user.getEmail());
+        assertEquals(tableHelper.getSalary(row), user.getSalary());
+        assertEquals(tableHelper.getDepartment(row), user.getDepartment());
     }
 }

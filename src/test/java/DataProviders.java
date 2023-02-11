@@ -20,16 +20,13 @@ public class DataProviders {
         return new Object[][]{checkBox};
     }
 
-    @DataProvider(name = "Web Tables params1")
-    public static Object[][] webTablesParamNikita() {
+    @DataProvider(name = "webTablesParam")
+    public static Object[][] webTablesParam() {
         return new Object[][]{
-                {"Nikita", "Rachkov", "nikita@gmail.com", "24", "0", "Kazan"},
-        };
-    }
-    @DataProvider(name = "Web Tables params2")
-    public static Object[][] webTablesParamNStepan() {
-        return new Object[][]{
-                {"Stepan", "Igolkin", "stepan@gmail.com", "24", "500000", "Yerevan"}
+                {
+                    new User("Nikita", "Rachkov", "nikita@gmail.com", "24", "0", "Kazan"),
+                    new User("Stepan", "Igolkin", "stepan@gmail.com", "24", "500000", "Yerevan")
+                },
         };
     }
 }

@@ -131,31 +131,25 @@ public class ElementsPage {
         addButton.click();
     }
 
-    public void fillTablesForm(
-            String firstName,
-            String lastName,
-            String email,
-            String age,
-            String salary,
-            String department
-    ) {
-        userTablesFirstName.sendKeys(firstName);
-        userTablesLastName.sendKeys(lastName);
-        userTablesEmail.sendKeys(email);
-        userTablesAge.sendKeys(age);
-        userTablesSalary.sendKeys(salary);
-        userTablesDepartment.sendKeys(department);
-    }
-
-    public void clearTablesForm() {
+    public void fillTablesForm(User user) {
         userTablesFirstName.clear();
-        userTablesLastName.clear();
-        userTablesEmail.clear();
-        userTablesAge.clear();
-        userTablesSalary.clear();
-        userTablesDepartment.clear();
-    }
+        userTablesFirstName.sendKeys(user.getFirstName());
 
+        userTablesLastName.clear();
+        userTablesLastName.sendKeys(user.getLastName());
+
+        userTablesEmail.clear();
+        userTablesEmail.sendKeys(user.getEmail());
+
+        userTablesAge.clear();
+        userTablesAge.sendKeys(user.getAge());
+
+        userTablesSalary.clear();
+        userTablesSalary.sendKeys(user.getSalary());
+
+        userTablesDepartment.clear();
+        userTablesDepartment.sendKeys(user.getDepartment());
+    }
 
     public void clickTablesButtonSubmit() {
         submitForm.click();

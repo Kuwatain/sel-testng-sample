@@ -7,13 +7,16 @@ public class BaseTest {
     public WebDriver driver;
     public LandingPage landingPage;
     public ElementsPage elementsPage;
+    TableHelper tableHelper;
 
     @BeforeMethod
     public void beforeMethod() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
+
         landingPage = new LandingPage(driver);
         elementsPage = new ElementsPage(driver);
+        tableHelper = new TableHelper(driver);
 
     }
 
