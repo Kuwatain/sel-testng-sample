@@ -1,3 +1,4 @@
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
@@ -55,7 +56,7 @@ public class PiapaTest extends BaseTest {
     }
 
     @Test(dataProvider = "webTablesParam", dataProviderClass = DataProviders.class)
-    public void webTablesTest(User userNikita, User userStepan) {
+    public void webTablesTest(User userNikita, User userStepan) throws InterruptedException {
         driver.get("https://demoqa.com/");
 
         landingPage.clickCategoryCards();
@@ -65,7 +66,7 @@ public class PiapaTest extends BaseTest {
         elementsPage.fillTablesForm(userNikita);
         elementsPage.clickTablesButtonSubmit();
 
-        WebElement rowNikita = tableHelper.findRow(userNikita.getEmail());
+        WebElement rowNikita = tableHelper.findRow(userNikita.getEmail()).get(0);
         assertRowUser(userNikita, rowNikita);
 
         tableHelper.clickEditRecord(rowNikita);
@@ -73,13 +74,23 @@ public class PiapaTest extends BaseTest {
         elementsPage.fillTablesForm(userStepan);
         elementsPage.clickTablesButtonSubmit();
 
-        WebElement rowStepan = tableHelper.findRow(userStepan.getEmail());
+        WebElement rowStepan = tableHelper.findRow(userStepan.getEmail()).get(0);
         assertRowUser(userStepan, rowStepan);
 
         elementsPage.searchBoxForm.sendKeys(userStepan.getEmail());
 
         assertNotNull(tableHelper.findRow(userStepan.getEmail()));
+
+
+        elementsPage.searchBoxForm.sendKeys(Keys.CONTROL + "A");
+        elementsPage.searchBoxForm.sendKeys(Keys.BACK_SPACE);
+        WebElement rowStepanNow = tableHelper.findRow(userStepan.getEmail()).get(0);
+        tableHelper.clickDeleteRecord(rowStepanNow);
+        assertEquals(tableHelper.findRow(userStepan.getEmail()).size(), 0);
+
     }
+
+
 
     private void assertRowUser(User user, WebElement row) {
         assertEquals(tableHelper.getFirstName(row), user.getFirstName());
@@ -89,4 +100,5 @@ public class PiapaTest extends BaseTest {
         assertEquals(tableHelper.getSalary(row), user.getSalary());
         assertEquals(tableHelper.getDepartment(row), user.getDepartment());
     }
+
 }

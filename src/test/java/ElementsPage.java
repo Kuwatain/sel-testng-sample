@@ -70,8 +70,6 @@ public class ElementsPage {
 
     @FindBy(xpath = "//input[@id='searchBox']")
     public WebElement searchBoxForm;
-    @FindBy(xpath = "//div[@class ='input-group-append']")
-    private WebElement searchButton;
 
     private WebElement getCheckBox(String name) {
         return driver.findElement(By.xpath("//label[contains(@for, 'tree-node-" + name + "')]"));
@@ -155,7 +153,4 @@ public class ElementsPage {
         submitForm.click();
     }
 
-    public void clickSearchButton() {
-        searchButton.click();
-    }
 }

@@ -18,7 +18,7 @@ dependencies {
 
 test {
     useTestNG()
-    options {
-        parallel = 'methods'
-    }
+//    options {
+//        parallel = 'methods'
+//    }
 }
