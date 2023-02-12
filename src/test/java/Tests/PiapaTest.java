@@ -112,13 +112,8 @@ public class PiapaTest extends BaseTest {
         landingPage.clickCategoryCards();
         elementsPage.clickMenuButtons();
 
-        Actions actions = new Actions(driver);
-        WebElement doubleClickButton = elementsPage.doubleClickBtn;
-        actions.doubleClick(doubleClickButton).perform();
-
-        WebElement rightClickButton = elementsPage.rightClickBtn;
-        actions.contextClick(rightClickButton).perform();
-
+        doubleClick(elementsPage.doubleClickBtn);
+        rightClick(elementsPage.rightClickBtn);
         elementsPage.clickMeButton();
 
         assertEquals(elementsPage.doubleClickMessage.getText(), "You have done a double click");

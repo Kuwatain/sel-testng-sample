@@ -6,6 +6,7 @@ import Pages.LandingPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
@@ -14,6 +15,7 @@ public class BaseTest {
     public LandingPage landingPage;
     public ElementsPage elementsPage;
     TableHelper tableHelper;
+    Actions actions;
 
     @BeforeMethod
     public void beforeMethod() {
@@ -23,6 +25,8 @@ public class BaseTest {
         landingPage = new LandingPage(driver);
         elementsPage = new ElementsPage(driver);
         tableHelper = new TableHelper(driver);
+
+        actions = new Actions(driver);
     }
 
     @AfterMethod
@@ -33,5 +37,13 @@ public class BaseTest {
     public static void sendText(WebElement element, String text) {
         element.clear();
         element.sendKeys(text);
+    }
+
+    public void doubleClick(WebElement element) {
+        actions.doubleClick(element).perform();
+    }
+
+    public void rightClick(WebElement element) {
+        actions.contextClick(element).perform();
     }
 }
