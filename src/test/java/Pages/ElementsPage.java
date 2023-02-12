@@ -56,7 +56,7 @@ public class ElementsPage {
 
     @FindBy(xpath = "//li[contains(., 'Web Tables')]")
     private WebElement webTables;
-    @FindBy(xpath = "//button[@id  = 'addNewRecordButton']")
+    @FindBy(xpath = "//button[@id = 'addNewRecordButton']")
     private WebElement addButton;
     @FindBy(xpath = "//input[@id  = 'firstName']")
     private WebElement userTablesFirstName;
@@ -75,6 +75,22 @@ public class ElementsPage {
 
     @FindBy(xpath = "//input[@id='searchBox']")
     public WebElement searchBoxForm;
+
+    @FindBy(xpath = "//li[contains(., 'Buttons')]")
+    private WebElement buttons;
+    @FindBy(xpath = "//button[@id = 'doubleClickBtn']")
+    public WebElement doubleClickBtn;
+    @FindBy(xpath = "//button[@id = 'rightClickBtn']")
+    public WebElement rightClickBtn;
+    @FindBy(xpath = "//button[@class = 'btn btn-primary' and .='Click Me']")
+    private WebElement clickMeBtn;
+    @FindBy(xpath = "//p[@id ='doubleClickMessage']")
+    public WebElement doubleClickMessage;
+    @FindBy(xpath = "//p[@id ='rightClickMessage']")
+    public WebElement rightClickMessage;
+    @FindBy(xpath = "//p[@id ='dynamicClickMessage']")
+    public WebElement dynamicClickMessage;
+
 
     private WebElement getCheckBox(String name) {
         return driver.findElement(By.xpath("//label[contains(@for, 'tree-node-" + name + "')]"));
@@ -145,5 +161,13 @@ public class ElementsPage {
 
     public void clickTablesButtonSubmit() {
         submitForm.click();
+    }
+
+    public void clickMenuButtons() {
+        buttons.click();
+    }
+
+    public void clickMeButton() {
+        clickMeBtn.click();
     }
 }

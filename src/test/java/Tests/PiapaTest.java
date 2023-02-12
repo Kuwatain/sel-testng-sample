@@ -4,6 +4,7 @@ import DataProviders.DataProviders;
 import Model.User;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -102,5 +103,26 @@ public class PiapaTest extends BaseTest {
         Assert.assertEquals(tableHelper.getEmail(row), user.getEmail());
         Assert.assertEquals(tableHelper.getSalary(row), user.getSalary());
         Assert.assertEquals(tableHelper.getDepartment(row), user.getDepartment());
+    }
+
+    @Test
+    public void buttonsTest() {
+        driver.get("https://demoqa.com/");
+
+        landingPage.clickCategoryCards();
+        elementsPage.clickMenuButtons();
+
+        Actions actions = new Actions(driver);
+        WebElement doubleClickButton = elementsPage.doubleClickBtn;
+        actions.doubleClick(doubleClickButton).perform();
+
+        WebElement rightClickButton = elementsPage.rightClickBtn;
+        actions.contextClick(rightClickButton).perform();
+
+        elementsPage.clickMeButton();
+
+        assertEquals(elementsPage.doubleClickMessage.getText(), "You have done a double click");
+        assertEquals(elementsPage.rightClickMessage.getText(), "You have done a right click");
+        assertEquals(elementsPage.dynamicClickMessage.getText(), "You have done a dynamic click");
     }
 }
