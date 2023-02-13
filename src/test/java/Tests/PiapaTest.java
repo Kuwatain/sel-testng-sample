@@ -4,9 +4,10 @@ import DataProviders.DataProviders;
 import Model.User;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.ArrayList;
 
 import static org.testng.Assert.*;
 
@@ -119,5 +120,63 @@ public class PiapaTest extends BaseTest {
         assertEquals(elementsPage.doubleClickMessage.getText(), "You have done a double click");
         assertEquals(elementsPage.rightClickMessage.getText(), "You have done a right click");
         assertEquals(elementsPage.dynamicClickMessage.getText(), "You have done a dynamic click");
+    }
+
+    @Test
+    public void linksTest() throws InterruptedException {
+        driver.get("https://demoqa.com/");
+
+        landingPage.clickCategoryCards();
+        elementsPage.clickMenuLinks();
+
+
+        elementsPage.clickSimpleLink();
+        ArrayList<String> tabs1 = new ArrayList<String>(driver.getWindowHandles());
+        driver.switchTo().window(tabs1.get(1));
+        assertTrue(elementsPage.bodyHeight.isDisplayed());
+        driver.close();
+        driver.switchTo().window(tabs1.get(0));
+
+        elementsPage.clickDynamicLink();
+        ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles());
+        driver.switchTo().window(tabs2.get(1));
+        assertTrue(elementsPage.bodyHeight.isDisplayed());
+        driver.close();
+        driver.switchTo().window(tabs2.get(0));
+
+        elementsPage.clickCreatedLinks();
+        Thread.sleep(2000);
+        assertEquals(elementsPage.statusTextCreated.getText(),
+                "Link has responded with staus 201 and status text Created");
+
+        elementsPage.clickNoContentLink();
+        Thread.sleep(2000);
+        assertEquals(elementsPage.statusTextNoContent.getText(),
+                "Link has responded with staus 204 and status text No Content");
+
+        elementsPage.clickMovedLink();
+        Thread.sleep(2000);
+        assertEquals(elementsPage.statusTextMovedPermanently.getText(),
+                "Link has responded with staus 301 and status text Moved Permanently");
+
+        elementsPage.clickBadRequestLink();
+        Thread.sleep(2000);
+        assertEquals(elementsPage.statusTextBadRequest.getText(),
+                "Link has responded with staus 400 and status text Bad Request");
+
+        elementsPage.clickUnauthorizedLink();
+        Thread.sleep(2000);
+        assertEquals(elementsPage.statusTextUnauthorized.getText(),
+                "Link has responded with staus 401 and status text Unauthorized");
+
+        elementsPage.clickForbiddenLink();
+        Thread.sleep(2000);
+        assertEquals(elementsPage.statusTextForbidden.getText(),
+                "Link has responded with staus 403 and status text Forbidden");
+
+        elementsPage.clickInvalidUrlLink();
+        Thread.sleep(2000);
+        assertEquals(elementsPage.statusTextNotFound.getText(),
+                "Link has responded with staus 404 and status text Not Found");
     }
 }

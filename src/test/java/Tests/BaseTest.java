@@ -25,7 +25,6 @@ public class BaseTest {
         landingPage = new LandingPage(driver);
         elementsPage = new ElementsPage(driver);
         tableHelper = new TableHelper(driver);
-
         actions = new Actions(driver);
     }
 
