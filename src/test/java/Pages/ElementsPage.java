@@ -111,22 +111,6 @@ public class ElementsPage {
     private WebElement forbidden;
     @FindBy(xpath = "//a[@id = 'invalid-url']")
     private WebElement invalidUrl;
-    @FindBy(xpath = "//div[@class ='body-height']")
-    public WebElement bodyHeight;
-    @FindBy(xpath = "//p[@id = 'linkResponse' and contains(.,'Created')] ")
-    public WebElement statusTextCreated;
-    @FindBy(xpath = "//p[@id = 'linkResponse' and contains(.,'No Content')] ")
-    public WebElement statusTextNoContent;
-    @FindBy(xpath = "//p[@id = 'linkResponse' and contains(.,'Moved Permanently')] ")
-    public WebElement statusTextMovedPermanently;
-    @FindBy(xpath = "//p[@id = 'linkResponse' and contains(.,'Bad Request')] ")
-    public WebElement statusTextBadRequest;
-    @FindBy(xpath = "//p[@id = 'linkResponse' and contains(.,'Unauthorized')] ")
-    public WebElement statusTextUnauthorized;
-    @FindBy(xpath = "//p[@id = 'linkResponse' and contains(.,'Forbidden')] ")
-    public WebElement statusTextForbidden;
-    @FindBy(xpath = "//p[@id = 'linkResponse' and contains(.,'Not Found')] ")
-    public WebElement statusTextNotFound;
 
     private WebElement getCheckBox(String name) {
         return driver.findElement(By.xpath("//label[contains(@for, 'tree-node-" + name + "')]"));
@@ -134,6 +118,10 @@ public class ElementsPage {
 
     public void clickCheckBox(String checkBoxName) {
         getCheckBox(checkBoxName).click();
+    }
+
+    public WebElement getResponseMessage() {
+        return driver.findElement(By.xpath("//p[@id = 'linkResponse']"));
     }
 
     private WebDriver driver;
@@ -246,5 +234,4 @@ public class ElementsPage {
     public void clickInvalidUrlLink() {
         invalidUrl.click();
     }
-
 }

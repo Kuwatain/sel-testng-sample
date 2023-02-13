@@ -5,7 +5,7 @@ import org.testng.annotations.DataProvider;
 
 public class DataProviders {
 
-    @DataProvider(name = "Form params")
+    @DataProvider(name = "Form Params")
     public static Object[][] formParams() {
         return new Object[][]{
                 {"Stepan", "stepan@gmail.com", "city", "adress"},
@@ -13,7 +13,7 @@ public class DataProviders {
         };
     }
 
-    @DataProvider(name = "Check Box params")
+    @DataProvider(name = "Check Box Params")
     public static Object[][] checkBoxParams() {
         String[] checkBox = new String[]
                 {
@@ -32,7 +32,7 @@ public class DataProviders {
         return new Object[][]{checkBox};
     }
 
-    @DataProvider(name = "webTablesParam")
+    @DataProvider(name = "Web Tables Params")
     public static Object[][] webTablesParam() {
         return new Object[][]{
                 {
