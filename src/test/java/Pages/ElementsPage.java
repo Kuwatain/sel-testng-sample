@@ -111,6 +111,8 @@ public class ElementsPage {
     private WebElement forbidden;
     @FindBy(xpath = "//a[@id = 'invalid-url']")
     private WebElement invalidUrl;
+    @FindBy(xpath = "//p[@id = 'linkResponse']")
+    public WebElement responseMessage;
 
     private WebElement getCheckBox(String name) {
         return driver.findElement(By.xpath("//label[contains(@for, 'tree-node-" + name + "')]"));
@@ -118,10 +120,6 @@ public class ElementsPage {
 
     public void clickCheckBox(String checkBoxName) {
         getCheckBox(checkBoxName).click();
-    }
-
-    public WebElement getResponseMessage() {
-        return driver.findElement(By.xpath("//p[@id = 'linkResponse']"));
     }
 
     private WebDriver driver;

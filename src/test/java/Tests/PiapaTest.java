@@ -4,6 +4,7 @@ import DataProviders.DataProviders;
 import Model.User;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -123,7 +124,7 @@ public class PiapaTest extends BaseTest {
     }
 
     @Test
-    public void linksTest() throws InterruptedException {
+    public void linksTest() {
         driver.get("https://demoqa.com/");
 
         landingPage.clickCategoryCards();
@@ -143,38 +144,31 @@ public class PiapaTest extends BaseTest {
         opensTabById(0);
 
         elementsPage.clickCreatedLinks();
-        Thread.sleep(2000);
-        assertEquals(elementsPage.getResponseMessage().getText(),
+        assertEquals(wait.until(ExpectedConditions.visibilityOf(elementsPage.responseMessage)).getText(),
                 "Link has responded with staus 201 and status text Created");
 
         elementsPage.clickNoContentLink();
-        Thread.sleep(2000);
-        assertEquals(elementsPage.getResponseMessage().getText(),
+        assertEquals(wait.until(ExpectedConditions.visibilityOf(elementsPage.responseMessage)).getText(),
                 "Link has responded with staus 204 and status text No Content");
 
         elementsPage.clickMovedLink();
-        Thread.sleep(2000);
-        assertEquals(elementsPage.getResponseMessage().getText(),
+        assertEquals(wait.until(ExpectedConditions.visibilityOf(elementsPage.responseMessage)).getText(),
                 "Link has responded with staus 301 and status text Moved Permanently");
 
         elementsPage.clickBadRequestLink();
-        Thread.sleep(2000);
-        assertEquals(elementsPage.getResponseMessage().getText(),
+        assertEquals(wait.until(ExpectedConditions.visibilityOf(elementsPage.responseMessage)).getText(),
                 "Link has responded with staus 400 and status text Bad Request");
 
         elementsPage.clickUnauthorizedLink();
-        Thread.sleep(2000);
-        assertEquals(elementsPage.getResponseMessage().getText(),
+        assertEquals(wait.until(ExpectedConditions.visibilityOf(elementsPage.responseMessage)).getText(),
                 "Link has responded with staus 401 and status text Unauthorized");
 
         elementsPage.clickForbiddenLink();
-        Thread.sleep(2000);
-        assertEquals(elementsPage.getResponseMessage().getText(),
+        assertEquals(wait.until(ExpectedConditions.visibilityOf(elementsPage.responseMessage)).getText(),
                 "Link has responded with staus 403 and status text Forbidden");
 
         elementsPage.clickInvalidUrlLink();
-        Thread.sleep(2000);
-        assertEquals(elementsPage.getResponseMessage().getText(),
+        assertEquals(wait.until(ExpectedConditions.visibilityOf(elementsPage.responseMessage)).getText(),
                 "Link has responded with staus 404 and status text Not Found");
     }
 
