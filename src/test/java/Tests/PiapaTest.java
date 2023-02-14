@@ -8,6 +8,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.File;
+
 import static org.testng.Assert.*;
 
 public class PiapaTest extends BaseTest {
@@ -175,11 +177,11 @@ public class PiapaTest extends BaseTest {
         elementsPage.clickUploadAndDownload();
 
         elementsPage.clickDownloadButton();
-        String filePicture = "C:/Users/Nikita/Downloads/sampleFile.jpeg";
+        String filePicture = "./sampleFile.jpeg";
         Thread.sleep(2000);
-        elementsPage.fileInput.sendKeys(filePicture);
+        elementsPage.fileInput.sendKeys(new File(filePicture).getAbsolutePath());
         wait.until(ExpectedConditions.textToBePresentInElement(elementsPage.uploadedFilePath,
                 "C:\\fakepath\\sampleFile.jpeg"));
-        deleteFilePicture(filePicture);
+        assertTrue(deleteFilePicture(filePicture));
     }
 }

@@ -58,11 +58,9 @@ public class BaseTest {
         driver.switchTo().window(tabs.get(tabNumber));
     }
 
-    public static void deleteFilePicture(String args) {
-        File file = new File("C:/Users/Nikita/Downloads/sampleFile.jpeg");
-        if (file.delete()) {
-            System.out.println("C:/Users/Nikita/Downloads/sampleFile.jpeg file deleted");
-        } else
-            System.out.println("File C:/Users/Nikita/Downloads/sampleFile.jpeg  not found");
+    public boolean deleteFilePicture(String args) {
+        File file = new File("./sampleFile.jpeg");
+        file.getAbsolutePath();
+        return  file.delete();
     }
 }
