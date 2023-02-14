@@ -91,6 +91,28 @@ public class ElementsPage {
     @FindBy(xpath = "//p[@id ='dynamicClickMessage']")
     public WebElement dynamicClickMessage;
 
+    @FindBy(xpath = "//li[contains(., 'Links')]")
+    private WebElement links;
+    @FindBy(xpath = "//a[@id = 'dynamicLink']")
+    private WebElement dynamicLink;
+    @FindBy(xpath = "//a[@id = 'simpleLink']")
+    private WebElement simpleLink;
+    @FindBy(xpath = "//a[@id = 'created']")
+    private WebElement created;
+    @FindBy(xpath = "//a[@id = 'no-content']")
+    private WebElement noContent;
+    @FindBy(xpath = "//a[@id = 'moved']")
+    private WebElement moved;
+    @FindBy(xpath = "//a[@id = 'bad-request']")
+    private WebElement badRequest;
+    @FindBy(xpath = "//a[@id = 'unauthorized']")
+    private WebElement unauthorized;
+    @FindBy(xpath = "//a[@id = 'forbidden']")
+    private WebElement forbidden;
+    @FindBy(xpath = "//a[@id = 'invalid-url']")
+    private WebElement invalidUrl;
+    @FindBy(xpath = "//p[@id = 'linkResponse']")
+    public WebElement responseMessage;
 
     private WebElement getCheckBox(String name) {
         return driver.findElement(By.xpath("//label[contains(@for, 'tree-node-" + name + "')]"));
@@ -169,5 +191,45 @@ public class ElementsPage {
 
     public void clickMeButton() {
         clickMeBtn.click();
+    }
+
+    public void clickMenuLinks() {
+        links.click();
+    }
+
+    public void clickSimpleLink() {
+        simpleLink.click();
+    }
+
+    public void clickDynamicLink() {
+        dynamicLink.click();
+    }
+
+    public void clickCreatedLinks() {
+        created.click();
+    }
+
+    public void clickNoContentLink() {
+        noContent.click();
+    }
+
+    public void clickMovedLink() {
+        moved.click();
+    }
+
+    public void clickBadRequestLink() {
+        badRequest.click();
+    }
+
+    public void clickUnauthorizedLink() {
+        unauthorized.click();
+    }
+
+    public void clickForbiddenLink() {
+        forbidden.click();
+    }
+
+    public void clickInvalidUrlLink() {
+        invalidUrl.click();
     }
 }

@@ -4,15 +4,17 @@ import DataProviders.DataProviders;
 import Model.User;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.ArrayList;
 
 import static org.testng.Assert.*;
 
 public class PiapaTest extends BaseTest {
 
-    @Test(dataProvider = "Form params", dataProviderClass = DataProviders.class)
+    @Test(dataProvider = "Form Params", dataProviderClass = DataProviders.class)
     public void piapaTest(String name, String email, String current, String permanent) {
 
         driver.get("https://demoqa.com/");
@@ -29,7 +31,7 @@ public class PiapaTest extends BaseTest {
         assertEquals(elementsPage.resultPermanentAddress.getText(), "Permananet Address :" + permanent);
     }
 
-    @Test(dataProvider = "Check Box params", dataProviderClass = DataProviders.class)
+    @Test(dataProvider = "Check Box Params", dataProviderClass = DataProviders.class)
     public void checkBoxTest(String[] checkBox) {
         driver.get("https://demoqa.com/");
 
@@ -61,8 +63,8 @@ public class PiapaTest extends BaseTest {
         assertFalse(elementsPage.noRadio.isEnabled());
     }
 
-    @Test(dataProvider = "webTablesParam", dataProviderClass = DataProviders.class)
-    public void webTablesTest(User userNikita, User userStepan) throws InterruptedException {
+    @Test(dataProvider = "Web Tables Params", dataProviderClass = DataProviders.class)
+    public void webTablesTest(User userNikita, User userStepan) {
         driver.get("https://demoqa.com/");
 
         landingPage.clickCategoryCards();
@@ -119,5 +121,51 @@ public class PiapaTest extends BaseTest {
         assertEquals(elementsPage.doubleClickMessage.getText(), "You have done a double click");
         assertEquals(elementsPage.rightClickMessage.getText(), "You have done a right click");
         assertEquals(elementsPage.dynamicClickMessage.getText(), "You have done a dynamic click");
+    }
+
+    @Test
+    public void linksTest() {
+        driver.get("https://demoqa.com/");
+
+        landingPage.clickCategoryCards();
+        elementsPage.clickMenuLinks();
+
+        elementsPage.clickSimpleLink();
+        opensTabById(1);
+        assertTrue(landingPage.elements.isDisplayed());
+        opensTabById(0);
+
+        elementsPage.clickDynamicLink();
+        opensTabById(2);
+        assertTrue(landingPage.elements.isDisplayed());
+        opensTabById(0);
+
+        elementsPage.clickCreatedLinks();
+        wait.until(ExpectedConditions.textToBePresentInElement(elementsPage.responseMessage,
+                "Link has responded with staus 201 and status text Created"));
+
+        elementsPage.clickNoContentLink();
+        wait.until(ExpectedConditions.textToBePresentInElement(elementsPage.responseMessage,
+                "Link has responded with staus 204 and status text No Content"));
+
+        elementsPage.clickMovedLink();
+        wait.until(ExpectedConditions.textToBePresentInElement(elementsPage.responseMessage,
+                "Link has responded with staus 301 and status text Moved Permanently"));
+
+        elementsPage.clickBadRequestLink();
+        wait.until(ExpectedConditions.textToBePresentInElement(elementsPage.responseMessage,
+                "Link has responded with staus 400 and status text Bad Request"));
+
+        elementsPage.clickUnauthorizedLink();
+        wait.until(ExpectedConditions.textToBePresentInElement(elementsPage.responseMessage,
+                "Link has responded with staus 401 and status text Unauthorized"));
+
+        elementsPage.clickForbiddenLink();
+        wait.until(ExpectedConditions.textToBePresentInElement(elementsPage.responseMessage,
+                "Link has responded with staus 403 and status text Forbidden"));
+
+        elementsPage.clickInvalidUrlLink();
+        wait.until(ExpectedConditions.textToBePresentInElement(elementsPage.responseMessage,
+                "Link has responded with staus 404 and status text Not Found"));
     }
 }
