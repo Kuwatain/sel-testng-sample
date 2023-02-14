@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import java.io.File;
 import java.time.Duration;
 import java.util.ArrayList;
 
@@ -55,5 +56,13 @@ public class BaseTest {
     public void opensTabById(int tabNumber) {
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(tabNumber));
+    }
+
+    public static void deleteFilePicture(String args) {
+        File file = new File("C:/Users/Nikita/Downloads/sampleFile.jpeg");
+        if (file.delete()) {
+            System.out.println("C:/Users/Nikita/Downloads/sampleFile.jpeg file deleted");
+        } else
+            System.out.println("File C:/Users/Nikita/Downloads/sampleFile.jpeg  not found");
     }
 }
