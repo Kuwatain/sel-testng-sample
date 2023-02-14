@@ -144,32 +144,32 @@ public class PiapaTest extends BaseTest {
         opensTabById(0);
 
         elementsPage.clickCreatedLinks();
-        assertEquals(wait.until(ExpectedConditions.visibilityOf(elementsPage.responseMessage)).getText(),
-                "Link has responded with staus 201 and status text Created");
+        wait.until(ExpectedConditions.textToBePresentInElement(elementsPage.responseMessage,
+                "Link has responded with staus 201 and status text Created"));
 
         elementsPage.clickNoContentLink();
-        assertEquals(wait.until(ExpectedConditions.visibilityOf(elementsPage.responseMessage)).getText(),
-                "Link has responded with staus 204 and status text No Content");
+        wait.until(ExpectedConditions.textToBePresentInElement(elementsPage.responseMessage,
+                "Link has responded with staus 204 and status text No Content"));
 
         elementsPage.clickMovedLink();
-        assertEquals(wait.until(ExpectedConditions.visibilityOf(elementsPage.responseMessage)).getText(),
-                "Link has responded with staus 301 and status text Moved Permanently");
+        wait.until(ExpectedConditions.textToBePresentInElement(elementsPage.responseMessage,
+                "Link has responded with staus 301 and status text Moved Permanently"));
 
         elementsPage.clickBadRequestLink();
-        assertEquals(wait.until(ExpectedConditions.visibilityOf(elementsPage.responseMessage)).getText(),
-                "Link has responded with staus 400 and status text Bad Request");
+        wait.until(ExpectedConditions.textToBePresentInElement(elementsPage.responseMessage,
+                "Link has responded with staus 400 and status text Bad Request"));
 
         elementsPage.clickUnauthorizedLink();
-        assertEquals(wait.until(ExpectedConditions.visibilityOf(elementsPage.responseMessage)).getText(),
-                "Link has responded with staus 401 and status text Unauthorized");
+        wait.until(ExpectedConditions.textToBePresentInElement(elementsPage.responseMessage,
+                "Link has responded with staus 401 and status text Unauthorized"));
 
         elementsPage.clickForbiddenLink();
-        assertEquals(wait.until(ExpectedConditions.visibilityOf(elementsPage.responseMessage)).getText(),
-                "Link has responded with staus 403 and status text Forbidden");
+        wait.until(ExpectedConditions.textToBePresentInElement(elementsPage.responseMessage,
+                "Link has responded with staus 403 and status text Forbidden"));
 
         elementsPage.clickInvalidUrlLink();
-        assertEquals(wait.until(ExpectedConditions.visibilityOf(elementsPage.responseMessage)).getText(),
-                "Link has responded with staus 404 and status text Not Found");
+        wait.until(ExpectedConditions.textToBePresentInElement(elementsPage.responseMessage,
+                "Link has responded with staus 404 and status text Not Found"));
     }
 
     private void opensTabById(int tabNumber) {
