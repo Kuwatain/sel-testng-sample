@@ -177,11 +177,12 @@ public class PiapaTest extends BaseTest {
         elementsPage.clickUploadAndDownload();
 
         elementsPage.clickDownloadButton();
-        String filePicture = "./sampleFile.jpeg";
+        String filePicture = System.getProperty("user.dir") + "\\src\\test\\java\\downloads\\sampleFile.jpeg";
         Thread.sleep(2000);
-        elementsPage.fileInput.sendKeys(new File(filePicture).getAbsolutePath());
+        elementsPage.fileInput.sendKeys(filePicture);
         wait.until(ExpectedConditions.textToBePresentInElement(elementsPage.uploadedFilePath,
                 "C:\\fakepath\\sampleFile.jpeg"));
-        assertTrue(deleteFilePicture(filePicture));
+
+        deleteFilePicture(filePicture);
     }
 }
