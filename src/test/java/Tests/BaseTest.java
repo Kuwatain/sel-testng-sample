@@ -12,6 +12,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import java.time.Duration;
+import java.util.ArrayList;
 
 public class BaseTest {
     public WebDriver driver;
@@ -49,5 +50,10 @@ public class BaseTest {
 
     public void rightClick(WebElement element) {
         actions.contextClick(element).perform();
+    }
+
+    public void opensTabById(int tabNumber) {
+        ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(tabNumber));
     }
 }

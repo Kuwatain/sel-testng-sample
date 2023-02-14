@@ -131,16 +131,13 @@ public class PiapaTest extends BaseTest {
         elementsPage.clickMenuLinks();
 
         elementsPage.clickSimpleLink();
-
         opensTabById(1);
         assertTrue(landingPage.elements.isDisplayed());
-        driver.close();
         opensTabById(0);
 
         elementsPage.clickDynamicLink();
-        opensTabById(1);
+        opensTabById(2);
         assertTrue(landingPage.elements.isDisplayed());
-        driver.close();
         opensTabById(0);
 
         elementsPage.clickCreatedLinks();
@@ -170,10 +167,5 @@ public class PiapaTest extends BaseTest {
         elementsPage.clickInvalidUrlLink();
         wait.until(ExpectedConditions.textToBePresentInElement(elementsPage.responseMessage,
                 "Link has responded with staus 404 and status text Not Found"));
-    }
-
-    private void opensTabById(int tabNumber) {
-        ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
-        driver.switchTo().window(tabs.get(tabNumber));
     }
 }
