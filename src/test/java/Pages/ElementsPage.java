@@ -13,7 +13,7 @@ import static Tests.BaseTest.sendText;
 
 public class ElementsPage {
     @FindBy(xpath = "//li[contains(.,'Text Box')]")
-    private WebElement textBox;
+    public WebElement textBox;
     @FindBy(xpath = "//input[contains(@id, 'userName')]")
     private WebElement userName;
     @FindBy(xpath = "//input[contains(@id, 'userEmail')]")
@@ -36,7 +36,7 @@ public class ElementsPage {
     public WebElement resultPermanentAddress;
 
     @FindBy(xpath = "//li[contains(., 'Check Box')]")
-    private WebElement checkBox;
+    public WebElement checkBox;
     @FindBy(xpath = "//button[contains(@title, 'Expand all')]")
     private WebElement expandAll;
 
@@ -44,7 +44,7 @@ public class ElementsPage {
     public List<WebElement> displayResultCheckBox;
 
     @FindBy(xpath = "//li[contains(., 'Radio Button')]")
-    private WebElement radioButton;
+    public WebElement radioButton;
     @FindBy(xpath = "//label[contains(@for, 'yesRadio')]")
     private WebElement yesRadio;
     @FindBy(xpath = "//label[contains(@for, 'impressiveRadio')]")
@@ -55,7 +55,7 @@ public class ElementsPage {
     public WebElement displayResultRadioButton;
 
     @FindBy(xpath = "//li[contains(., 'Web Tables')]")
-    private WebElement webTables;
+    public WebElement webTables;
     @FindBy(xpath = "//button[@id = 'addNewRecordButton']")
     private WebElement addButton;
     @FindBy(xpath = "//input[@id  = 'firstName']")
@@ -70,14 +70,14 @@ public class ElementsPage {
     private WebElement userTablesSalary;
     @FindBy(xpath = "//input[@id  = 'department']")
     private WebElement userTablesDepartment;
-    @FindBy(xpath = "//button[@id  = 'submit']")
+    @FindBy(xpath = "//button[@id = 'submit']")
     private WebElement submitForm;
 
     @FindBy(xpath = "//input[@id='searchBox']")
     public WebElement searchBoxForm;
 
     @FindBy(xpath = "//li[contains(., 'Buttons')]")
-    private WebElement buttons;
+    public WebElement buttons;
     @FindBy(xpath = "//button[@id = 'doubleClickBtn']")
     public WebElement doubleClickBtn;
     @FindBy(xpath = "//button[@id = 'rightClickBtn']")
@@ -92,7 +92,7 @@ public class ElementsPage {
     public WebElement dynamicClickMessage;
 
     @FindBy(xpath = "//li[contains(., 'Links')]")
-    private WebElement links;
+    public WebElement links;
     @FindBy(xpath = "//a[@id = 'dynamicLink']")
     private WebElement dynamicLink;
     @FindBy(xpath = "//a[@id = 'simpleLink']")
@@ -115,14 +115,20 @@ public class ElementsPage {
     public WebElement responseMessage;
 
     @FindBy(xpath = "//li[contains(., 'Upload and Download')]")
-    private WebElement uploadAndDownload;
+    public WebElement uploadAndDownload;
     @FindBy(xpath = "//a[@download ='sampleFile.jpeg']")
     private WebElement downloadButton;
     @FindBy(xpath = "//input[@type='file']")
     public WebElement fileInput;
-    @FindBy(xpath = "//p[@id ='uploadedFilePath']")
+    @FindBy(xpath = "//p[@id = 'uploadedFilePath']")
     public WebElement uploadedFilePath;
 
+    @FindBy(xpath = "//li[contains(., 'Dynamic Properties')]")
+    public WebElement dynamicProperties;
+    @FindBy(xpath = "//button[@id = 'colorChange']")
+    public WebElement colorChange;
+    @FindBy(xpath = "//button[@id = 'visibleAfter']")
+    public WebElement visibleAfter;
 
     private WebElement getCheckBox(String name) {
         return driver.findElement(By.xpath("//label[contains(@for, 'tree-node-" + name + "')]"));
@@ -139,10 +145,6 @@ public class ElementsPage {
         this.driver = driver;
     }
 
-    public void clickMenuTextBox() {
-        textBox.click();
-    }
-
     public void clickButtonSubmit() {
         submit.click();
     }
@@ -154,16 +156,8 @@ public class ElementsPage {
         permanentAddress.sendKeys(permanent);
     }
 
-    public void clickMenuCheckBox() {
-        checkBox.click();
-    }
-
     public void clickCheckBoxExpandAll() {
         expandAll.click();
-    }
-
-    public void clickMenuRadioButton() {
-        radioButton.click();
     }
 
     public void clickYesRadioButton() {
@@ -172,10 +166,6 @@ public class ElementsPage {
 
     public void clickImpressiveRadioButton() {
         impressiveRadio.click();
-    }
-
-    public void clickMenuWebTables() {
-        webTables.click();
     }
 
     public void clickAddButton() {
@@ -195,16 +185,8 @@ public class ElementsPage {
         submitForm.click();
     }
 
-    public void clickMenuButtons() {
-        buttons.click();
-    }
-
     public void clickMeButton() {
         clickMeBtn.click();
-    }
-
-    public void clickMenuLinks() {
-        links.click();
     }
 
     public void clickSimpleLink() {
@@ -241,10 +223,6 @@ public class ElementsPage {
 
     public void clickInvalidUrlLink() {
         invalidUrl.click();
-    }
-
-    public void clickUploadAndDownload() {
-        uploadAndDownload.click();
     }
 
     public void clickDownloadButton() {

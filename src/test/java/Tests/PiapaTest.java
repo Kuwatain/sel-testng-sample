@@ -8,8 +8,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.io.File;
-
 import static org.testng.Assert.*;
 
 public class PiapaTest extends BaseTest {
@@ -20,8 +18,8 @@ public class PiapaTest extends BaseTest {
         driver.get("https://demoqa.com/");
 
         landingPage.clickCategoryCards();
+        clickJS(elementsPage.textBox);
 
-        elementsPage.clickMenuTextBox();
         elementsPage.fillForm(name, email, current, permanent);
         elementsPage.clickButtonSubmit();
 
@@ -36,8 +34,8 @@ public class PiapaTest extends BaseTest {
         driver.get("https://demoqa.com/");
 
         landingPage.clickCategoryCards();
+        clickJS(elementsPage.checkBox);
 
-        elementsPage.clickMenuCheckBox();
         elementsPage.clickCheckBoxExpandAll();
 
         for (int i = 0; i < checkBox.length; i++) {
@@ -53,8 +51,7 @@ public class PiapaTest extends BaseTest {
         driver.get("https://demoqa.com/");
 
         landingPage.clickCategoryCards();
-
-        elementsPage.clickMenuRadioButton();
+        clickJS(elementsPage.radioButton);
 
         elementsPage.clickYesRadioButton();
         assertEquals(elementsPage.displayResultRadioButton.getText(), "You have selected Yes");
@@ -68,8 +65,8 @@ public class PiapaTest extends BaseTest {
         driver.get("https://demoqa.com/");
 
         landingPage.clickCategoryCards();
+        clickJS(elementsPage.webTables);
 
-        elementsPage.clickMenuWebTables();
         elementsPage.clickAddButton();
         elementsPage.fillTablesForm(userNikita);
         elementsPage.clickTablesButtonSubmit();
@@ -112,7 +109,7 @@ public class PiapaTest extends BaseTest {
         driver.get("https://demoqa.com/");
 
         landingPage.clickCategoryCards();
-        elementsPage.clickMenuButtons();
+        clickJS(elementsPage.buttons);
 
         doubleClick(elementsPage.doubleClickBtn);
         rightClick(elementsPage.rightClickBtn);
@@ -128,7 +125,7 @@ public class PiapaTest extends BaseTest {
         driver.get("https://demoqa.com/");
 
         landingPage.clickCategoryCards();
-        elementsPage.clickMenuLinks();
+        clickJS(elementsPage.links);
 
         elementsPage.clickSimpleLink();
         opensTabById(1);
@@ -174,7 +171,7 @@ public class PiapaTest extends BaseTest {
         driver.get("https://demoqa.com/");
 
         landingPage.clickCategoryCards();
-        elementsPage.clickUploadAndDownload();
+        clickJS(elementsPage.uploadAndDownload);
 
         elementsPage.clickDownloadButton();
         String filePicture = System.getProperty("user.dir") + "\\src\\test\\java\\downloads\\sampleFile.jpeg";
@@ -184,5 +181,26 @@ public class PiapaTest extends BaseTest {
                 "C:\\fakepath\\sampleFile.jpeg"));
 
         deleteFilePicture(filePicture);
+    }
+
+    @Test
+    public void dynamicPropertiesTest() throws InterruptedException {
+        driver.get("https://demoqa.com/");
+
+        landingPage.clickCategoryCards();
+        clickJS(elementsPage.dynamicProperties);
+
+        String titleColor = null;
+        for (int i = 0; i <= 3; i++) {
+            titleColor = elementsPage.colorChange.getCssValue("color");
+            if (titleColor != "rgba(255, 255, 255, 1)") {
+                return;
+            }
+            Thread.sleep(2000);
+        }
+        titleColor = elementsPage.colorChange.getCssValue("color");
+        assertEquals(titleColor, "rgba(220, 53, 69, 1)");
+
+        wait.until(ExpectedConditions.visibilityOf(elementsPage.visibleAfter));
     }
 }
