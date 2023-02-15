@@ -18,8 +18,8 @@ public class PiapaTest extends BaseTest {
         driver.get("https://demoqa.com/");
 
         landingPage.clickCategoryCards();
+        clickJS(elementsPage.textBox);
 
-        elementsPage.clickMenuTextBox();
         elementsPage.fillForm(name, email, current, permanent);
         elementsPage.clickButtonSubmit();
 
@@ -34,8 +34,8 @@ public class PiapaTest extends BaseTest {
         driver.get("https://demoqa.com/");
 
         landingPage.clickCategoryCards();
+        clickJS(elementsPage.checkBox);
 
-        elementsPage.clickMenuCheckBox();
         elementsPage.clickCheckBoxExpandAll();
 
         for (int i = 0; i < checkBox.length; i++) {
@@ -51,8 +51,7 @@ public class PiapaTest extends BaseTest {
         driver.get("https://demoqa.com/");
 
         landingPage.clickCategoryCards();
-
-        elementsPage.clickMenuRadioButton();
+        clickJS(elementsPage.radioButton);
 
         elementsPage.clickYesRadioButton();
         assertEquals(elementsPage.displayResultRadioButton.getText(), "You have selected Yes");
@@ -66,8 +65,8 @@ public class PiapaTest extends BaseTest {
         driver.get("https://demoqa.com/");
 
         landingPage.clickCategoryCards();
+        clickJS(elementsPage.webTables);
 
-        elementsPage.clickMenuWebTables();
         elementsPage.clickAddButton();
         elementsPage.fillTablesForm(userNikita);
         elementsPage.clickTablesButtonSubmit();
@@ -110,7 +109,7 @@ public class PiapaTest extends BaseTest {
         driver.get("https://demoqa.com/");
 
         landingPage.clickCategoryCards();
-        elementsPage.clickMenuButtons();
+        clickJS(elementsPage.buttons);
 
         doubleClick(elementsPage.doubleClickBtn);
         rightClick(elementsPage.rightClickBtn);
@@ -126,7 +125,7 @@ public class PiapaTest extends BaseTest {
         driver.get("https://demoqa.com/");
 
         landingPage.clickCategoryCards();
-        elementsPage.clickMenuLinks();
+        clickJS(elementsPage.links);
 
         elementsPage.clickSimpleLink();
         opensTabById(1);
@@ -165,5 +164,38 @@ public class PiapaTest extends BaseTest {
         elementsPage.clickInvalidUrlLink();
         wait.until(ExpectedConditions.textToBePresentInElement(elementsPage.responseMessage,
                 "Link has responded with staus 404 and status text Not Found"));
+    }
+
+    @Test
+    public void uploadAndDownload() throws InterruptedException {
+        driver.get("https://demoqa.com/");
+
+        landingPage.clickCategoryCards();
+        clickJS(elementsPage.uploadAndDownload);
+
+        elementsPage.clickDownloadButton();
+        String filePicture = System.getProperty("user.dir") + "\\src\\test\\java\\downloads\\sampleFile.jpeg";
+        Thread.sleep(2000);
+        elementsPage.fileInput.sendKeys(filePicture);
+        wait.until(ExpectedConditions.textToBePresentInElement(elementsPage.uploadedFilePath,
+                "C:\\fakepath\\sampleFile.jpeg"));
+
+        deleteFilePicture(filePicture);
+    }
+
+    @Test
+    public void dynamicProperties() throws InterruptedException {
+        driver.get("https://demoqa.com/");
+
+        landingPage.clickCategoryCards();
+        clickJS(elementsPage.dynamicProperties);
+
+        String titleColor = elementsPage.colorChange.getCssValue("color");
+        for (int i = 0; i < 5; i++) {
+            assertEquals(titleColor, "rgba(255, 255, 255, 1)");
+            Thread.sleep(1000);
+        }
+
+        wait.until(ExpectedConditions.visibilityOf(elementsPage.visibleAfter));
     }
 }
