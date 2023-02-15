@@ -184,17 +184,22 @@ public class PiapaTest extends BaseTest {
     }
 
     @Test
-    public void dynamicProperties() throws InterruptedException {
+    public void dynamicPropertiesTest() throws InterruptedException {
         driver.get("https://demoqa.com/");
 
         landingPage.clickCategoryCards();
         clickJS(elementsPage.dynamicProperties);
 
-        String titleColor = elementsPage.colorChange.getCssValue("color");
-        for (int i = 0; i < 5; i++) {
-            assertEquals(titleColor, "rgba(255, 255, 255, 1)");
-            Thread.sleep(1000);
+        String titleColor = null;
+        for (int i = 0; i <= 3; i++) {
+            titleColor = elementsPage.colorChange.getCssValue("color");
+            if (titleColor != "rgba(255, 255, 255, 1)") {
+                return;
+            }
+            Thread.sleep(2000);
         }
+        titleColor = elementsPage.colorChange.getCssValue("color");
+        assertEquals(titleColor, "rgba(220, 53, 69, 1)");
 
         wait.until(ExpectedConditions.visibilityOf(elementsPage.visibleAfter));
     }
