@@ -114,6 +114,16 @@ public class ElementsPage {
     @FindBy(xpath = "//p[@id = 'linkResponse']")
     public WebElement responseMessage;
 
+    @FindBy(xpath = "//li[contains(., 'Upload and Download')]")
+    private WebElement uploadAndDownload;
+    @FindBy(xpath = "//a[@download ='sampleFile.jpeg']")
+    private WebElement downloadButton;
+    @FindBy(xpath = "//input[@type='file']")
+    public WebElement fileInput;
+    @FindBy(xpath = "//p[@id ='uploadedFilePath']")
+    public WebElement uploadedFilePath;
+
+
     private WebElement getCheckBox(String name) {
         return driver.findElement(By.xpath("//label[contains(@for, 'tree-node-" + name + "')]"));
     }
@@ -231,5 +241,13 @@ public class ElementsPage {
 
     public void clickInvalidUrlLink() {
         invalidUrl.click();
+    }
+
+    public void clickUploadAndDownload() {
+        uploadAndDownload.click();
+    }
+
+    public void clickDownloadButton() {
+        downloadButton.click();
     }
 }

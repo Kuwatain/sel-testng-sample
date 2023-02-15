@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
+import java.io.File;
 
 import static org.testng.Assert.*;
 
@@ -167,5 +167,22 @@ public class PiapaTest extends BaseTest {
         elementsPage.clickInvalidUrlLink();
         wait.until(ExpectedConditions.textToBePresentInElement(elementsPage.responseMessage,
                 "Link has responded with staus 404 and status text Not Found"));
+    }
+
+    @Test
+    public void uploadAndDownload() throws InterruptedException {
+        driver.get("https://demoqa.com/");
+
+        landingPage.clickCategoryCards();
+        elementsPage.clickUploadAndDownload();
+
+        elementsPage.clickDownloadButton();
+        String filePicture = System.getProperty("user.dir") + "\\src\\test\\java\\downloads\\sampleFile.jpeg";
+        Thread.sleep(2000);
+        elementsPage.fileInput.sendKeys(filePicture);
+        wait.until(ExpectedConditions.textToBePresentInElement(elementsPage.uploadedFilePath,
+                "C:\\fakepath\\sampleFile.jpeg"));
+
+        deleteFilePicture(filePicture);
     }
 }

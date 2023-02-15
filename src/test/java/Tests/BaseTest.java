@@ -3,16 +3,23 @@ package Tests;
 import Helpers.TableHelper;
 import Pages.ElementsPage;
 import Pages.LandingPage;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import java.io.File;
+import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class BaseTest {
     public WebDriver driver;
@@ -24,7 +31,14 @@ public class BaseTest {
 
     @BeforeMethod
     public void beforeMethod() {
-        driver = new ChromeDriver();
+        String downloadDirVersion2 = System.getProperty("user.dir") + "\\src\\test\\java\\downloads";
+
+        HashMap<String, Object> prefs = new HashMap<>();
+        prefs.put("download.default_directory", downloadDirVersion2);
+        ChromeOptions opts = new ChromeOptions();
+        opts.setExperimentalOption("prefs", prefs);
+
+        driver = new ChromeDriver(opts);
         driver.manage().window().maximize();
 
         landingPage = new LandingPage(driver);
@@ -55,5 +69,15 @@ public class BaseTest {
     public void opensTabById(int tabNumber) {
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(tabNumber));
+    }
+
+    public void deleteFilePicture(String filePath) {
+        File file = new File(filePath);
+        assert file.delete();
+    }
+
+    public void clickJS(WebElement element) {
+        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        executor.executeScript("arguments[0].click();", element);
     }
 }
