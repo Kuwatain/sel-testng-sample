@@ -49,4 +49,44 @@ public class TableHelper {
     public void clickDeleteRecord(WebElement row) {
         row.findElement(By.xpath("div[7]//span[@title='Delete']")).click();
     }
+
+    public String getStudentName() {
+        return driver.findElement(By.xpath("//tr[contains(., 'Student Name')] // td[2]")).getText();
+    }
+
+    public String getStudentEmail() {
+        return driver.findElement(By.xpath("//tr[contains(., 'Student Email')] // td[2]")).getText();
+    }
+
+    public String getGender() {
+        return driver.findElement(By.xpath("//tr[contains(., 'Gender')] // td[2]")).getText();
+    }
+
+    public String getMobile() {
+        return driver.findElement(By.xpath("//tr[contains(., 'Mobile')] // td[2]")).getText();
+    }
+
+    public String getDateOfBirth() {
+        return driver.findElement(By.xpath("//tr[contains(., 'Date of Birth')] // td[2]")).getText();
+    }
+
+    public String getSubjects() {
+        return driver.findElement(By.xpath("//tr[contains(., 'Subjects')] // td[2]")).getText();
+    }
+
+    public String getHobbies() {
+        return driver.findElement(By.xpath("//tr[contains(., 'Hobbies')] // td[2]")).getText();
+    }
+
+    public String getPicture() {
+        return driver.findElement(By.xpath("//tr[contains(., 'Picture')] // td[2]")).getText();
+    }
+
+    public String getAddress() {
+        return driver.findElement(By.xpath("//tr[contains(., 'Address')] // td[2]")).getText();
+    }
+
+    public String getStateAndCity() {
+        return driver.findElement(By.xpath("//tr[contains(., 'State and City')] // td[2]")).getText();
+    }
 }

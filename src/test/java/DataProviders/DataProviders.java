@@ -33,11 +33,20 @@ public class DataProviders {
     }
 
     @DataProvider(name = "Web Tables Params")
-    public static Object[][] webTablesParam() {
+    public static Object[][] webTablesParams() {
         return new Object[][]{
                 {
                         new User("Nikita", "Rachkov", "nikita@gmail.com", "24", "0", "Kazan"),
                         new User("Stepan", "Igolkin", "stepan@gmail.com", "24", "500000", "Yerevan")
+                },
+        };
+    }
+
+    @DataProvider(name = "Forms Params")
+    public static Object[][] fromsParams() {
+        return new Object[][]{
+                {
+                        new User("Nikita", "Rachkov", "nikita@gmail.com", "9655857796", "Kazan")
                 },
         };
     }

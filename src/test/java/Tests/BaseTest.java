@@ -1,7 +1,9 @@
 package Tests;
 
+import Helpers.CalendarHelper;
 import Helpers.TableHelper;
 import Pages.ElementsPage;
+import Pages.FormsPage;
 import Pages.LandingPage;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -22,9 +24,11 @@ public class BaseTest {
     public WebDriver driver;
     public LandingPage landingPage;
     public ElementsPage elementsPage;
+    public FormsPage formsPage;
     TableHelper tableHelper;
     Actions actions;
     WebDriverWait wait;
+    CalendarHelper calendarHelper;
 
     @BeforeMethod
     public void beforeMethod() {
@@ -40,9 +44,11 @@ public class BaseTest {
 
         landingPage = new LandingPage(driver);
         elementsPage = new ElementsPage(driver);
+        formsPage = new FormsPage(driver);
         tableHelper = new TableHelper(driver);
         actions = new Actions(driver);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        calendarHelper = new CalendarHelper(driver);
     }
 
     @AfterMethod
