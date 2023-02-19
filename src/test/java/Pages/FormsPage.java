@@ -144,4 +144,17 @@ public class FormsPage {
     public void clickCloseLargeModal() {
         closeLargeModal.click();
     }
+    
+    public void assertLargeTable(User user) {
+        assertEquals(tableHelper.getStudentName(), "Nikita Rachkov");
+        assertEquals(tableHelper.getStudentEmail(), "nikita@gmail.com");
+        assertEquals(tableHelper.getGender(), "Male");
+        assertEquals(tableHelper.getMobile(), "9655857796");
+        assertEquals(tableHelper.getDateOfBirth(), "08 March,1998");
+        assertEquals(tableHelper.getSubjects(), "Social Studies, Biology, Civics, Hindi");
+        assertEquals(tableHelper.getHobbies(), "Sports, Reading, Music");
+        assertEquals(tableHelper.getPicture(), "BaseTest.java");
+        assertEquals(tableHelper.getAddress(), "Kazan");
+        assertEquals(tableHelper.getStateAndCity(), "NCR Delhi");
+    }
 }
