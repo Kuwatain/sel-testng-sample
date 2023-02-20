@@ -15,18 +15,28 @@ public class FormsTest extends BaseTest {
         landingPage.clickCategoryCardsForms();
         clickJS(formsPage.practiceForm);
 
-        formsPage.fillRegistrationForm(userNikita);
-        formsPage.clickRadioMale();
+        formsPage.sendKeysFirstName("Nikita");
+        formsPage.sendKeysLastName("Rachkov");
+        formsPage.sendKeysUserEmail("nikita@gmail.com");
+
+        formsPage.clickRadioButtonMale();
+
+        formsPage.sendKeysUserNumber("9655857796");
 
         formsPage.clickDateOfBirth();
-        formsPage.clickCalendarYear();
-        formsPage.clickCalendarMonth();
-        formsPage.clickCalendarDay();
+        calendarHelper.clickDatePicker
+                (
+                        "1998",
+                        "March",
+                        "8"
+                );
 
-        formsPage.sendKeysAndClickSubjects("a", 3);
-        formsPage.sendKeysAndClickSubjects("b", 0);
-        formsPage.sendKeysAndClickSubjects("c", 6);
-        formsPage.sendKeysAndClickSubjects("d", 0);
+        formsPage.sendKeysAndClickSubjects("a", "Social Studies");
+        formsPage.sendKeysAndClickSubjects("b", "Biology");
+        formsPage.clickRemoveSubjectsElement("Biology");
+        formsPage.clickClearAllSubjects();
+        formsPage.sendKeysAndClickSubjects("c", "Civics");
+        formsPage.sendKeysAndClickSubjects("d", "Hindi");
 
         formsPage.clickCheckBoxSports();
         formsPage.clickCheckBoxReading();
@@ -35,22 +45,28 @@ public class FormsTest extends BaseTest {
         String file = System.getProperty("user.dir") + "\\src\\test\\java\\Tests\\BaseTest.java";
         formsPage.fileInput.sendKeys(file);
 
-        formsPage.clickAndChoiceState(0);
-        formsPage.clickAndChoiceCity(0);
+        formsPage.sendKeysCurrentAddress("Kazan");
+
+        formsPage.clickAndChoiceState("NCR");
+        formsPage.clickAndChoiceCity("Delhi");
 
         clickJS(formsPage.submit);
 
-        assertEquals(tableHelper.getStudentName(), "Nikita Rachkov");
-        assertEquals(tableHelper.getStudentEmail(), "nikita@gmail.com");
-        assertEquals(tableHelper.getGender(), "Male");
-        assertEquals(tableHelper.getMobile(), "9655857796");
-        assertEquals(tableHelper.getDateOfBirth(), "08 March,1998");
-        assertEquals(tableHelper.getSubjects(), "Social Studies, Biology, Civics, Hindi");
-        assertEquals(tableHelper.getHobbies(), "Sports, Reading, Music");
-        assertEquals(tableHelper.getPicture(), "BaseTest.java");
-        assertEquals(tableHelper.getAddress(), "Kazan");
-        assertEquals(tableHelper.getStateAndCity(), "NCR Delhi");
+        assertLargeTable(userNikita);
 
         formsPage.clickCloseLargeModal();
+    }
+
+    private void assertLargeTable(User user) {
+        assertEquals(formsPage.getStudentName(), user.getFirstName() + " " + user.getLastName());
+        assertEquals(formsPage.getStudentEmail(), user.getEmail());
+        assertEquals(formsPage.getGender(), user.getGender());
+        assertEquals(formsPage.getMobile(), user.getNumber());
+        assertEquals(formsPage.getDateOfBirth(), user.getDateOfBirth());
+        assertEquals(formsPage.getSubjects(), user.getSubjects());
+        assertEquals(formsPage.getHobbies(), user.getHobbies());
+        assertEquals(formsPage.getPicture(), user.getPicture());
+        assertEquals(formsPage.getAddress(), user.getCurrentAddress());
+        assertEquals(formsPage.getStateAndCity(), user.getStateAndCity());
     }
 }

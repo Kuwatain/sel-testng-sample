@@ -46,7 +46,23 @@ public class DataProviders {
     public static Object[][] fromsParams() {
         return new Object[][]{
                 {
-                        new User("Nikita", "Rachkov", "nikita@gmail.com", "9655857796", "Kazan")
+                        new User
+                                (
+                                        "Nikita",
+                                        "Rachkov",
+                                        "nikita@gmail.com",
+                                        "Male",
+                                        "9655857796",
+                                        "08 March,1998",
+                                        "Civics, Hindi",
+                                        "Sports, Reading, Music",
+                                        "BaseTest.java",
+                                        "Kazan",
+                                        "NCR Delhi",
+                                        null,
+                                        null,
+                                        null
+                                )
                 },
         };
     }

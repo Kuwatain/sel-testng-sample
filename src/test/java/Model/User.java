@@ -9,6 +9,12 @@ public class User {
     private String department;
     private String number;
     private String currentAddress;
+    private String gender;
+    private String dateOfBirth;
+    private String subjects;
+    private String hobbies;
+    private String picture;
+    private String stateAndCity;
 
     public User(String firstName, String lastName, String email, String age, String salary, String department) {
         this.firstName = firstName;
@@ -19,12 +25,38 @@ public class User {
         this.department = department;
     }
 
-    public User(String firstName, String lastName, String email, String number, String currentAddress) {
+
+    public User
+            (
+                    String firstName,
+                    String lastName,
+                    String email,
+                    String gender,
+                    String number,
+                    String dateOfBirth,
+                    String subjects,
+                    String hobbies,
+                    String picture,
+                    String currentAddress,
+                    String stateAndCity,
+                    String age,
+                    String salary,
+                    String department
+            ) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.gender = gender;
         this.number = number;
+        this.dateOfBirth = dateOfBirth;
+        this.subjects = subjects;
+        this.hobbies = hobbies;
+        this.picture = picture;
         this.currentAddress = currentAddress;
+        this.stateAndCity = stateAndCity;
+        this.age = age;
+        this.salary = salary;
+        this.department = department;
     }
 
     public String getFirstName() {
@@ -59,7 +91,30 @@ public class User {
         return currentAddress;
     }
 
-//    public  User  setNumber(String number) {
+    public String getGender() {
+        return gender;
+    }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public String getSubjects() {
+        return subjects;
+    }
+
+    public String getHobbies() {
+        return hobbies;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public String getStateAndCity() {
+        return stateAndCity;
+    }
+    //    public  User  setNumber(String number) {
 //        this.number = number;
 //        return  this;
 //    }

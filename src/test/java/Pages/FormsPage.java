@@ -1,6 +1,6 @@
 package Pages;
 
-import Model.User;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,16 +8,14 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-import static Tests.BaseTest.sendText;
-
 public class FormsPage {
     @FindBy(xpath = "//li[contains(., 'Practice Form')]")
     public WebElement practiceForm;
 
     @FindBy(xpath = "//input[@id = 'firstName']")
-    private WebElement firstName;
+    private WebElement userFirstName;
     @FindBy(xpath = "//input[@id = 'lastName']")
-    private WebElement lastName;
+    private WebElement userLastName;
     @FindBy(xpath = "//input[@id = 'userEmail']")
     private WebElement userEmail;
     @FindBy(xpath = "//input[@id = 'userNumber']")
@@ -32,22 +30,15 @@ public class FormsPage {
     @FindBy(xpath = "//label[@for = 'gender-radio-3']")
     private WebElement radioOther;
 
-    //TODO написать хелпер у дня должны быть условия 1,2,3
     @FindBy(xpath = "//input[@id = 'dateOfBirthInput']")
     private WebElement dateOfBirth;
-    @FindBy(xpath = "//div[@class = 'react-datepicker__month-container']")
-    public WebElement calendar;
-    @FindBy(xpath = "//select[@class = 'react-datepicker__year-select'] / option[@value = '1998']")
-    private WebElement calendarYear;
-    @FindBy(xpath = "//select[@class = 'react-datepicker__month-select'] / option[@value = '2']")
-    private WebElement calendarMonth;
-    @FindBy(xpath = "//div[contains(@aria-label, 'March 8th')]")
-    private WebElement calendarDay;
 
     @FindBy(xpath = "//input[@id = 'subjectsInput']")
     private WebElement subjectsInput;
-    @FindBy(xpath = "//div[contains(@id, 'react-select')]")
-    private List<WebElement> dropDawnMenu;
+    @FindBy(xpath = "//div[contains(@class, 'subjects-auto-complete__multi-value__remove')]")
+    private List<WebElement> removeSubjectsElement;
+    @FindBy(xpath = "//div[contains(@class, 'subjects-auto-complete__indicator subjects-auto-complete__clear')]")
+    private WebElement clearSubjects;
 
     @FindBy(xpath = "//label[@for = 'hobbies-checkbox-1']")
     private WebElement checkBoxSports;
@@ -70,7 +61,6 @@ public class FormsPage {
     @FindBy(xpath = "//button[@id ='closeLargeModal']")
     private WebElement closeLargeModal;
 
-
     private WebDriver driver;
 
     public FormsPage(WebDriver driver) {
@@ -78,15 +68,27 @@ public class FormsPage {
         this.driver = driver;
     }
 
-    public void fillRegistrationForm(User user) {
-        sendText(firstName, user.getFirstName());
-        sendText(lastName, user.getLastName());
-        sendText(userEmail, user.getEmail());
-        sendText(userNumber, user.getNumber());
-        sendText(currentAddress, user.getCurrentAddress());
+    public void sendKeysFirstName(String firstName) {
+        userFirstName.sendKeys(firstName);
     }
 
-    public void clickRadioMale() {
+    public void sendKeysLastName(String lastName) {
+        userLastName.sendKeys(lastName);
+    }
+
+    public void sendKeysUserEmail(String email) {
+        userEmail.sendKeys(email);
+    }
+
+    public void sendKeysUserNumber(String number) {
+        userNumber.sendKeys(number);
+    }
+
+    public void sendKeysCurrentAddress(String address) {
+        currentAddress.sendKeys(address);
+    }
+
+    public void clickRadioButtonMale() {
         radioMale.click();
     }
 
@@ -102,21 +104,25 @@ public class FormsPage {
         dateOfBirth.click();
     }
 
-    public void clickCalendarYear() {
-        calendarYear.click();
+    private WebElement getElementDropDownMenu(String name) {
+        return driver.findElement(By.xpath("//div[contains(@id, 'react-select') and .='" + name + "']"));
     }
 
-    public void clickCalendarMonth() {
-        calendarMonth.click();
-    }
-
-    public void clickCalendarDay() {
-        calendarDay.click();
-    }
-
-    public void sendKeysAndClickSubjects(String send, int index) {
+    public void sendKeysAndClickSubjects(String send, String subjectsName) {
         subjectsInput.sendKeys(send);
-        dropDawnMenu.get(index).click();
+        getElementDropDownMenu(subjectsName).click();
+    }
+
+    private WebElement getRemoveSubjectElement(String name) {
+        return driver.findElement(By.xpath("//div[contains(@class, 'multi-value')]/div[contains(., '" + name + "')] //following-sibling::div[contains(@class, 'remove')]"));
+    }
+
+    public void clickRemoveSubjectsElement(String subjectsRemove) {
+        getRemoveSubjectElement(subjectsRemove).click();
+    }
+
+    public void clickClearAllSubjects() {
+        clearSubjects.click();
     }
 
     public void clickCheckBoxSports() {
@@ -131,17 +137,57 @@ public class FormsPage {
         checkBoxMusic.click();
     }
 
-    public void clickAndChoiceState(int index) {
+    public void clickAndChoiceState(String stateName) {
         dropDawnState.click();
-        dropDawnMenu.get(index).click();
+        getElementDropDownMenu(stateName).click();
     }
 
-    public void clickAndChoiceCity(int index) {
+    public void clickAndChoiceCity(String cityName) {
         dropDawnCity.click();
-        dropDawnMenu.get(index).click();
+        getElementDropDownMenu(cityName).click();
     }
 
     public void clickCloseLargeModal() {
         closeLargeModal.click();
+    }
+
+    public String getStudentName() {
+        return driver.findElement(By.xpath("//tr[contains(., 'Student Name')] // td[2]")).getText();
+    }
+
+    public String getStudentEmail() {
+        return driver.findElement(By.xpath("//tr[contains(., 'Student Email')] // td[2]")).getText();
+    }
+
+    public String getGender() {
+        return driver.findElement(By.xpath("//tr[contains(., 'Gender')] // td[2]")).getText();
+    }
+
+    public String getMobile() {
+        return driver.findElement(By.xpath("//tr[contains(., 'Mobile')] // td[2]")).getText();
+    }
+
+    public String getDateOfBirth() {
+        return driver.findElement(By.xpath("//tr[contains(., 'Date of Birth')] // td[2]")).getText();
+    }
+
+    public String getSubjects() {
+        return driver.findElement(By.xpath("//tr[contains(., 'Subjects')] // td[2]")).getText();
+    }
+
+    public String getHobbies() {
+        return driver.findElement(By.xpath("//tr[contains(., 'Hobbies')] // td[2]")).getText();
+    }
+
+    public String getPicture() {
+        return driver.findElement(By.xpath("//tr[contains(., 'Picture')] // td[2]")).getText();
+    }
+
+    public String getAddress() {
+        return driver.findElement(By.xpath("//tr[contains(., 'Address')] // td[2]")).getText();
+    }
+
+    public String getStateAndCity() {
+        return driver.findElement(By.xpath("//tr[contains(., 'State and City')] // td[2]")).getText();
     }
 }
