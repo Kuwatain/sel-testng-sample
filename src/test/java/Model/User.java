@@ -26,37 +26,25 @@ public class User {
     }
 
 
-    public User
-            (
-                    String firstName,
-                    String lastName,
-                    String email,
-                    String gender,
-                    String number,
-                    String dateOfBirth,
-                    String subjects,
-                    String hobbies,
-                    String picture,
-                    String currentAddress,
-                    String stateAndCity,
-                    String age,
-                    String salary,
-                    String department
-            ) {
+    public User(
+            String firstName,
+            String lastName,
+            String email
+    ) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.gender = gender;
-        this.number = number;
-        this.dateOfBirth = dateOfBirth;
-        this.subjects = subjects;
-        this.hobbies = hobbies;
-        this.picture = picture;
-        this.currentAddress = currentAddress;
-        this.stateAndCity = stateAndCity;
-        this.age = age;
-        this.salary = salary;
-        this.department = department;
+        this.gender =  "Male";
+        this.number = "9655857796";
+        this.dateOfBirth =  "08 March,1998";
+        this.subjects =  "Civics, Hindi";
+        this.hobbies = "Sports, Reading, Music";
+        this.picture = "BaseTest.java";
+        this.currentAddress = "Kazan";
+        this.stateAndCity = "NCR Delhi";
+        this.age = "24";
+        this.salary = "0";
+        this.department = "Yerevan";
     }
 
     public String getFirstName() {
@@ -114,8 +102,8 @@ public class User {
     public String getStateAndCity() {
         return stateAndCity;
     }
-    //    public  User  setNumber(String number) {
-//        this.number = number;
+//        public  User  setAge(String age) {
+//        this.age = age;
 //        return  this;
 //    }
 }

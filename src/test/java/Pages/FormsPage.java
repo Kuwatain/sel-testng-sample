@@ -35,9 +35,7 @@ public class FormsPage {
 
     @FindBy(xpath = "//input[@id = 'subjectsInput']")
     private WebElement subjectsInput;
-    @FindBy(xpath = "//div[contains(@class, 'subjects-auto-complete__multi-value__remove')]")
-    private List<WebElement> removeSubjectsElement;
-    @FindBy(xpath = "//div[contains(@class, 'subjects-auto-complete__indicator subjects-auto-complete__clear')]")
+    @FindBy(xpath = "//div[contains(@class, 'subjects-auto-complete__clear')]")
     private WebElement clearSubjects;
 
     @FindBy(xpath = "//label[@for = 'hobbies-checkbox-1']")
@@ -68,15 +66,15 @@ public class FormsPage {
         this.driver = driver;
     }
 
-    public void sendKeysFirstName(String firstName) {
+    public void enterFirstName(String firstName) {
         userFirstName.sendKeys(firstName);
     }
 
-    public void sendKeysLastName(String lastName) {
+    public void enterKeysLastName(String lastName) {
         userLastName.sendKeys(lastName);
     }
 
-    public void sendKeysUserEmail(String email) {
+    public void enterKeysUserEmail(String email) {
         userEmail.sendKeys(email);
     }
 
@@ -109,12 +107,12 @@ public class FormsPage {
     }
 
     public void sendKeysAndClickSubjects(String send, String subjectsName) {
-        subjectsInput.sendKeys(send);
+            subjectsInput.sendKeys(send);
         getElementDropDownMenu(subjectsName).click();
     }
 
     private WebElement getRemoveSubjectElement(String name) {
-        return driver.findElement(By.xpath("//div[contains(@class, 'multi-value')]/div[contains(., '" + name + "')] //following-sibling::div[contains(@class, 'remove')]"));
+        return driver.findElement(By.xpath("//div[contains(@ class, 'multi-value__label') and (text() = '" + name + "')]//following-sibling::div[contains(@ class, 'remove')]"));
     }
 
     public void clickRemoveSubjectsElement(String subjectsRemove) {

@@ -15,9 +15,9 @@ public class FormsTest extends BaseTest {
         landingPage.clickCategoryCardsForms();
         clickJS(formsPage.practiceForm);
 
-        formsPage.sendKeysFirstName("Nikita");
-        formsPage.sendKeysLastName("Rachkov");
-        formsPage.sendKeysUserEmail("nikita@gmail.com");
+        formsPage.enterFirstName("Nikita");
+        formsPage.enterKeysLastName("Rachkov");
+        formsPage.enterKeysUserEmail("nikita@gmail.com");
 
         formsPage.clickRadioButtonMale();
 
@@ -31,7 +31,7 @@ public class FormsTest extends BaseTest {
                         "8"
                 );
 
-        formsPage.sendKeysAndClickSubjects("a", "Social Studies");
+        formsPage.sendKeysAndClickSubjects("a", "Accounting");
         formsPage.sendKeysAndClickSubjects("b", "Biology");
         formsPage.clickRemoveSubjectsElement("Biology");
         formsPage.clickClearAllSubjects();

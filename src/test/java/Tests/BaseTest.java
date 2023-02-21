@@ -38,9 +38,12 @@ public class BaseTest {
         prefs.put("download.default_directory", downloadDirVersion2);
         ChromeOptions opts = new ChromeOptions();
         opts.setExperimentalOption("prefs", prefs);
+//        opts.addArguments("--headless");
+
 
         driver = new ChromeDriver(opts);
         driver.manage().window().maximize();
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         landingPage = new LandingPage(driver);
         elementsPage = new ElementsPage(driver);

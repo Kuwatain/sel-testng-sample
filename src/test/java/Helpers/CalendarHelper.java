@@ -19,19 +19,22 @@ public class CalendarHelper {
         return driver.findElement(By.xpath("//select[@class = 'react-datepicker__month-select'] / option[contains(., '" + calendarMonth + "')]"));
     }
 
-    private WebElement getCalendarDay(String calendarDay) {
-        if (calendarDay == "1" || calendarDay == "21" || calendarDay == "31")
+    private WebElement getCalendarDay(String month, String calendarDay) {
+        if (calendarDay == "1")
             return driver.findElement(By.xpath("//div[contains(@aria-label, '" + calendarDay + "st')]"));
-        else if (calendarDay == "2" || calendarDay == "22")
+
+         if (calendarDay == "2")
             return driver.findElement(By.xpath("//div[contains(@aria-label, '" + calendarDay + "nd')]"));
-        else if (calendarDay == "3" || calendarDay == "23")
+
+         if (calendarDay == "3")
             return driver.findElement(By.xpath("//div[contains(@aria-label, '" + calendarDay + "rd')]"));
-        else return driver.findElement(By.xpath("//div[contains(@aria-label, '" + calendarDay + "th')]"));
+
+         return driver.findElement(By.xpath("//div[contains(@aria-label, '" + month + " " + calendarDay + "')]"));
     }
 
     public void clickDatePicker(String year, String month, String day) {
         getCalendarYear(year).click();
         getCalendarMonth(month).click();
-        getCalendarDay(day).click();
+        getCalendarDay(month, day).click();
     }
 }
