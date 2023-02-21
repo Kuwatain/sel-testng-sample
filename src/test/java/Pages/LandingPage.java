@@ -8,6 +8,8 @@ import org.openqa.selenium.support.PageFactory;
 public class LandingPage {
     @FindBy(xpath = "//div[contains(@class, 'card mt-4 top-card') and .='Elements']")
     public WebElement elements;
+    @FindBy(xpath = "//div[contains(@class, 'card mt-4 top-card') and .='Forms']")
+    public WebElement forms;
 
     public WebDriver driver;
 
@@ -16,7 +18,11 @@ public class LandingPage {
         this.driver = driver;
     }
 
-    public void clickCategoryCards() {
+    public void clickCategoryCardsElements() {
         elements.click();
+    }
+
+    public void clickCategoryCardsForms() {
+        forms.click();
     }
 }

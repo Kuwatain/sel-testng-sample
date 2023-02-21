@@ -10,14 +10,14 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
-public class PiapaTest extends BaseTest {
+public class ElementsTest extends BaseTest {
 
     @Test(dataProvider = "Form Params", dataProviderClass = DataProviders.class)
-    public void piapaTest(String name, String email, String current, String permanent) {
+    public void textBoxTest(String name, String email, String current, String permanent) {
 
         driver.get("https://demoqa.com/");
 
-        landingPage.clickCategoryCards();
+        landingPage.clickCategoryCardsElements();
         clickJS(elementsPage.textBox);
 
         elementsPage.fillForm(name, email, current, permanent);
@@ -33,7 +33,7 @@ public class PiapaTest extends BaseTest {
     public void checkBoxTest(String[] checkBox) {
         driver.get("https://demoqa.com/");
 
-        landingPage.clickCategoryCards();
+        landingPage.clickCategoryCardsElements();
         clickJS(elementsPage.checkBox);
 
         elementsPage.clickCheckBoxExpandAll();
@@ -50,7 +50,7 @@ public class PiapaTest extends BaseTest {
     public void radioButtonTest() {
         driver.get("https://demoqa.com/");
 
-        landingPage.clickCategoryCards();
+        landingPage.clickCategoryCardsElements();
         clickJS(elementsPage.radioButton);
 
         elementsPage.clickYesRadioButton();
@@ -64,7 +64,7 @@ public class PiapaTest extends BaseTest {
     public void webTablesTest(User userNikita, User userStepan) {
         driver.get("https://demoqa.com/");
 
-        landingPage.clickCategoryCards();
+        landingPage.clickCategoryCardsElements();
         clickJS(elementsPage.webTables);
 
         elementsPage.clickAddButton();
@@ -108,7 +108,7 @@ public class PiapaTest extends BaseTest {
     public void buttonsTest() {
         driver.get("https://demoqa.com/");
 
-        landingPage.clickCategoryCards();
+        landingPage.clickCategoryCardsElements();
         clickJS(elementsPage.buttons);
 
         doubleClick(elementsPage.doubleClickBtn);
@@ -124,7 +124,7 @@ public class PiapaTest extends BaseTest {
     public void linksTest() {
         driver.get("https://demoqa.com/");
 
-        landingPage.clickCategoryCards();
+        landingPage.clickCategoryCardsElements();
         clickJS(elementsPage.links);
 
         elementsPage.clickSimpleLink();
@@ -170,7 +170,7 @@ public class PiapaTest extends BaseTest {
     public void uploadAndDownload() throws InterruptedException {
         driver.get("https://demoqa.com/");
 
-        landingPage.clickCategoryCards();
+        landingPage.clickCategoryCardsElements();
         clickJS(elementsPage.uploadAndDownload);
 
         elementsPage.clickDownloadButton();
@@ -187,7 +187,7 @@ public class PiapaTest extends BaseTest {
     public void dynamicPropertiesTest() throws InterruptedException {
         driver.get("https://demoqa.com/");
 
-        landingPage.clickCategoryCards();
+        landingPage.clickCategoryCardsElements();
         clickJS(elementsPage.dynamicProperties);
 
         String titleColor = null;
