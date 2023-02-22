@@ -115,7 +115,7 @@ public class FormsPage {
     }
 
     private WebElement getRemoveSubjectElement(String name) {
-        return driver.findElement(By.xpath("//div[contains(@ class, 'multi-value__label') and (text() = '" + name + "')]//following-sibling::div[contains(@ class, 'remove')]"));
+        return driver.findElement(By.xpath("//div[contains(@class, 'multi-value__label') and (text() = '" + name + "')]//following-sibling::div[contains(@class, 'remove')]"));
     }
 
     public void clickRemoveSubjectsElement(String subjectsRemove) {

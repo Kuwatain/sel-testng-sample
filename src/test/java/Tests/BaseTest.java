@@ -2,6 +2,7 @@ package Tests;
 
 import Helpers.CalendarHelper;
 import Helpers.TableHelper;
+import Pages.AlertsFrameWindowsPage;
 import Pages.ElementsPage;
 import Pages.FormsPage;
 import Pages.LandingPage;
@@ -25,6 +26,7 @@ public class BaseTest {
     public LandingPage landingPage;
     public ElementsPage elementsPage;
     public FormsPage formsPage;
+    public AlertsFrameWindowsPage alertsFrameWindowsPage;
     TableHelper tableHelper;
     Actions actions;
     WebDriverWait wait;
@@ -48,6 +50,7 @@ public class BaseTest {
         landingPage = new LandingPage(driver);
         elementsPage = new ElementsPage(driver);
         formsPage = new FormsPage(driver);
+        alertsFrameWindowsPage = new AlertsFrameWindowsPage(driver);
         tableHelper = new TableHelper(driver);
         actions = new Actions(driver);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
