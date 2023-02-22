@@ -6,8 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.List;
-
 public class FormsPage {
     @FindBy(xpath = "//li[contains(., 'Practice Form')]")
     public WebElement practiceForm;
@@ -67,22 +65,27 @@ public class FormsPage {
     }
 
     public void enterFirstName(String firstName) {
+        userFirstName.clear();
         userFirstName.sendKeys(firstName);
     }
 
     public void enterKeysLastName(String lastName) {
+        userLastName.clear();
         userLastName.sendKeys(lastName);
     }
 
     public void enterKeysUserEmail(String email) {
+        userEmail.clear();
         userEmail.sendKeys(email);
     }
 
     public void sendKeysUserNumber(String number) {
+        userNumber.clear();
         userNumber.sendKeys(number);
     }
 
     public void sendKeysCurrentAddress(String address) {
+        currentAddress.clear();
         currentAddress.sendKeys(address);
     }
 
@@ -107,7 +110,7 @@ public class FormsPage {
     }
 
     public void sendKeysAndClickSubjects(String send, String subjectsName) {
-            subjectsInput.sendKeys(send);
+        subjectsInput.sendKeys(send);
         getElementDropDownMenu(subjectsName).click();
     }
 
@@ -187,5 +190,53 @@ public class FormsPage {
 
     public String getStateAndCity() {
         return driver.findElement(By.xpath("//tr[contains(., 'State and City')] // td[2]")).getText();
+    }
+
+    public String borderColorFirstName() {
+        return userFirstName.getCssValue("border-color");
+    }
+
+    public String borderColorLastName() {
+        return userLastName.getCssValue("border-color");
+    }
+
+    public String borderColorEmail() {
+        return userEmail.getCssValue("border-color");
+    }
+
+    public String borderColorNumber() {
+        return userNumber.getCssValue("border-color");
+    }
+
+    public String borderColorCurrentAddress() {
+        return currentAddress.getCssValue("border-color");
+    }
+
+    public String borderColorRadioMale() {
+        return radioMale.getCssValue("border-color");
+    }
+
+    public String borderColorRadioFemale() {
+        return radioFemale.getCssValue("border-color");
+    }
+
+    public String borderColorRadioOther() {
+        return radioOther.getCssValue("border-color");
+    }
+
+    public String borderColorDateOfBirth() {
+        return dateOfBirth.getCssValue("border-color");
+    }
+
+    public String borderColorCheckBoxSports() {
+        return checkBoxSports.getCssValue("border-color");
+    }
+
+    public String borderColorCheckBoxMusic() {
+        return checkBoxMusic.getCssValue("border-color");
+    }
+
+    public String borderColorCheckBoxReading() {
+        return checkBoxReading.getCssValue("border-color");
     }
 }
