@@ -8,7 +8,7 @@ import static org.testng.AssertJUnit.assertEquals;
 
 public class FormsTest extends BaseTest {
     @Test(dataProvider = "Forms Params", dataProviderClass = DataProviders.class)
-    public void correctFillingOfTheForm(User userNikita) {
+    public void correctFillingOfTheFormTest(User userNikita) {
 
         driver.get("https://demoqa.com/");
 
@@ -68,5 +68,70 @@ public class FormsTest extends BaseTest {
         assertEquals(formsPage.getPicture(), user.getPicture());
         assertEquals(formsPage.getAddress(), user.getCurrentAddress());
         assertEquals(formsPage.getStateAndCity(), user.getStateAndCity());
+    }
+
+    @Test
+    public void validationOfRequiredFieldsTest() throws InterruptedException {
+
+        driver.get("https://demoqa.com/");
+
+        landingPage.clickCategoryCardsForms();
+        clickJS(formsPage.practiceForm);
+
+        clickJS(formsPage.submit);
+
+        Thread.sleep(2000);
+        String red = "rgb(220, 53, 69)";
+        assertEquals(formsPage.borderColorFirstName(), red);
+        assertEquals(formsPage.borderColorLastName(), red);
+        assertEquals(formsPage.borderColorNumber(), red);
+        assertEquals(formsPage.borderColorRadioMale(), red);
+        assertEquals(formsPage.borderColorRadioFemale(), red);
+        assertEquals(formsPage.borderColorRadioOther(), red);
+
+        formsPage.enterFirstName("Lina");
+        formsPage.enterKeysLastName("Inverse");
+
+        formsPage.enterKeysUserEmail("Лина@gmagic.com");
+        Thread.sleep(2000);
+        assertEquals(formsPage.borderColorEmail(), red);
+
+        formsPage.enterKeysUserEmail("Linagmagic.com");
+        Thread.sleep(2000);
+        assertEquals(formsPage.borderColorEmail(), red);
+
+        formsPage.enterKeysUserEmail("lina@gmagic.com");
+
+        formsPage.clickRadioFemale();
+
+        formsPage.sendKeysUserNumber("QWERTYUIOP");
+        assertEquals(formsPage.borderColorNumber(), red);
+
+        formsPage.sendKeysUserNumber("123456789");
+        assertEquals(formsPage.borderColorNumber(), red);
+
+        formsPage.sendKeysUserNumber("0000000000");
+
+        formsPage.clickDateOfBirth();
+        calendarHelper.clickDatePicker
+                (
+                        "1900",
+                        "October",
+                        "21"
+                );
+
+        String green = "rgb(40, 167, 69)";
+        assertEquals(formsPage.borderColorFirstName(), green);
+        assertEquals(formsPage.borderColorLastName(), green);
+        assertEquals(formsPage.borderColorEmail(), green);
+        assertEquals(formsPage.borderColorNumber(), green);
+        assertEquals(formsPage.borderColorCurrentAddress(), green);
+        assertEquals(formsPage.borderColorRadioMale(), green);
+        assertEquals(formsPage.borderColorRadioFemale(), green);
+        assertEquals(formsPage.borderColorRadioOther(), green);
+        assertEquals(formsPage.borderColorDateOfBirth(), green);
+        assertEquals(formsPage.borderColorCheckBoxSports(), green);
+        assertEquals(formsPage.borderColorCheckBoxMusic(), green);
+        assertEquals(formsPage.borderColorCheckBoxReading(), green);
     }
 }
