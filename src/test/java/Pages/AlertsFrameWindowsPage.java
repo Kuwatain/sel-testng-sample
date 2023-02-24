@@ -10,6 +10,8 @@ public class AlertsFrameWindowsPage {
     public WebElement browserWindows;
     @FindBy(xpath = "//li[contains(., 'Alerts')]")
     public WebElement alerts;
+    @FindBy(xpath = "//li[contains(., 'Frames')]")
+    public WebElement frames;
 
     @FindBy(xpath = "//button[@id = 'tabButton']")
     private WebElement tabButton;
@@ -34,7 +36,6 @@ public class AlertsFrameWindowsPage {
     public WebElement confirmResult;
     @FindBy(xpath = "//span[@id = 'promptResult']")
     public WebElement promptResult;
-
 
     public void clickTabButton() {
         tabButton.click();
