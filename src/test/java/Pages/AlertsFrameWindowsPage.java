@@ -12,6 +12,8 @@ public class AlertsFrameWindowsPage {
     public WebElement alerts;
     @FindBy(xpath = "//li[contains(., 'Frames')]")
     public WebElement frames;
+    @FindBy(xpath = "//li[contains(., 'Nested Frames')]")
+    public WebElement nestedFrames;
 
     @FindBy(xpath = "//button[@id = 'tabButton']")
     private WebElement tabButton;
@@ -36,6 +38,13 @@ public class AlertsFrameWindowsPage {
     public WebElement confirmResult;
     @FindBy(xpath = "//span[@id = 'promptResult']")
     public WebElement promptResult;
+
+    @FindBy(xpath = "//body[text()]")
+    public WebElement parentFrameText;
+    @FindBy(xpath = "//p[text()]")
+    public WebElement childIframeText;
+    @FindBy(xpath = "//div[@id='framesWrapper']/div[text()]")
+    public WebElement framesWrapper;
 
     public void clickTabButton() {
         tabButton.click();
