@@ -40,21 +40,18 @@ public class AlertsFrameWindowsTest extends BaseTest {
 
         alertsFrameWindowsPage.clickAlertButton();
         Alert simpleAlert = driver.switchTo().alert();
-        String alertMessageSimple = driver.switchTo().alert().getText();
-        assertEquals(alertMessageSimple, "You clicked a button");
+        assertEquals( simpleAlert.getText(), "You clicked a button");
         simpleAlert.accept();
 
         alertsFrameWindowsPage.clickTimerAlertButton();
         wait.until(ExpectedConditions.alertIsPresent());
         Alert timerAlert = driver.switchTo().alert();
-        String alertMessageTimer = driver.switchTo().alert().getText();
-        assertEquals(alertMessageTimer, "This alert appeared after 5 seconds");
+        assertEquals(timerAlert.getText(), "This alert appeared after 5 seconds");
         timerAlert.accept();
 
         alertsFrameWindowsPage.clickConfirmButton();
         Alert confirmationAlert = driver.switchTo().alert();
-        String alertMessageConfirmation = driver.switchTo().alert().getText();
-        assertEquals(alertMessageConfirmation, "Do you confirm action?");
+        assertEquals(confirmationAlert.getText(), "Do you confirm action?");
         confirmationAlert.accept();
         wait.until(ExpectedConditions.textToBePresentInElement(alertsFrameWindowsPage.confirmResult, "Ok"));
 
@@ -64,8 +61,7 @@ public class AlertsFrameWindowsTest extends BaseTest {
 
         alertsFrameWindowsPage.clickPromptButton();
         Alert promptAlert = driver.switchTo().alert();
-        String alertMessagePrompt = driver.switchTo().alert().getText();
-        assertEquals(alertMessagePrompt, "Please enter your name");
+        assertEquals(promptAlert.getText(), "Please enter your name");
         promptAlert.sendKeys("Nikita");
         promptAlert.accept();
         wait.until(ExpectedConditions.textToBePresentInElement(alertsFrameWindowsPage.promptResult, "Nikita"));
