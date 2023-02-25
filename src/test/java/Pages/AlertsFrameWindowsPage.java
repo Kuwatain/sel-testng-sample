@@ -45,6 +45,8 @@ public class AlertsFrameWindowsPage {
     public WebElement childIframeText;
     @FindBy(xpath = "//div[@id='framesWrapper']/div[text()]")
     public WebElement framesWrapper;
+    @FindBy(xpath = "//iframe[@srcdoc = '<p>Child Iframe</p>']")
+    public WebElement childIframe;
 
     public void clickTabButton() {
         tabButton.click();

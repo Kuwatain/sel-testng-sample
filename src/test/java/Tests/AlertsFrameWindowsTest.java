@@ -97,7 +97,7 @@ public class AlertsFrameWindowsTest extends BaseTest {
         driver.switchTo().frame("frame1");
         assertEquals(alertsFrameWindowsPage.parentFrameText.getText(), "Parent frame");
 
-        driver.switchTo().frame(0);
+        driver.switchTo().frame(alertsFrameWindowsPage.childIframe);
         assertEquals(alertsFrameWindowsPage.childIframeText.getText(), "Child Iframe");
 
         driver.switchTo().defaultContent();
