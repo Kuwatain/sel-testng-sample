@@ -107,4 +107,22 @@ public class AlertsFrameWindowsTest extends BaseTest {
                         " In total you can switch between the parent frame and the nested child frame.");
 
     }
+
+    @Test
+    public void modalDialogsTest() {
+
+        driver.get("https://demoqa.com/");
+
+        landingPage.clickCategoryCardsAlertsFrameWindows();
+
+        clickJS(alertsFrameWindowsPage.modalDialogs);
+
+        alertsFrameWindowsPage.clickShowSmallModal();
+        wait.until(ExpectedConditions.textToBePresentInElement(alertsFrameWindowsPage.modalHeader, "Small Modal"));
+        alertsFrameWindowsPage.clickClose();
+
+        alertsFrameWindowsPage.clickShowLargeModal();
+        wait.until(ExpectedConditions.textToBePresentInElement(alertsFrameWindowsPage.modalHeader, "Large Modal"));
+        alertsFrameWindowsPage.clickClose();
+    }
 }
