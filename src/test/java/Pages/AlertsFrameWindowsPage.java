@@ -14,6 +14,9 @@ public class AlertsFrameWindowsPage {
     public WebElement frames;
     @FindBy(xpath = "//li[contains(., 'Nested Frames')]")
     public WebElement nestedFrames;
+    @FindBy(xpath = "//li[contains(., 'Modal Dialogs')]")
+    public WebElement modalDialogs;
+
 
     @FindBy(xpath = "//button[@id = 'tabButton']")
     private WebElement tabButton;
@@ -48,6 +51,15 @@ public class AlertsFrameWindowsPage {
     @FindBy(xpath = "//iframe[@srcdoc = '<p>Child Iframe</p>']")
     public WebElement childIframe;
 
+    @FindBy(xpath = "//button[@id = 'showSmallModal']")
+    private WebElement showSmallModal;
+    @FindBy(xpath = "//button[@id = 'showLargeModal']")
+    private WebElement showLargeModal;
+    @FindBy(xpath = "//div[@class ='modal-header']")
+    public WebElement modalHeader;
+    @FindBy(xpath = "//button[@class = 'btn btn-primary']")
+    private WebElement close;
+
     public void clickTabButton() {
         tabButton.click();
     }
@@ -70,6 +82,18 @@ public class AlertsFrameWindowsPage {
 
     public void clickPromptButton() {
         promptButton.click();
+    }
+
+    public void clickShowSmallModal() {
+        showSmallModal.click();
+    }
+
+    public void clickShowLargeModal() {
+        showLargeModal.click();
+    }
+
+    public void clickClose() {
+        close.click();
     }
 
     private WebDriver driver;
