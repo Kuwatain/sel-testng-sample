@@ -40,7 +40,7 @@ public class AlertsFrameWindowsTest extends BaseTest {
 
         alertsFrameWindowsPage.clickAlertButton();
         Alert simpleAlert = driver.switchTo().alert();
-        assertEquals( simpleAlert.getText(), "You clicked a button");
+        assertEquals(simpleAlert.getText(), "You clicked a button");
         simpleAlert.accept();
 
         alertsFrameWindowsPage.clickTimerAlertButton();
@@ -65,5 +65,23 @@ public class AlertsFrameWindowsTest extends BaseTest {
         promptAlert.sendKeys("Nikita");
         promptAlert.accept();
         wait.until(ExpectedConditions.textToBePresentInElement(alertsFrameWindowsPage.promptResult, "Nikita"));
+    }
+
+    @Test
+    public void framesTest() {
+
+        driver.get("https://demoqa.com/");
+
+        landingPage.clickCategoryCardsAlertsFrameWindows();
+
+        clickJS(alertsFrameWindowsPage.frames);
+
+        driver.switchTo().frame("frame1");
+        assertEquals(alertsFrameWindowsPage.sampleHeading.getText(), "This is a sample page");
+
+        driver.switchTo().parentFrame();
+
+        driver.switchTo().frame("frame2");
+        assertEquals(alertsFrameWindowsPage.sampleHeading.getText(), "This is a sample page");
     }
 }
