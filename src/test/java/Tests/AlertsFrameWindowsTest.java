@@ -84,4 +84,27 @@ public class AlertsFrameWindowsTest extends BaseTest {
         driver.switchTo().frame("frame2");
         assertEquals(alertsFrameWindowsPage.sampleHeading.getText(), "This is a sample page");
     }
+
+    @Test
+    public void nestedFramesTest() {
+
+        driver.get("https://demoqa.com/");
+
+        landingPage.clickCategoryCardsAlertsFrameWindows();
+
+        clickJS(alertsFrameWindowsPage.nestedFrames);
+
+        driver.switchTo().frame("frame1");
+        assertEquals(alertsFrameWindowsPage.parentFrameText.getText(), "Parent frame");
+
+        driver.switchTo().frame(alertsFrameWindowsPage.childIframe);
+        assertEquals(alertsFrameWindowsPage.childIframeText.getText(), "Child Iframe");
+
+        driver.switchTo().defaultContent();
+        assertEquals(alertsFrameWindowsPage.framesWrapper.getText(),
+                "Sample Nested Iframe page. There are nested iframes in this page." +
+                        " Use browser inspecter or firebug to check out the HTML source." +
+                        " In total you can switch between the parent frame and the nested child frame.");
+
+    }
 }
