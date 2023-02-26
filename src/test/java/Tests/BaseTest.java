@@ -2,10 +2,7 @@ package Tests;
 
 import Helpers.CalendarHelper;
 import Helpers.TableHelper;
-import Pages.AlertsFrameWindowsPage;
-import Pages.ElementsPage;
-import Pages.FormsPage;
-import Pages.LandingPage;
+import Pages.*;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,6 +24,7 @@ public class BaseTest {
     public ElementsPage elementsPage;
     public FormsPage formsPage;
     public AlertsFrameWindowsPage alertsFrameWindowsPage;
+    public WidgetsPage widgetsPage;
     TableHelper tableHelper;
     Actions actions;
     WebDriverWait wait;
@@ -51,6 +49,7 @@ public class BaseTest {
         elementsPage = new ElementsPage(driver);
         formsPage = new FormsPage(driver);
         alertsFrameWindowsPage = new AlertsFrameWindowsPage(driver);
+        widgetsPage = new  WidgetsPage(driver);
         tableHelper = new TableHelper(driver);
         actions = new Actions(driver);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
