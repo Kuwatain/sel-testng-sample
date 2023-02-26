@@ -1,9 +1,15 @@
 package Pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+
+import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 
 public class WidgetsPage {
     @FindBy(xpath = "//li[contains(., 'Accordian')]")
@@ -15,10 +21,19 @@ public class WidgetsPage {
     @FindBy(xpath = "//div[@id = 'section3Heading']")
     private WebElement section3Heading;
 
-    @FindBy(xpath = "//div[@class = 'collapse show']")
-    public WebElement collapseShow;
-    @FindBy(xpath = "//div[@class = 'collapse']")
-    public WebElement collapse;
+    public WebElement getSectionCollapseShow(String name) {
+        return new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(presenceOfElementLocated(
+                        By.xpath("//div[@class = 'card-header' and text() = '" + name + "']//following-sibling::div[@class= 'collapse show']")
+                ));
+    }
+
+    public WebElement getSectionCollapse(String name) {
+        return new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(presenceOfElementLocated(
+                        By.xpath("//div[@class = 'card-header' and text() = '" + name + "']//following-sibling::div[@class= 'collapse']")
+                ));
+    }
 
     public void clickSection1Heading() {
         section1Heading.click();

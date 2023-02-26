@@ -1,11 +1,12 @@
 package Tests;
 
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertNotNull;
 
 public class WidgetsTest extends BaseTest {
     @Test
-    public void accordianTest() {
+    public void accordianTest() throws InterruptedException {
 
         driver.get("https://demoqa.com/");
 
@@ -14,21 +15,21 @@ public class WidgetsTest extends BaseTest {
         clickJS(widgetsPage.accordian);
 
         widgetsPage.clickSection1Heading();
-        wait.until(ExpectedConditions.attributeToBe(widgetsPage.collapse, "class", "collapse"));
+        assertNotNull(widgetsPage.getSectionCollapse("What is Lorem Ipsum?"));
 
         widgetsPage.clickSection1Heading();
-        wait.until(ExpectedConditions.attributeToBe(widgetsPage.collapseShow, "class", "collapse show"));
+        assertNotNull(widgetsPage.getSectionCollapseShow("What is Lorem Ipsum?"));
 
         widgetsPage.clickSection2Heading();
-        wait.until(ExpectedConditions.attributeToBe(widgetsPage.collapseShow, "class", "collapse show"));
+        assertNotNull(widgetsPage.getSectionCollapseShow("Where does it come from?"));
 
         widgetsPage.clickSection2Heading();
-        wait.until(ExpectedConditions.attributeToBe(widgetsPage.collapse, "class", "collapse"));
+        assertNotNull(widgetsPage.getSectionCollapse("Where does it come from?"));
 
         widgetsPage.clickSection3Heading();
-        wait.until(ExpectedConditions.attributeToBe(widgetsPage.collapseShow, "class", "collapse show"));
+        assertNotNull(widgetsPage.getSectionCollapseShow("Why do we use it?"));
 
         widgetsPage.clickSection3Heading();
-        wait.until(ExpectedConditions.attributeToBe(widgetsPage.collapse, "class", "collapse"));
+        assertNotNull(widgetsPage.getSectionCollapse("Why do we use it?"));
     }
 }
