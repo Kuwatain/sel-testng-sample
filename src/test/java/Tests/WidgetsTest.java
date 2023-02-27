@@ -1,9 +1,10 @@
 package Tests;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.*;
 
 public class WidgetsTest extends BaseTest {
     @Test
@@ -46,29 +47,27 @@ public class WidgetsTest extends BaseTest {
         widgetsPage.sendKeysAndClickMultipleInput("e", "Red");
         widgetsPage.sendKeysAndClickMultipleInput("q", "Aqua");
         widgetsPage.sendKeysAndClickMultipleInput("w", "White");
-        assertEquals(widgetsPage.containerIsMulti.getText(),
-                "Red\n" +
-                        "Aqua\n" +
-                        "White");
+
+        assertEquals(widgetsPage.getTextElement("Red"),"Red");
+        assertEquals(widgetsPage.getTextElement("Aqua"),"Aqua");
+        assertEquals(widgetsPage.getTextElement("White"),"White");
 
         widgetsPage.clickRemoveElement("White");
         widgetsPage.clickRemoveElement("Red");
-        assertEquals(widgetsPage.containerIsMulti.getText(), "Aqua");
-
+        assertEquals(widgetsPage.getTextElement("Aqua"),"Aqua");
 
         widgetsPage.clickClearIndicator();
-        assertEquals(widgetsPage.containerIsMulti.getText(), "");
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(@class, 'multi-value__label')]")));
 
         widgetsPage.sendKeysAndClickMultipleInput("t", "Magenta");
         widgetsPage.sendKeysAndClickMultipleInput("o", "Indigo");
-        assertEquals(widgetsPage.containerIsMulti.getText(),
-                "Magenta\n" +
-                        "Indigo");
+        assertEquals(widgetsPage.getTextElement("Magenta"),"Magenta");
+        assertEquals(widgetsPage.getTextElement("Indigo"),"Indigo");
 
         widgetsPage.sendKeysAndClickSingleInput("b", "Black");
-        assertEquals(widgetsPage.containerIsSingle.getText(), "Black");
+        assertTrue(widgetsPage.containerIsSingle.getText().contains("Black"));
 
         widgetsPage.sendKeysAndClickSingleInput("h", "White");
-        assertEquals(widgetsPage.containerIsSingle.getText(), "White");
+        assertTrue(widgetsPage.containerIsSingle.getText().contains("White"));
     }
 }

@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 
@@ -30,9 +31,7 @@ public class WidgetsPage {
     private WebElement autoCompleteSingleInput;
     @FindBy(xpath = "//div[contains(@class, 'clear-indicator')]")
     private WebElement clearIndicator;
-    @FindBy(xpath = "//div[contains(@class, 'container--is-multi')]")
-    public WebElement containerIsMulti;
-    @FindBy(xpath = "//div[contains(@class, 'auto-complete__value-container auto-complete__value-container--has-value')]")
+    @FindBy(xpath = "//div[@id = 'autoCompleteSingleContainer']")
     public WebElement containerIsSingle;
 
 
@@ -86,12 +85,20 @@ public class WidgetsPage {
                 ));
     }
 
-    public void clickRemoveElement(String subjectsRemove) {
-        getRemoveElement(subjectsRemove).click();
+    public void clickRemoveElement(String removeElement) {
+        getRemoveElement(removeElement).click();
     }
 
     public void clickClearIndicator() {
         clearIndicator.click();
+    }
+
+    private WebElement getElement(String getElement) {
+        return driver.findElement(By.xpath("//div[contains(@class, 'multi-value__label') and (text()= '" + getElement + "')]"));
+    }
+
+    public String getTextElement(String text) {
+       return getElement(text).getText();
     }
 
     private WebDriver driver;
