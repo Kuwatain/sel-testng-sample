@@ -15,6 +15,7 @@ import org.testng.annotations.BeforeMethod;
 
 import java.io.File;
 import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -27,7 +28,7 @@ public class BaseTest {
     public WidgetsPage widgetsPage;
     TableHelper tableHelper;
     Actions actions;
-    WebDriverWait wait;
+    public static WebDriverWait wait;
     CalendarHelper calendarHelper;
 
     @BeforeMethod

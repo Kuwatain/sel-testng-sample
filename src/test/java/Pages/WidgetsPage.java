@@ -1,15 +1,13 @@
 package Pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-import java.util.List;
-
+import static Tests.BaseTest.wait;
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 
 public class WidgetsPage {
@@ -17,6 +15,8 @@ public class WidgetsPage {
     public WebElement accordian;
     @FindBy(xpath = "//li[contains(., 'Auto Complete')]")
     public WebElement autoComplete;
+    @FindBy(xpath = "//li[contains(., 'Date Picker')]")
+    public WebElement datePicker;
 
     @FindBy(xpath = "//div[@id = 'section1Heading']")
     private WebElement section1Heading;
@@ -34,19 +34,21 @@ public class WidgetsPage {
     @FindBy(xpath = "//div[@id = 'autoCompleteSingleContainer']")
     public WebElement containerIsSingle;
 
+    @FindBy(xpath = "//input[@id = 'datePickerMonthYearInput']")
+    public WebElement datePickerMonthYearInput;
+    @FindBy(xpath = "//input[@id = 'dateAndTimePickerInput']")
+    public WebElement dateAndTimePickerInput;
 
     public WebElement getSectionCollapseShow(String name) {
-        return new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(presenceOfElementLocated(
-                        By.xpath("//div[@class = 'card-header' and text() = '" + name + "']//following-sibling::div[@class= 'collapse show']")
-                ));
+        return wait.until(presenceOfElementLocated(
+                By.xpath("//div[@class = 'card-header' and text() = '" + name + "']//following-sibling::div[@class= 'collapse show']")
+        ));
     }
 
     public WebElement getSectionCollapse(String name) {
-        return new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(presenceOfElementLocated(
-                        By.xpath("//div[@class = 'card-header' and text() = '" + name + "']//following-sibling::div[@class= 'collapse']")
-                ));
+        return wait.until(presenceOfElementLocated(
+                By.xpath("//div[@class = 'card-header' and text() = '" + name + "']//following-sibling::div[@class= 'collapse']")
+        ));
     }
 
     public void clickSection1Heading() {
@@ -62,10 +64,9 @@ public class WidgetsPage {
     }
 
     private WebElement getElementDropDownMenu(String name) {
-        return new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(presenceOfElementLocated(
-                        By.xpath("//div[contains(@id, 'react-select') and .='" + name + "']")
-                ));
+        return wait.until(presenceOfElementLocated(
+                By.xpath("//div[contains(@id, 'react-select') and .='" + name + "']")
+        ));
     }
 
     public void sendKeysAndClickMultipleInput(String send, String completeOption) {
@@ -79,10 +80,9 @@ public class WidgetsPage {
     }
 
     private WebElement getRemoveElement(String name) {
-        return new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(presenceOfElementLocated(
-                        By.xpath("//div[contains(@class, 'label') and (text() = '" + name + "')]//following-sibling::div[contains(@class, 'remove')]")
-                ));
+        return wait.until(presenceOfElementLocated(
+                By.xpath("//div[contains(@class, 'label') and (text() = '" + name + "')]//following-sibling::div[contains(@class, 'remove')]")
+        ));
     }
 
     public void clickRemoveElement(String removeElement) {
@@ -98,7 +98,21 @@ public class WidgetsPage {
     }
 
     public String getTextElement(String text) {
-       return getElement(text).getText();
+        return getElement(text).getText();
+    }
+
+    public void enterDatePickerMonthYearInput(String datePicker) {
+        datePickerMonthYearInput.sendKeys(Keys.CONTROL + "A");
+        datePickerMonthYearInput.sendKeys(Keys.BACK_SPACE);
+        datePickerMonthYearInput.sendKeys(datePicker);
+        datePickerMonthYearInput.sendKeys(Keys.ENTER);
+    }
+
+    public void enterDateAndTimePickerInput(String dateAndTimePicker) {
+        dateAndTimePickerInput.sendKeys(Keys.CONTROL + "A");
+        dateAndTimePickerInput.sendKeys(Keys.BACK_SPACE);
+        dateAndTimePickerInput.sendKeys(dateAndTimePicker);
+        dateAndTimePickerInput.sendKeys(Keys.ENTER);
     }
 
     private WebDriver driver;
