@@ -100,8 +100,7 @@ public class WidgetsTest extends BaseTest {
 
         var width = widgetsPage.sliderElement.getSize().getWidth();
         actions.clickAndHold(widgetsPage.sliderElement).moveByOffset(-(width / 2), 0).perform();
-        int increment = 77;
-        for (int i = 0; i < increment; i++) {
+        for (int i = 0; i < 77; i++) {
             actions.sendKeys(Keys.ARROW_RIGHT);
         }
         actions.perform();
