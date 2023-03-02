@@ -19,6 +19,8 @@ public class WidgetsPage {
     public WebElement datePicker;
     @FindBy(xpath = "//li[contains(., 'Slider')]")
     public WebElement slider;
+    @FindBy(xpath = "//li[contains(., 'Progress Bar')]")
+    public WebElement progressBar;
 
     @FindBy(xpath = "//div[@id = 'section1Heading']")
     private WebElement section1Heading;
@@ -45,6 +47,9 @@ public class WidgetsPage {
     public WebElement sliderElement;
     @FindBy(xpath = "//input[@id= 'sliderValue']")
     public WebElement sliderValue;
+
+    @FindBy(xpath = "//div[@role = 'progressbar']")
+    public WebElement progressbar;
 
     public WebElement getSectionCollapseShow(String name) {
         return wait.until(presenceOfElementLocated(
@@ -120,6 +125,16 @@ public class WidgetsPage {
         dateAndTimePickerInput.sendKeys(Keys.BACK_SPACE);
         dateAndTimePickerInput.sendKeys(dateAndTimePicker);
         dateAndTimePickerInput.sendKeys(Keys.ENTER);
+    }
+
+    public WebElement getTextButton(String name) {
+        return wait.until(presenceOfElementLocated(
+                By.xpath("//button[@type= 'button' and text() ='" + name + "']")
+        ));
+    }
+
+    public void clickButtonText(String text) {
+        getTextButton(text).click();
     }
 
     private WebDriver driver;
