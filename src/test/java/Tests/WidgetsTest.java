@@ -1,10 +1,12 @@
 package Tests;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 
 public class WidgetsTest extends BaseTest {
     @Test
@@ -70,6 +72,7 @@ public class WidgetsTest extends BaseTest {
         widgetsPage.sendKeysAndClickSingleInput("h", "White");
         assertTrue(widgetsPage.containerIsSingle.getText().contains("White"));
     }
+
     @Test
     public void datePickerTest() {
 
@@ -80,9 +83,29 @@ public class WidgetsTest extends BaseTest {
         clickJS(widgetsPage.datePicker);
 
         widgetsPage.enterDatePickerMonthYearInput("03/08/1998");
-        wait.until(ExpectedConditions.attributeContains(widgetsPage.datePickerMonthYearInput,"value", "03/08/1998"));
+        wait.until(ExpectedConditions.attributeContains(widgetsPage.datePickerMonthYearInput, "value", "03/08/1998"));
 
         widgetsPage.enterDateAndTimePickerInput("March 8, 1998 2:30 PM");
-        wait.until(ExpectedConditions.attributeContains(widgetsPage.dateAndTimePickerInput,"value", "March 8, 1998 2:30 PM"));
+        wait.until(ExpectedConditions.attributeContains(widgetsPage.dateAndTimePickerInput, "value", "March 8, 1998 2:30 PM"));
+    }
+
+    @Test
+    public void sliderTest() {
+
+        driver.get("https://demoqa.com/");
+
+        landingPage.clickCategoryCardsWidgets();
+
+        clickJS(widgetsPage.slider);
+
+        var width = widgetsPage.sliderElement.getSize().getWidth();
+        actions.clickAndHold(widgetsPage.sliderElement).moveByOffset(-(width / 2), 0).perform();
+        int increment = 77;
+        for (int i = 0; i < increment; i++) {
+            actions.sendKeys(Keys.ARROW_RIGHT);
+        }
+        actions.perform();
+
+        wait.until(ExpectedConditions.attributeContains(widgetsPage.sliderValue, "value", "77"));
     }
 }

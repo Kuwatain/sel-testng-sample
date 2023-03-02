@@ -15,7 +15,6 @@ import org.testng.annotations.BeforeMethod;
 
 import java.io.File;
 import java.time.Duration;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -50,7 +49,7 @@ public class BaseTest {
         elementsPage = new ElementsPage(driver);
         formsPage = new FormsPage(driver);
         alertsFrameWindowsPage = new AlertsFrameWindowsPage(driver);
-        widgetsPage = new  WidgetsPage(driver);
+        widgetsPage = new WidgetsPage(driver);
         tableHelper = new TableHelper(driver);
         actions = new Actions(driver);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
