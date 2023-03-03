@@ -21,6 +21,8 @@ public class WidgetsPage {
     public WebElement slider;
     @FindBy(xpath = "//li[contains(., 'Progress Bar')]")
     public WebElement progressBar;
+    @FindBy(xpath = "//li[contains(., 'Tabs')]")
+    public WebElement tabs;
 
     @FindBy(xpath = "//div[@id = 'section1Heading']")
     private WebElement section1Heading;
@@ -50,6 +52,20 @@ public class WidgetsPage {
 
     @FindBy(xpath = "//div[@role = 'progressbar']")
     public WebElement progressbar;
+
+    @FindBy(xpath = "//a[@id = 'demo-tab-what']")
+    private WebElement tabWhat;
+    @FindBy(xpath = "//a[@id = 'demo-tab-origin']")
+    private WebElement tabOrigin;
+    @FindBy(xpath = "//a[@id = 'demo-tab-use']")
+    private WebElement tabUse;
+
+    @FindBy(xpath = "//div[@id = 'demo-tabpane-what']")
+    public WebElement tabpaneWhat;
+    @FindBy(xpath = "//div[@id = 'demo-tabpane-origin']")
+    public WebElement tabpaneOrigin;
+    @FindBy(xpath = "//div[@id = 'demo-tabpane-use']")
+    public WebElement tabpaneUse;
 
     public WebElement getSectionCollapseShow(String name) {
         return wait.until(presenceOfElementLocated(
@@ -135,6 +151,18 @@ public class WidgetsPage {
 
     public void clickButtonText(String text) {
         getTextButton(text).click();
+    }
+
+    public void clickTabWhat() {
+        tabWhat.click();
+    }
+
+    public void clickTabOrigin() {
+        tabOrigin.click();
+    }
+
+    public void clickTabUse() {
+        tabUse.click();
     }
 
     private WebDriver driver;

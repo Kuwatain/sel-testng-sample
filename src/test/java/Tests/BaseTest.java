@@ -56,7 +56,7 @@ public class BaseTest {
         calendarHelper = new CalendarHelper(driver);
     }
 
-    @AfterMethod
+//    @AfterMethod
     public void afterMethod() {
         driver.quit();
     }

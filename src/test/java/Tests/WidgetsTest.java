@@ -130,4 +130,24 @@ public class WidgetsTest extends BaseTest {
         Thread.sleep(10000);
         assertEquals(widgetsPage.progressbar.getText(), "100%");
     }
+
+    @Test
+    public void tabsTest() {
+
+        driver.get("https://demoqa.com/");
+
+        landingPage.clickCategoryCardsWidgets();
+
+        clickJS(widgetsPage.tabs);
+
+        widgetsPage.clickTabOrigin();
+        wait.until(ExpectedConditions.attributeToBe(widgetsPage.tabpaneOrigin, "aria-hidden", "false"));
+
+        widgetsPage.clickTabUse();
+        wait.until(ExpectedConditions.attributeToBe(widgetsPage.tabpaneUse, "aria-hidden", "false"));
+
+        widgetsPage.clickTabWhat();
+        wait.until(ExpectedConditions.attributeToBe(widgetsPage.tabpaneWhat, "aria-hidden", "false"));
+    }
+
 }
