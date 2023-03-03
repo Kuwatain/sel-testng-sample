@@ -23,6 +23,8 @@ public class WidgetsPage {
     public WebElement progressBar;
     @FindBy(xpath = "//li[contains(., 'Tabs')]")
     public WebElement tabs;
+    @FindBy(xpath = "//li[contains(., 'Tool Tips')]")
+    public WebElement toolTips;
 
     @FindBy(xpath = "//div[@id = 'section1Heading']")
     private WebElement section1Heading;
@@ -66,6 +68,24 @@ public class WidgetsPage {
     public WebElement tabpaneOrigin;
     @FindBy(xpath = "//div[@id = 'demo-tabpane-use']")
     public WebElement tabpaneUse;
+
+    @FindBy(xpath = "//button[@id = 'toolTipButton']")
+    public WebElement toolTipButton;
+    @FindBy(xpath = "//input[@id = 'toolTipTextField']")
+    public WebElement toolTipTextField;
+    @FindBy(xpath = "//a[text() = 'Contrary']")
+    public WebElement toolTipContrary;
+    @FindBy(xpath = "//a[text() = '1.10.32']")
+    public WebElement toolTipSection;
+
+    @FindBy(xpath = "//div[@id = 'buttonToolTip']/div[@class = 'tooltip-inner']")
+    public WebElement buttonToolTip;
+    @FindBy(xpath = "//div[@id = 'textFieldToolTip']/div[@class = 'tooltip-inner']")
+    public WebElement textFieldToolTip;
+    @FindBy(xpath = "//div[@id = 'contraryTexToolTip']/div[@class = 'tooltip-inner']")
+    public WebElement contraryTexToolTip;
+    @FindBy(xpath = "//div[@id = 'sectionToolTip']/div[@class = 'tooltip-inner']")
+    public WebElement sectionToolTip;
 
     public WebElement getSectionCollapseShow(String name) {
         return wait.until(presenceOfElementLocated(

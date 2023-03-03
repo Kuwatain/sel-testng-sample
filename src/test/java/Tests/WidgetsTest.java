@@ -149,4 +149,25 @@ public class WidgetsTest extends BaseTest {
         wait.until(ExpectedConditions.attributeToBe(widgetsPage.tabpaneWhat, "aria-hidden", "false"));
     }
 
+    @Test
+    public void toolTipsTest() {
+
+        driver.get("https://demoqa.com/");
+
+        landingPage.clickCategoryCardsWidgets();
+
+        clickJS(widgetsPage.toolTips);
+
+        actions.moveToElement(widgetsPage.toolTipButton).build().perform();
+        wait.until(ExpectedConditions.textToBePresentInElement(widgetsPage.buttonToolTip, "You hovered over the Button"));
+
+        actions.moveToElement(widgetsPage.toolTipTextField).build().perform();
+        wait.until(ExpectedConditions.textToBePresentInElement(widgetsPage.textFieldToolTip, "You hovered over the text field"));
+
+        actions.moveToElement(widgetsPage.toolTipContrary).build().perform();
+        wait.until(ExpectedConditions.textToBePresentInElement(widgetsPage.contraryTexToolTip, "You hovered over the Contrary"));
+
+        actions.moveToElement(widgetsPage.toolTipSection).build().perform();
+        wait.until(ExpectedConditions.textToBePresentInElement(widgetsPage.sectionToolTip, "You hovered over the 1.10.32"));
+    }
 }
