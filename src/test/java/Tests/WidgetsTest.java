@@ -5,8 +5,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class WidgetsTest extends BaseTest {
     @Test
@@ -106,5 +105,28 @@ public class WidgetsTest extends BaseTest {
         actions.perform();
 
         wait.until(ExpectedConditions.attributeContains(widgetsPage.sliderValue, "value", "77"));
+    }
+
+    @Test
+    public void progressBarTest() throws InterruptedException {
+
+        driver.get("https://demoqa.com/");
+
+        landingPage.clickCategoryCardsWidgets();
+
+        clickJS(widgetsPage.progressBar);
+
+        widgetsPage.clickButtonText("Start");
+        Thread.sleep(5000);
+        assertEquals(widgetsPage.progressbar.getText(), "50%");
+        widgetsPage.clickButtonText("Stop");
+
+        widgetsPage.clickButtonText("Start");
+        Thread.sleep(5000);
+        assertEquals(widgetsPage.progressbar.getText(), "100%");
+
+        widgetsPage.clickButtonText("Reset");
+        Thread.sleep(10000);
+        assertEquals(widgetsPage.progressbar.getText(), "100%");
     }
 }
