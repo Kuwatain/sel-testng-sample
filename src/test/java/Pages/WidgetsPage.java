@@ -17,6 +17,8 @@ public class WidgetsPage {
     public WebElement autoComplete;
     @FindBy(xpath = "//li[contains(., 'Date Picker')]")
     public WebElement datePicker;
+    @FindBy(xpath = "//li[contains(., 'Slider')]")
+    public WebElement slider;
 
     @FindBy(xpath = "//div[@id = 'section1Heading']")
     private WebElement section1Heading;
@@ -38,6 +40,11 @@ public class WidgetsPage {
     public WebElement datePickerMonthYearInput;
     @FindBy(xpath = "//input[@id = 'dateAndTimePickerInput']")
     public WebElement dateAndTimePickerInput;
+
+    @FindBy(xpath = "//input[@type = 'range']")
+    public WebElement sliderElement;
+    @FindBy(xpath = "//input[@id= 'sliderValue']")
+    public WebElement sliderValue;
 
     public WebElement getSectionCollapseShow(String name) {
         return wait.until(presenceOfElementLocated(
