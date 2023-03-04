@@ -182,11 +182,8 @@ public class WidgetsTest extends BaseTest {
 
         actions.moveToElement(widgetsPage.getTextMenu("Main Item 2")).build().perform();
         widgetsPage.getTextMenu("Sub Item");
-        widgetsPage.getTextMenu("SUB SUB LIST");
 
         actions.moveToElement(widgetsPage.getTextMenu("SUB SUB LIST")).build().perform();
-        widgetsPage.getTextMenu("Sub Sub Item 1");
-        widgetsPage.getTextMenu("Sub Sub Item 2");
 
         actions.moveToElement(widgetsPage.getTextMenu("Sub Sub Item 1")).build().perform();
         actions.moveToElement(widgetsPage.getTextMenu("Sub Sub Item 2")).build().perform();
