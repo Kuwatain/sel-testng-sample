@@ -170,4 +170,22 @@ public class WidgetsTest extends BaseTest {
         actions.moveToElement(widgetsPage.toolTipSection).build().perform();
         wait.until(ExpectedConditions.textToBePresentInElement(widgetsPage.sectionToolTip, "You hovered over the 1.10.32"));
     }
+
+    @Test
+    public void menuTest() {
+
+        driver.get("https://demoqa.com/");
+
+        landingPage.clickCategoryCardsWidgets();
+
+        clickJS(widgetsPage.menu);
+
+        actions.moveToElement(widgetsPage.getTextMenu("Main Item 2")).build().perform();
+        widgetsPage.getTextMenu("Sub Item");
+
+        actions.moveToElement(widgetsPage.getTextMenu("SUB SUB LIST")).build().perform();
+
+        actions.moveToElement(widgetsPage.getTextMenu("Sub Sub Item 1")).build().perform();
+        actions.moveToElement(widgetsPage.getTextMenu("Sub Sub Item 2")).build().perform();
+    }
 }
