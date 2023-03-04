@@ -25,6 +25,8 @@ public class WidgetsPage {
     public WebElement tabs;
     @FindBy(xpath = "//li[contains(., 'Tool Tips')]")
     public WebElement toolTips;
+    @FindBy(xpath = "//li[contains(., 'Menu')]")
+    public WebElement menu;
 
     @FindBy(xpath = "//div[@id = 'section1Heading']")
     private WebElement section1Heading;
@@ -183,6 +185,10 @@ public class WidgetsPage {
 
     public void clickTabUse() {
         tabUse.click();
+    }
+
+    public WebElement getTextMenu(String text) {
+        return driver.findElement(By.xpath("//a[contains(text(), '" + text + "')]"));
     }
 
     private WebDriver driver;
