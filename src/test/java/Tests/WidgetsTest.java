@@ -188,4 +188,45 @@ public class WidgetsTest extends BaseTest {
         actions.moveToElement(widgetsPage.getTextMenu("Sub Sub Item 1")).build().perform();
         actions.moveToElement(widgetsPage.getTextMenu("Sub Sub Item 2")).build().perform();
     }
+
+    @Test
+    public void selectMenuTest() {
+
+        driver.get("https://demoqa.com/");
+
+        landingPage.clickCategoryCardsWidgets();
+
+        clickJS(widgetsPage.selectMenu);
+
+        widgetsPage.clickWithOptGroup();
+        widgetsPage.clickSelectOption("A root option");
+        assertTrue(widgetsPage.getTextWithOptGroup().contains("A root option"));
+
+        widgetsPage.clickSelectOne();
+        widgetsPage.clickSelectOption("Mrs.");
+        assertTrue(widgetsPage.getTextSelectOne().contains("Mrs"));
+
+        widgetsPage.clickOldSelectMenu();
+        widgetsPage.clickOldSelect("Black");
+        widgetsPage.getTextOldSelect("Black");
+
+        widgetsPage.clickMultiSelectMenu();
+        widgetsPage.clickMultiSelect("Green");
+        widgetsPage.clickMultiSelect("Red");
+        widgetsPage.clickMultiSelect("Blue");
+        widgetsPage.clickRemoveElementMultiSelect("Green");
+        widgetsPage.getTextElementMultiSelect("Red");
+        widgetsPage.getTextElementMultiSelect("Blue");
+        widgetsPage.clickIndicatorContainer();
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(@class, 'multiValue')]")));
+        widgetsPage.clickMultiSelectMenu();
+        widgetsPage.clickMultiSelect("Black");
+        widgetsPage.getTextElementMultiSelect("Black");
+
+        widgetsPage.clickElementStandard("Saab");
+        String blue = "rgba(30, 144, 255, 1)";
+        String white = "rgba(255, 255, 255, 1)";
+        assertEquals(widgetsPage.backgroundColorElementStandard("Saab"), blue);
+        assertEquals(widgetsPage.colorElementStandard("Saab"), white);
+    }
 }

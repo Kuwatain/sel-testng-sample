@@ -27,6 +27,8 @@ public class WidgetsPage {
     public WebElement toolTips;
     @FindBy(xpath = "//li[contains(., 'Menu')]")
     public WebElement menu;
+    @FindBy(xpath = "//li[contains(., 'Select Menu')]")
+    public WebElement selectMenu;
 
     @FindBy(xpath = "//div[@id = 'section1Heading']")
     private WebElement section1Heading;
@@ -88,6 +90,17 @@ public class WidgetsPage {
     public WebElement contraryTexToolTip;
     @FindBy(xpath = "//div[@id = 'sectionToolTip']/div[@class = 'tooltip-inner']")
     public WebElement sectionToolTip;
+
+    @FindBy(xpath = "//div[@id = 'withOptGroup']")
+    private WebElement withOptGroup;
+    @FindBy(xpath = "//div[@id = 'selectOne']")
+    private WebElement selectOne;
+    @FindBy(xpath = "//select[@id = 'oldSelectMenu']")
+    private WebElement oldSelectMenu;
+    @FindBy(xpath = "//div[@class ='row']//following-sibling::div[contains(@class, 'c-container')]")
+    private WebElement reactSelectInput;
+    @FindBy(xpath = "//div[@id = 'selectMenuContainer']/div[@class = 'row']//div[contains(@class, 'indicatorContainer')][1]")
+    private WebElement indicatorContainer;
 
     public WebElement getSectionCollapseShow(String name) {
         return wait.until(presenceOfElementLocated(
@@ -189,6 +202,90 @@ public class WidgetsPage {
 
     public WebElement getTextMenu(String text) {
         return driver.findElement(By.xpath("//a[contains(text(), '" + text + "')]"));
+    }
+
+    public void clickSelectOption(String select) {
+        getElementDropDownMenu(select).click();
+    }
+
+    public void clickWithOptGroup() {
+        withOptGroup.click();
+    }
+
+    public String getTextWithOptGroup() {
+        return withOptGroup.getText();
+    }
+
+    public void clickSelectOne() {
+        selectOne.click();
+    }
+
+    public String getTextSelectOne() {
+        return selectOne.getText();
+    }
+
+    public void clickOldSelectMenu() {
+        oldSelectMenu.click();
+    }
+
+    public WebElement getOldSelectElement(String getElement) {
+        return wait.until(presenceOfElementLocated(
+                By.xpath("//option[text() = '" + getElement + "']")
+        ));
+    }
+
+    public void clickOldSelect(String select) {
+        getOldSelectElement(select).click();
+    }
+
+    public String getTextOldSelect(String select) {
+        return getOldSelectElement(select).getText();
+    }
+
+    public void clickMultiSelectMenu() {
+        reactSelectInput.click();
+    }
+
+    public void clickMultiSelect(String select) {
+        getElementDropDownMenu(select).click();
+    }
+
+    private WebElement getRemoveElementMultiSelect(String getElement) {
+        return wait.until(presenceOfElementLocated(
+                By.xpath("//div[@class = 'css-12jo7m5' and (text() = '" + getElement + "')]//following-sibling::div[@class = 'css-xb97g8']")
+        ));
+    }
+
+    public void clickRemoveElementMultiSelect(String removeElement) {
+        getRemoveElementMultiSelect(removeElement).click();
+    }
+
+    private WebElement getElementMultiSelect(String getElement) {
+        return driver.findElement(By.xpath("//div[@class = 'css-12jo7m5' and text()= '" + getElement + "']"));
+    }
+
+    public String getTextElementMultiSelect(String textElement) {
+        return getElementMultiSelect(textElement).getText();
+    }
+
+    public void clickIndicatorContainer() {
+        indicatorContainer.click();
+    }
+
+    private WebElement getElementStandard(String getElement) {
+        return driver.findElement(By.xpath("//select[@id = 'cars']/option[text() = '" + getElement + "']"));
+    }
+
+    public void clickElementStandard(String elementStandard) {
+        getElementStandard(elementStandard).click();
+    }
+
+    public String backgroundColorElementStandard(String elementStandard) {
+        return getElementStandard(elementStandard).getCssValue("background-color");
+    }
+
+    public String colorElementStandard(String elementStandard) {
+        return getElementStandard(elementStandard).getCssValue("color");
     }
 
     private WebDriver driver;
