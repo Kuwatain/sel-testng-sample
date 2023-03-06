@@ -14,6 +14,8 @@ public class LandingPage {
     public WebElement alertsFrameWindows;
     @FindBy(xpath = "//div[contains(@class, 'card mt-4 top-card') and .='Widgets']")
     public WebElement widgets;
+    @FindBy(xpath = "//div[contains(@class, 'card mt-4 top-card') and .='Interactions']")
+    public WebElement interactions;
 
     public WebDriver driver;
 
@@ -36,5 +38,9 @@ public class LandingPage {
 
     public void clickCategoryCardsWidgets() {
         widgets.click();
+    }
+
+    public void clickCategoryCardsInteractions() {
+        interactions.click();
     }
 }

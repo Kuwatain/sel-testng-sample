@@ -25,8 +25,9 @@ public class BaseTest {
     public FormsPage formsPage;
     public AlertsFrameWindowsPage alertsFrameWindowsPage;
     public WidgetsPage widgetsPage;
+    public InteractionsPage interactionsPage;
     TableHelper tableHelper;
-    Actions actions;
+    public static Actions actions;
     public static WebDriverWait wait;
     CalendarHelper calendarHelper;
 
@@ -50,6 +51,7 @@ public class BaseTest {
         formsPage = new FormsPage(driver);
         alertsFrameWindowsPage = new AlertsFrameWindowsPage(driver);
         widgetsPage = new WidgetsPage(driver);
+        interactionsPage = new InteractionsPage(driver);
         tableHelper = new TableHelper(driver);
         actions = new Actions(driver);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
