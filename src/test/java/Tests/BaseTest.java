@@ -27,7 +27,7 @@ public class BaseTest {
     public WidgetsPage widgetsPage;
     public InteractionsPage interactionsPage;
     TableHelper tableHelper;
-    Actions actions;
+    public static Actions actions;
     public static WebDriverWait wait;
     CalendarHelper calendarHelper;
 

@@ -3,6 +3,10 @@ package Tests;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
+import java.util.LinkedHashMap;
+
+import static org.openqa.selenium.support.ui.ExpectedConditions.textToBePresentInElement;
+
 public class InteractionsTest extends BaseTest {
     @Test
     public void sortableTest() {
@@ -17,51 +21,49 @@ public class InteractionsTest extends BaseTest {
         interactionsPage.clickDemoTabList();
         wait.until(ExpectedConditions.attributeToBe(interactionsPage.demoTabpaneList, "aria-hidden", "false"));
 
+        LinkedHashMap<String, String> testData = new LinkedHashMap<>();
+        testData.put("One", "Six");
+        testData.put("Six", "Two");
+        testData.put("Two", "Five");
+        testData.put("Five", "Three");
+        testData.put("Three", "Four");
 
-        actions.dragAndDrop(interactionsPage.getVerticalListItem("One"), interactionsPage.getVerticalListItem("Six")).build().perform();
-        wait.until(ExpectedConditions.textToBePresentInElement(interactionsPage.getVerticalNumberListItem("6"), "One"));
-
-        actions.dragAndDrop(interactionsPage.getVerticalListItem("Six"), interactionsPage.getVerticalListItem("Two")).build().perform();
-        wait.until(ExpectedConditions.textToBePresentInElement(interactionsPage.getVerticalNumberListItem("1"), "Six"));
-
-        actions.dragAndDrop(interactionsPage.getVerticalListItem("Two"), interactionsPage.getVerticalListItem("Five")).build().perform();
-        wait.until(ExpectedConditions.textToBePresentInElement(interactionsPage.getVerticalNumberListItem("5"), "Two"));
-
-        actions.dragAndDrop(interactionsPage.getVerticalListItem("Five"), interactionsPage.getVerticalListItem("Three")).build().perform();
-        wait.until(ExpectedConditions.textToBePresentInElement(interactionsPage.getVerticalNumberListItem("2"), "Five"));
-
-        actions.dragAndDrop(interactionsPage.getVerticalListItem("Three"), interactionsPage.getVerticalListItem("Four")).build().perform();
-        wait.until(ExpectedConditions.textToBePresentInElement(interactionsPage.getVerticalNumberListItem("4"), "Three"));
-
-        wait.until(ExpectedConditions.textToBePresentInElement(interactionsPage.getVerticalNumberListItem("3"), "Four"));
+        testData.forEach((k, v) -> {
+            interactionsPage.dragAndDropListItem(k, v);
+        });
+        wait.until(textToBePresentInElement(interactionsPage.listGroupItemAction.get(5), "One"));
+        wait.until(textToBePresentInElement(interactionsPage.listGroupItemAction.get(4), "Two"));
+        wait.until(textToBePresentInElement(interactionsPage.listGroupItemAction.get(3), "Three"));
+        wait.until(textToBePresentInElement(interactionsPage.listGroupItemAction.get(2), "Four"));
+        wait.until(textToBePresentInElement(interactionsPage.listGroupItemAction.get(1), "Five"));
+        wait.until(textToBePresentInElement(interactionsPage.listGroupItemAction.get(0), "Six"));
 
 
         interactionsPage.clickDemoTabGrid();
 
-        actions.dragAndDrop(interactionsPage.getCreateGridListItem("Nine"), interactionsPage.getCreateGridListItem("One")).build().perform();
-        wait.until(ExpectedConditions.textToBePresentInElement(interactionsPage.getCreateGridNumberListItem("1"), "Nine"));
+        interactionsPage.dragAndDropGridItem("Nine", "One");
+        wait.until(textToBePresentInElement(interactionsPage.getCreateGridNumberListItem("1"), "Nine"));
 
-        actions.dragAndDrop(interactionsPage.getCreateGridListItem("Eight"), interactionsPage.getCreateGridListItem("One")).build().perform();
-        wait.until(ExpectedConditions.textToBePresentInElement(interactionsPage.getCreateGridNumberListItem("2"), "Eight"));
+        interactionsPage.dragAndDropGridItem("Eight", "One");
+        wait.until(textToBePresentInElement(interactionsPage.getCreateGridNumberListItem("2"), "Eight"));
 
-        actions.dragAndDrop(interactionsPage.getCreateGridListItem("Seven"), interactionsPage.getCreateGridListItem("One")).build().perform();
-        wait.until(ExpectedConditions.textToBePresentInElement(interactionsPage.getCreateGridNumberListItem("3"), "Seven"));
+        interactionsPage.dragAndDropGridItem("Seven", "One");
+        wait.until(textToBePresentInElement(interactionsPage.getCreateGridNumberListItem("3"), "Seven"));
 
-        actions.dragAndDrop(interactionsPage.getCreateGridListItem("Six"), interactionsPage.getCreateGridListItem("One")).build().perform();
-        wait.until(ExpectedConditions.textToBePresentInElement(interactionsPage.getCreateGridNumberListItem("4"), "Six"));
+        interactionsPage.dragAndDropGridItem("Six", "One");
+        wait.until(textToBePresentInElement(interactionsPage.getCreateGridNumberListItem("4"), "Six"));
 
-        actions.dragAndDrop(interactionsPage.getCreateGridListItem("Five"), interactionsPage.getCreateGridListItem("One")).build().perform();
-        wait.until(ExpectedConditions.textToBePresentInElement(interactionsPage.getCreateGridNumberListItem("5"), "Five"));
+        interactionsPage.dragAndDropGridItem("Five", "One");
+        wait.until(textToBePresentInElement(interactionsPage.getCreateGridNumberListItem("5"), "Five"));
 
-        actions.dragAndDrop(interactionsPage.getCreateGridListItem("Four"), interactionsPage.getCreateGridListItem("One")).build().perform();
-        wait.until(ExpectedConditions.textToBePresentInElement(interactionsPage.getCreateGridNumberListItem("6"), "Four"));
+        interactionsPage.dragAndDropGridItem("Four", "One");
+        wait.until(textToBePresentInElement(interactionsPage.getCreateGridNumberListItem("6"), "Four"));
 
-        actions.dragAndDrop(interactionsPage.getCreateGridListItem("Three"), interactionsPage.getCreateGridListItem("One")).build().perform();
-        wait.until(ExpectedConditions.textToBePresentInElement(interactionsPage.getCreateGridNumberListItem("7"), "Three"));
+        interactionsPage.dragAndDropGridItem("Three", "One");
+        wait.until(textToBePresentInElement(interactionsPage.getCreateGridNumberListItem("7"), "Three"));
 
-        actions.dragAndDrop(interactionsPage.getCreateGridListItem("Two"), interactionsPage.getCreateGridListItem("One")).build().perform();
-        wait.until(ExpectedConditions.textToBePresentInElement(interactionsPage.getCreateGridNumberListItem("8"), "Two"));
-
-        wait.until(ExpectedConditions.textToBePresentInElement(interactionsPage.getCreateGridNumberListItem("9"), "One"));
+        interactionsPage.dragAndDropGridItem("Two", "One");
+        wait.until(textToBePresentInElement(interactionsPage.getCreateGridNumberListItem("8"), "Two"));
+        wait.until(textToBePresentInElement(interactionsPage.getCreateGridNumberListItem("9"), "One"));
     }
 }

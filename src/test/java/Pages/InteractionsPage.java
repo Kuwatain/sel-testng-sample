@@ -6,6 +6,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
+import static Tests.BaseTest.actions;
+
 public class InteractionsPage {
     @FindBy(xpath = "//li[contains(., 'Sortable')]")
     public WebElement sortable;
@@ -17,6 +21,8 @@ public class InteractionsPage {
     public WebElement demoTabpaneList;
     @FindBy(xpath = "//div[@id = 'demo-tabpane-grid']")
     public WebElement demoTabpaneGrid;
+    @FindBy(xpath = "//div[contains(@class, 'vertical-list-container')]/div")
+    public List<WebElement> listGroupItemAction;
 
 
     public void clickDemoTabList() {
@@ -41,6 +47,14 @@ public class InteractionsPage {
 
     public WebElement getCreateGridNumberListItem(String number) {
         return driver.findElement(By.xpath("//div[@class = 'create-grid']/div[contains(@class, 'list-group-item')][" + number + "]"));
+    }
+
+    public void dragAndDropGridItem(String source, String target) {
+        actions.dragAndDrop(getCreateGridListItem(source), getCreateGridListItem(target)).build().perform();
+    }
+
+    public void dragAndDropListItem(String source, String target) {
+        actions.dragAndDrop(getVerticalListItem(source), getVerticalListItem(target)).build().perform();
     }
 
     private WebDriver driver;
