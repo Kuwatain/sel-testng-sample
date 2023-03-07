@@ -1,10 +1,10 @@
 package Tests;
 
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
 import java.util.LinkedHashMap;
 
+import static org.openqa.selenium.support.ui.ExpectedConditions.attributeToBe;
 import static org.openqa.selenium.support.ui.ExpectedConditions.textToBePresentInElement;
 
 public class InteractionsTest extends BaseTest {
@@ -17,9 +17,9 @@ public class InteractionsTest extends BaseTest {
         clickJS(interactionsPage.sortable);
 
         interactionsPage.clickDemoTabGrid();
-        wait.until(ExpectedConditions.attributeToBe(interactionsPage.demoTabpaneGrid, "aria-hidden", "false"));
+        wait.until(attributeToBe(interactionsPage.demoTabpaneGrid, "aria-hidden", "false"));
         interactionsPage.clickDemoTabList();
-        wait.until(ExpectedConditions.attributeToBe(interactionsPage.demoTabpaneList, "aria-hidden", "false"));
+        wait.until(attributeToBe(interactionsPage.demoTabpaneList, "aria-hidden", "false"));
 
         LinkedHashMap<String, String> testData = new LinkedHashMap<>();
         testData.put("One", "Six");
@@ -65,5 +65,90 @@ public class InteractionsTest extends BaseTest {
         interactionsPage.dragAndDropGridItem("Two", "One");
         wait.until(textToBePresentInElement(interactionsPage.getCreateGridNumberListItem("8"), "Two"));
         wait.until(textToBePresentInElement(interactionsPage.getCreateGridNumberListItem("9"), "One"));
+    }
+
+    @Test
+    public void selectableTest() {
+
+        driver.get("https://demoqa.com/");
+
+        landingPage.clickCategoryCardsInteractions();
+        clickJS(interactionsPage.selectable);
+
+        interactionsPage.clickDemoTabGrid();
+        wait.until(attributeToBe(interactionsPage.demoTabpaneGrid, "aria-hidden", "false"));
+        interactionsPage.clickDemoTabList();
+        wait.until(attributeToBe(interactionsPage.demoTabpaneList, "aria-hidden", "false"));
+
+        interactionsPage.clickListGroupItem("Cras justo odio");
+        wait.until(attributeToBe(interactionsPage.getListGroupItem("Cras justo odio"),
+                "class",
+                "mt-2 list-group-item active list-group-item-action"));
+
+        interactionsPage.clickListGroupItem("Cras justo odio");
+        wait.until(attributeToBe(interactionsPage.getListGroupItem("Cras justo odio"),
+                "class",
+                "mt-2 list-group-item list-group-item-action"));
+
+        interactionsPage.clickListGroupItem("Dapibus ac facilisis in");
+        wait.until(attributeToBe(interactionsPage.getListGroupItem("Dapibus ac facilisis in"),
+                "class",
+                "mt-2 list-group-item active list-group-item-action"));
+
+        interactionsPage.clickListGroupItem("Morbi leo risus");
+        wait.until(attributeToBe(interactionsPage.getListGroupItem("Morbi leo risus"),
+                "class",
+                "mt-2 list-group-item active list-group-item-action"));
+
+        interactionsPage.clickListGroupItem("Porta ac consectetur ac");
+        wait.until(attributeToBe(interactionsPage.getListGroupItem(
+                "Porta ac consectetur ac"),
+                "class",
+                "mt-2 list-group-item active list-group-item-action"));
+
+        interactionsPage.clickListGroupItem("Porta ac consectetur ac");
+        wait.until(attributeToBe(interactionsPage.getListGroupItem("Porta ac consectetur ac"),
+                "class",
+                "mt-2 list-group-item list-group-item-action"));
+
+        interactionsPage.clickDemoTabGrid();
+
+        interactionsPage.clickListGroupItem("One");
+        interactionsPage.clickListGroupItem("Five");
+        interactionsPage.clickListGroupItem("Nine");
+        interactionsPage.clickListGroupItem("Seven");
+        interactionsPage.clickListGroupItem("Three");
+        interactionsPage.clickListGroupItem("Four");
+        interactionsPage.clickListGroupItem("Two");
+        interactionsPage.clickListGroupItem("Eight");
+        interactionsPage.clickListGroupItem("Six");
+
+        wait.until(attributeToBe(interactionsPage.getListGroupItem("One"),
+                "class",
+                "list-group-item active list-group-item-action"));
+        wait.until(attributeToBe(interactionsPage.getListGroupItem("Two"),
+                "class",
+                "list-group-item active list-group-item-action"));
+        wait.until(attributeToBe(interactionsPage.getListGroupItem("Three"),
+                "class",
+                "list-group-item active list-group-item-action"));
+        wait.until(attributeToBe(interactionsPage.getListGroupItem("Four"),
+                "class",
+                "list-group-item active list-group-item-action"));
+        wait.until(attributeToBe(interactionsPage.getListGroupItem("Five"),
+                "class",
+                "list-group-item active list-group-item-action"));
+        wait.until(attributeToBe(interactionsPage.getListGroupItem("Six"),
+                "class",
+                "list-group-item active list-group-item-action"));
+        wait.until(attributeToBe(interactionsPage.getListGroupItem("Seven"),
+                "class",
+                "list-group-item active list-group-item-action"));
+        wait.until(attributeToBe(interactionsPage.getListGroupItem("Eight"),
+                "class",
+                "list-group-item active list-group-item-action"));
+        wait.until(attributeToBe(interactionsPage.getListGroupItem("Nine"),
+                "class",
+                "list-group-item active list-group-item-action"));
     }
 }

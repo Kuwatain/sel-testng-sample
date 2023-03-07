@@ -13,6 +13,9 @@ import static Tests.BaseTest.actions;
 public class InteractionsPage {
     @FindBy(xpath = "//li[contains(., 'Sortable')]")
     public WebElement sortable;
+    @FindBy(xpath = "//li[contains(., 'Selectable')]")
+    public WebElement selectable;
+
     @FindBy(xpath = "//a[@id = 'demo-tab-list']")
     private WebElement demoTabList;
     @FindBy(xpath = "//a[@id = 'demo-tab-grid']")
@@ -55,6 +58,14 @@ public class InteractionsPage {
 
     public void dragAndDropListItem(String source, String target) {
         actions.dragAndDrop(getVerticalListItem(source), getVerticalListItem(target)).build().perform();
+    }
+
+    public WebElement getListGroupItem(String text) {
+        return driver.findElement(By.xpath("//li[contains(@class, 'list-group-item') and (text() = '" + text + "')]"));
+    }
+
+    public void clickListGroupItem(String text) {
+        getListGroupItem(text).click();
     }
 
     private WebDriver driver;
