@@ -13,6 +13,9 @@ import static Tests.BaseTest.actions;
 public class InteractionsPage {
     @FindBy(xpath = "//li[contains(., 'Sortable')]")
     public WebElement sortable;
+    @FindBy(xpath = "//li[contains(., 'Resizable')]")
+    public WebElement resizable;
+
     @FindBy(xpath = "//a[@id = 'demo-tab-list']")
     private WebElement demoTabList;
     @FindBy(xpath = "//a[@id = 'demo-tab-grid']")
@@ -23,6 +26,15 @@ public class InteractionsPage {
     public WebElement demoTabpaneGrid;
     @FindBy(xpath = "//div[contains(@class, 'vertical-list-container')]/div")
     public List<WebElement> listGroupItemAction;
+
+    @FindBy(xpath = "//div[@id = 'resizableBoxWithRestriction']")
+    public WebElement resizableBoxWithRestriction;
+    @FindBy(xpath = "//div[@id = 'resizableBoxWithRestriction']/span")
+    public WebElement reactResizableHandle;
+    @FindBy(xpath = "//div[@id = 'resizable']")
+    public WebElement resizableBox;
+    @FindBy(xpath = "//div[@id = 'resizable']/span")
+    public WebElement reactResizableHandle2;
 
 
     public void clickDemoTabList() {

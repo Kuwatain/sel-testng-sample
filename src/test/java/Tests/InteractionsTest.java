@@ -1,10 +1,10 @@
 package Tests;
 
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
 import java.util.LinkedHashMap;
 
+import static org.openqa.selenium.support.ui.ExpectedConditions.attributeToBe;
 import static org.openqa.selenium.support.ui.ExpectedConditions.textToBePresentInElement;
 
 public class InteractionsTest extends BaseTest {
@@ -17,9 +17,9 @@ public class InteractionsTest extends BaseTest {
         clickJS(interactionsPage.sortable);
 
         interactionsPage.clickDemoTabGrid();
-        wait.until(ExpectedConditions.attributeToBe(interactionsPage.demoTabpaneGrid, "aria-hidden", "false"));
+        wait.until(attributeToBe(interactionsPage.demoTabpaneGrid, "aria-hidden", "false"));
         interactionsPage.clickDemoTabList();
-        wait.until(ExpectedConditions.attributeToBe(interactionsPage.demoTabpaneList, "aria-hidden", "false"));
+        wait.until(attributeToBe(interactionsPage.demoTabpaneList, "aria-hidden", "false"));
 
         LinkedHashMap<String, String> testData = new LinkedHashMap<>();
         testData.put("One", "Six");
@@ -65,5 +65,26 @@ public class InteractionsTest extends BaseTest {
         interactionsPage.dragAndDropGridItem("Two", "One");
         wait.until(textToBePresentInElement(interactionsPage.getCreateGridNumberListItem("8"), "Two"));
         wait.until(textToBePresentInElement(interactionsPage.getCreateGridNumberListItem("9"), "One"));
+    }
+
+    @Test
+    public void resizableTest() {
+
+        driver.get("https://demoqa.com/");
+
+        landingPage.clickCategoryCardsInteractions();
+        clickJS(interactionsPage.resizable);
+
+        actions.clickAndHold(interactionsPage.reactResizableHandle).moveByOffset(-50, -50).click().build().perform();
+        wait.until(attributeToBe(interactionsPage.resizableBoxWithRestriction, "style", "width: 150px; height: 150px;"));
+
+        actions.clickAndHold(interactionsPage.reactResizableHandle).moveByOffset(350, 150).click().build().perform();
+        wait.until(attributeToBe(interactionsPage.resizableBoxWithRestriction, "style", "width: 500px; height: 300px;"));
+
+        actions.clickAndHold(interactionsPage.reactResizableHandle2).moveByOffset(-180, -180).click().build().perform();
+        wait.until(attributeToBe(interactionsPage.resizableBox, "style", "width: 20px; height: 20px;"));
+
+        actions.clickAndHold(interactionsPage.reactResizableHandle2).moveByOffset(980, 280).click().build().perform();
+        wait.until(attributeToBe(interactionsPage.resizableBox, "style", "width: 1000px; height: 300px;"));
     }
 }
