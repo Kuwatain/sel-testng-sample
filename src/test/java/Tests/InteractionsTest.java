@@ -2,7 +2,9 @@ package Tests;
 
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.attributeToBe;
 import static org.openqa.selenium.support.ui.ExpectedConditions.textToBePresentInElement;
@@ -65,6 +67,33 @@ public class InteractionsTest extends BaseTest {
         interactionsPage.dragAndDropGridItem("Two", "One");
         wait.until(textToBePresentInElement(interactionsPage.getCreateGridNumberListItem("8"), "Two"));
         wait.until(textToBePresentInElement(interactionsPage.getCreateGridNumberListItem("9"), "One"));
+    }
+
+    @Test
+    public void selectableTest() {
+
+        driver.get("https://demoqa.com/");
+
+        landingPage.clickCategoryCardsInteractions();
+        clickJS(interactionsPage.selectable);
+
+        interactionsPage.clickDemoTabGrid();
+        wait.until(attributeToBe(interactionsPage.demoTabpaneGrid, "aria-hidden", "false"));
+        interactionsPage.clickDemoTabList();
+        wait.until(attributeToBe(interactionsPage.demoTabpaneList, "aria-hidden", "false"));
+
+        List<String> clickListItem = Arrays.asList("Cras justo odio", "Dapibus ac facilisis in", "Morbi leo risus", "Porta ac consectetur ac");
+        clickListItem.forEach(i -> interactionsPage.clickListGroupItem(i));
+        clickListItem.forEach(i -> wait.until(attributeToBe(interactionsPage.getListGroupItem(i),
+                "class",
+                "mt-2 list-group-item active list-group-item-action")));
+
+        interactionsPage.clickDemoTabGrid();
+        List<String> clickGridItem = Arrays.asList("One", "Five", "Nine", "Seven", "Three", "Four", "Two", "Eight", "Six");
+        clickGridItem.forEach(i -> interactionsPage.clickListGroupItem(i));
+        clickGridItem.forEach(i -> wait.until(attributeToBe(interactionsPage.getListGroupItem(i),
+                "class",
+                "list-group-item active list-group-item-action")));
     }
 
     @Test
