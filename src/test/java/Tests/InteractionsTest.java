@@ -116,4 +116,21 @@ public class InteractionsTest extends BaseTest {
         actions.clickAndHold(interactionsPage.reactResizableHandle2).moveByOffset(980, 280).click().build().perform();
         wait.until(attributeToBe(interactionsPage.resizableBox, "style", "width: 1000px; height: 300px;"));
     }
+    @Test
+    public void droppableTest() {
+
+        driver.get("https://demoqa.com/");
+
+        landingPage.clickCategoryCardsInteractions();
+        clickJS(interactionsPage.droppable);
+
+        interactionsPage.clickTabRevertable();
+        wait.until(attributeToBe(interactionsPage.revertable, "aria-selected", "true"));
+        interactionsPage.clickTabPreventPropogation();
+        wait.until(attributeToBe(interactionsPage.preventPropogation, "aria-selected", "true"));
+        interactionsPage.clickTabAccept();
+        wait.until(attributeToBe(interactionsPage.accept, "aria-selected", "true"));
+        interactionsPage.clickTabSimple();
+        wait.until(attributeToBe(interactionsPage.simple, "aria-selected", "true"));
+    }
 }

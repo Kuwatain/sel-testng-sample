@@ -17,6 +17,8 @@ public class InteractionsPage {
     public WebElement selectable;
     @FindBy(xpath = "//li[contains(., 'Resizable')]")
     public WebElement resizable;
+    @FindBy(xpath = "//li[contains(., 'Droppable')]")
+    public WebElement droppable;
 
     @FindBy(xpath = "//a[@id = 'demo-tab-list']")
     private WebElement demoTabList;
@@ -38,6 +40,14 @@ public class InteractionsPage {
     @FindBy(xpath = "//div[@id = 'resizable']/span")
     public WebElement reactResizableHandle2;
 
+    @FindBy(xpath = "//a[contains(@id, 'simple')]")
+    public WebElement simple;
+    @FindBy(xpath = "//a[contains(@id, 'accept')]")
+    public WebElement accept;
+    @FindBy(xpath = "//a[contains(@id, 'preventPropogation')]")
+    public WebElement preventPropogation;
+    @FindBy(xpath = "//a[contains(@id, 'revertable')]")
+    public WebElement revertable;
 
     public void clickDemoTabList() {
         demoTabList.click();
@@ -77,6 +87,22 @@ public class InteractionsPage {
 
     public void clickListGroupItem(String text) {
         getListGroupItem(text).click();
+    }
+
+    public void clickTabSimple() {
+        simple.click();
+    }
+
+    public void clickTabAccept() {
+        accept.click();
+    }
+
+    public void clickTabPreventPropogation() {
+        preventPropogation.click();
+    }
+
+    public void clickTabRevertable() {
+        revertable.click();
     }
 
     private WebDriver driver;
