@@ -38,6 +38,7 @@ public class BaseTest {
         HashMap<String, Object> prefs = new HashMap<>();
         prefs.put("download.default_directory", downloadDirVersion2);
         ChromeOptions opts = new ChromeOptions();
+        opts.addArguments("--remote-allow-origins=*");
         opts.setExperimentalOption("prefs", prefs);
 //        opts.addArguments("--headless");
 

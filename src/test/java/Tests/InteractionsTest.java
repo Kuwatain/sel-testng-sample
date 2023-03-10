@@ -116,4 +116,46 @@ public class InteractionsTest extends BaseTest {
         actions.clickAndHold(interactionsPage.reactResizableHandle2).moveByOffset(980, 280).click().build().perform();
         wait.until(attributeToBe(interactionsPage.resizableBox, "style", "width: 1000px; height: 300px;"));
     }
+
+    @Test
+    public void droppableTest() {
+
+        driver.get("https://demoqa.com/");
+
+        landingPage.clickCategoryCardsInteractions();
+        clickJS(interactionsPage.droppable);
+
+        interactionsPage.clickTabRevertable();
+        wait.until(attributeToBe(interactionsPage.revertable, "aria-selected", "true"));
+        interactionsPage.clickTabPreventPropogation();
+        wait.until(attributeToBe(interactionsPage.preventPropogation, "aria-selected", "true"));
+        interactionsPage.clickTabAccept();
+        wait.until(attributeToBe(interactionsPage.accept, "aria-selected", "true"));
+        interactionsPage.clickTabSimple();
+        wait.until(attributeToBe(interactionsPage.simple, "aria-selected", "true"));
+
+        interactionsPage.dragAndDropSimple();
+        wait.until(textToBePresentInElement(interactionsPage.droppableSimple, "Dropped!"));
+
+        interactionsPage.clickTabAccept();
+        interactionsPage.dragAndDropNotAccept();
+        wait.until(textToBePresentInElement(interactionsPage.droppableAccept, "Drop here"));
+        interactionsPage.dragAndDropAccept();
+        wait.until(textToBePresentInElement(interactionsPage.droppableAccept, "Dropped!"));
+
+        interactionsPage.clickTabPreventPropogation();
+        interactionsPage.dragAndDropNotGreedy();
+        wait.until(textToBePresentInElement(interactionsPage.notGreedyDropBox, "Dropped!"));
+        wait.until(textToBePresentInElement(interactionsPage.notGreedyInnerDropBox, "Dropped!"));
+        interactionsPage.dragAndDropGreedy();
+        wait.until(textToBePresentInElement(interactionsPage.greedyDropBox, "Outer droppable"));
+        wait.until(textToBePresentInElement(interactionsPage.greedyDropBoxInner, "Dropped!"));
+
+        interactionsPage.clickTabRevertable();
+        interactionsPage.dragAndDropRevertable();
+        wait.until(textToBePresentInElement(interactionsPage.droppableRevertable, "Dropped!"));
+        wait.until(attributeToBe(interactionsPage.revertableBox, "style", "position: relative; left: 0px; top: 0px;"));
+        interactionsPage.dragAndDropNotRevertable();
+        wait.until(attributeToBe(interactionsPage.notRevertable, "style", "position: relative; left: 353px; top: -17px;"));
+    }
 }
