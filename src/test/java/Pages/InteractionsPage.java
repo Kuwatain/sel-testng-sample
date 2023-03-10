@@ -49,6 +49,33 @@ public class InteractionsPage {
     @FindBy(xpath = "//a[contains(@id, 'revertable')]")
     public WebElement revertable;
 
+    @FindBy(xpath = "//div[@id ='draggable']")
+    public WebElement draggable;
+    @FindBy(xpath = "//div[contains(@id, 'simple')]/div[@id ='droppable']")
+    public WebElement droppableSimple;
+    @FindBy(xpath = "//div[@id ='acceptable']")
+    public WebElement acceptable;
+    @FindBy(xpath = "//div[@id ='notAcceptable']")
+    public WebElement notAcceptable;
+    @FindBy(xpath = "//div[contains(@id, 'accept')]/div[@id ='droppable']")
+    public WebElement droppableAccept;
+    @FindBy(xpath = "//div[@id ='dragBox']")
+    public WebElement dragBox;
+    @FindBy(xpath = "//div[@id ='notGreedyDropBox']")
+    public WebElement notGreedyDropBox;
+    @FindBy(xpath = "//div[@id ='notGreedyInnerDropBox']")
+    public WebElement notGreedyInnerDropBox;
+    @FindBy(xpath = "//div[@id ='greedyDropBox']")
+    public WebElement greedyDropBox;
+    @FindBy(xpath = "//div[@id ='greedyDropBoxInner']")
+    public WebElement greedyDropBoxInner;
+    @FindBy(xpath = "//div[contains(@id, 'revertable')]/div[@id ='droppable']")
+    public WebElement droppableRevertable;
+    @FindBy(xpath = "//div[@id ='revertable']")
+    public WebElement revertableBox;
+    @FindBy(xpath = "//div[@id ='notRevertable']")
+    public WebElement notRevertable;
+
     public void clickDemoTabList() {
         demoTabList.click();
     }
@@ -103,6 +130,34 @@ public class InteractionsPage {
 
     public void clickTabRevertable() {
         revertable.click();
+    }
+
+    public void dragAndDropSimple() {
+        actions.dragAndDrop(draggable, droppableSimple).build().perform();
+    }
+
+    public void dragAndDropNotAccept() {
+        actions.dragAndDrop(notAcceptable, droppableAccept).build().perform();
+    }
+
+    public void dragAndDropAccept() {
+        actions.dragAndDrop(acceptable, droppableAccept).build().perform();
+    }
+
+    public void dragAndDropNotGreedy() {
+        actions.dragAndDrop(dragBox, notGreedyInnerDropBox).build().perform();
+    }
+
+    public void dragAndDropGreedy() {
+        actions.dragAndDrop(dragBox, greedyDropBoxInner).build().perform();
+    }
+
+    public void dragAndDropNotRevertable() {
+        actions.dragAndDrop(notRevertable, droppableRevertable).build().perform();
+    }
+
+    public void dragAndDropRevertable() {
+        actions.dragAndDrop(revertableBox, droppableRevertable).build().perform();
     }
 
     private WebDriver driver;
