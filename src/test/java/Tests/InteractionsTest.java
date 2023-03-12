@@ -158,4 +158,39 @@ public class InteractionsTest extends BaseTest {
         interactionsPage.dragAndDropNotRevertable();
         wait.until(attributeToBe(interactionsPage.notRevertable, "style", "position: relative; left: 353px; top: -17px;"));
     }
+
+    @Test
+    public void dragabbleTest() {
+        driver.get("https://demoqa.com/");
+
+        landingPage.clickCategoryCardsInteractions();
+        clickJS(interactionsPage.dragabble);
+
+        wait.until(attributeToBe(interactionsPage.simple, "aria-selected", "true"));
+        actions.dragAndDropBy(interactionsPage.dragBox, 100, 100).build().perform();
+        wait.until(attributeToBe(interactionsPage.dragBox, "style", "position: relative; left: 100px; top: 100px;"));
+
+        interactionsPage.clickTabAxisRestriction();
+        wait.until(attributeToBe(interactionsPage.axisRestriction, "aria-selected", "true"));
+        actions.dragAndDropBy(interactionsPage.restrictedX, 100, 100).build().perform();
+        wait.until(attributeToBe(interactionsPage.restrictedX, "style", "position: relative; left: 100px; top: 0px;"));
+        actions.dragAndDropBy(interactionsPage.restrictedY, 100, 100).build().perform();
+        wait.until(attributeToBe(interactionsPage.restrictedY, "style", "position: relative; left: 0px; top: 100px;"));
+
+        interactionsPage.clickTabContainerRestriction();
+        wait.until(attributeToBe(interactionsPage.containerRestriction, "aria-selected", "true"));
+        actions.dragAndDropBy(interactionsPage.withinTheBox, 673, 106).build().perform();
+        wait.until(attributeToBe(interactionsPage.withinTheBox, "style", "position: relative; left: 673px; top: 106px;"));
+        actions.dragAndDropBy(interactionsPage.withinMyParent, 13, 86).build().perform();
+        wait.until(attributeToBe(interactionsPage.withinMyParent, "style", "position: relative; left: 13px; top: 86px;"));
+
+        interactionsPage.clickTabCursorStyle();
+        wait.until(attributeToBe(interactionsPage.cursorStyle, "aria-selected", "true"));
+        actions.dragAndDropBy(interactionsPage.cursorCenter, 300, 100).build().perform();
+        wait.until(attributeToBe(interactionsPage.cursorCenter, "style", "position: relative; left: 293.734px; top: 94px;"));
+        actions.dragAndDropBy(interactionsPage.cursorTopLeft, 300, 100).build().perform();
+        wait.until(attributeToBe(interactionsPage.cursorTopLeft, "style", "position: relative; left: 354.734px; top: 155px;"));
+        actions.dragAndDropBy(interactionsPage.cursorBottom, 300, 100).build().perform();
+        wait.until(attributeToBe(interactionsPage.cursorBottom, "style", "position: relative; left: 300px; top: 50px;"));
+    }
 }
