@@ -19,6 +19,8 @@ public class InteractionsPage {
     public WebElement resizable;
     @FindBy(xpath = "//li[contains(., 'Droppable')]")
     public WebElement droppable;
+    @FindBy(xpath = "//li[contains(., 'Dragabble')]")
+    public WebElement dragabble;
 
     @FindBy(xpath = "//a[@id = 'demo-tab-list']")
     private WebElement demoTabList;
@@ -75,6 +77,28 @@ public class InteractionsPage {
     public WebElement revertableBox;
     @FindBy(xpath = "//div[@id ='notRevertable']")
     public WebElement notRevertable;
+
+    @FindBy(xpath = "//a[contains(@id, 'axisRestriction')]")
+    public WebElement axisRestriction;
+    @FindBy(xpath = "//a[contains(@id, 'containerRestriction')]")
+    public WebElement containerRestriction;
+    @FindBy(xpath = "//a[contains(@id, 'cursorStyle')]")
+    public WebElement cursorStyle;
+
+    @FindBy(xpath = "//div[@id = 'restrictedX']")
+    public WebElement restrictedX;
+    @FindBy(xpath = "//div[@id = 'restrictedY']")
+    public WebElement restrictedY;
+    @FindBy(xpath = "//div[@id ='containmentWrapper']/div")
+    public WebElement withinTheBox;
+    @FindBy(xpath = "//div[contains(@class, 'ui-widget-content m-3')]/span")
+    public WebElement withinMyParent;
+    @FindBy(xpath = "//div[@id = 'cursorCenter']")
+    public WebElement cursorCenter;
+    @FindBy(xpath = "//div[@id = 'cursorTopLeft']")
+    public WebElement cursorTopLeft;
+    @FindBy(xpath = "//div[@id = 'cursorBottom']")
+    public WebElement cursorBottom;
 
     public void clickDemoTabList() {
         demoTabList.click();
@@ -158,6 +182,18 @@ public class InteractionsPage {
 
     public void dragAndDropRevertable() {
         actions.dragAndDrop(revertableBox, droppableRevertable).build().perform();
+    }
+
+    public void clickTabAxisRestriction() {
+        axisRestriction.click();
+    }
+
+    public void clickTabContainerRestriction() {
+        containerRestriction.click();
+    }
+
+    public void clickTabCursorStyle() {
+        cursorStyle.click();
     }
 
     private WebDriver driver;
