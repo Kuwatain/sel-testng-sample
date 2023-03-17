@@ -30,7 +30,7 @@ public class AlertsFrameWindowsTest extends BaseTest {
     }
 
     @Test
-    public void alertsTest() throws InterruptedException {
+    public void alertsTest() {
 
         driver.get("https://demoqa.com/");
 

@@ -10,7 +10,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import java.io.File;
@@ -26,10 +25,13 @@ public class BaseTest {
     public AlertsFrameWindowsPage alertsFrameWindowsPage;
     public WidgetsPage widgetsPage;
     public InteractionsPage interactionsPage;
+    public BookStoreApplicationPage bookAppPage;
     TableHelper tableHelper;
     public static Actions actions;
     public static WebDriverWait wait;
     CalendarHelper calendarHelper;
+//    public static  RequestSpecification spec;
+
 
     @BeforeMethod
     public void beforeMethod() {
@@ -45,21 +47,26 @@ public class BaseTest {
 
         driver = new ChromeDriver(opts);
         driver.manage().window().maximize();
-//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
+//        spec = new RequestSpecBuilder()
+//                .setBaseUri("https://demoqa.com")
+//                .setContentType(ContentType.JSON)
+//                .build();
         landingPage = new LandingPage(driver);
         elementsPage = new ElementsPage(driver);
         formsPage = new FormsPage(driver);
         alertsFrameWindowsPage = new AlertsFrameWindowsPage(driver);
         widgetsPage = new WidgetsPage(driver);
         interactionsPage = new InteractionsPage(driver);
+        bookAppPage = new BookStoreApplicationPage(driver);
         tableHelper = new TableHelper(driver);
         actions = new Actions(driver);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         calendarHelper = new CalendarHelper(driver);
     }
 
-    @AfterMethod
+    //    @AfterMethod
     public void afterMethod() {
         driver.quit();
     }
