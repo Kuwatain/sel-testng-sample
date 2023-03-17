@@ -92,13 +92,13 @@ public class BookStoreApplicationTest extends BaseTest {
 
     @Test
     public void deleteUserTest() {
-        addingAUser("Nikita", "123456Aa!", 201);
+        addingAUser("Gena", "123456Aa!", 201);
         driver.get("https://demoqa.com/");
 
         clickJS(landingPage.bookStoreApplication);
         clickJS(bookAppPage.menuListLogin);
 
-        bookAppPage.enterUserName("Nikita");
+        bookAppPage.enterUserName("Gena");
         bookAppPage.enterPassword("123456Aa!");
         bookAppPage.clickLoginButton();
 
@@ -112,7 +112,7 @@ public class BookStoreApplicationTest extends BaseTest {
         AssertJUnit.assertEquals(alert.getText(), "User Deleted.");
         alert.accept();
 
-        bookAppPage.enterUserName("Nikita");
+        bookAppPage.enterUserName("Gena");
         bookAppPage.enterPassword("123456Aa!");
         bookAppPage.clickLoginButton();
         wait.until(textToBePresentInElement(bookAppPage.error, "Invalid username or password!"));
