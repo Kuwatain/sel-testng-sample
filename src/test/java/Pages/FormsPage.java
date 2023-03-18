@@ -6,6 +6,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import static Tests.BaseTest.wait;
+import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
+
 public class FormsPage {
     @FindBy(xpath = "//li[contains(., 'Practice Form')]")
     public WebElement practiceForm;
@@ -106,7 +109,7 @@ public class FormsPage {
     }
 
     private WebElement getElementDropDownMenu(String name) {
-        return driver.findElement(By.xpath("//div[contains(@id, 'react-select') and .='" + name + "']"));
+        return wait.until(presenceOfElementLocated(By.xpath("//div[contains(@id, 'react-select') and .='" + name + "']")));
     }
 
     public void sendKeysAndClickSubjects(String send, String subjectsName) {
@@ -115,7 +118,7 @@ public class FormsPage {
     }
 
     private WebElement getRemoveSubjectElement(String name) {
-        return driver.findElement(By.xpath("//div[contains(@class, 'multi-value__label') and (text() = '" + name + "')]//following-sibling::div[contains(@class, 'remove')]"));
+        return wait.until(presenceOfElementLocated(By.xpath("//div[contains(@class, 'multi-value__label') and (text() = '" + name + "')]//following-sibling::div[contains(@class, 'remove')]")));
     }
 
     public void clickRemoveSubjectsElement(String subjectsRemove) {

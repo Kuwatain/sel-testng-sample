@@ -26,10 +26,13 @@ public class BaseTest {
     public AlertsFrameWindowsPage alertsFrameWindowsPage;
     public WidgetsPage widgetsPage;
     public InteractionsPage interactionsPage;
+    public BookStoreApplicationPage bookAppPage;
     TableHelper tableHelper;
     public static Actions actions;
     public static WebDriverWait wait;
     CalendarHelper calendarHelper;
+//    public static  RequestSpecification spec;
+
 
     @BeforeMethod
     public void beforeMethod() {
@@ -45,14 +48,19 @@ public class BaseTest {
 
         driver = new ChromeDriver(opts);
         driver.manage().window().maximize();
-//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
+//        spec = new RequestSpecBuilder()
+//                .setBaseUri("https://demoqa.com")
+//                .setContentType(ContentType.JSON)
+//                .build();
         landingPage = new LandingPage(driver);
         elementsPage = new ElementsPage(driver);
         formsPage = new FormsPage(driver);
         alertsFrameWindowsPage = new AlertsFrameWindowsPage(driver);
         widgetsPage = new WidgetsPage(driver);
         interactionsPage = new InteractionsPage(driver);
+        bookAppPage = new BookStoreApplicationPage(driver);
         tableHelper = new TableHelper(driver);
         actions = new Actions(driver);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
