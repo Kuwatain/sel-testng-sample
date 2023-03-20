@@ -31,6 +31,92 @@ public class Api {
                 .extract().response();
     }
 
+
+    public static void creatingAUniqueUser(String randomUserName, String randomPassword) {
+        RequestSpecification spec = new RequestSpecBuilder()
+                .setBaseUri("https://demoqa.com")
+                .setContentType(ContentType.JSON)
+                .build();
+        JSONObject requestBody = new JSONObject()
+                .put("userName", randomUserName)
+                .put("password", randomPassword);
+        given(spec).log().all()
+                .body(requestBody.toString())
+                .when()
+                .post("/Account/v1/User")
+                .then()
+                .statusCode(201)
+                .extract().response();
+    }
+
+    public static void creatingAUniqueUserWithBooks(String randomUserName, String randomPassword) {
+        RequestSpecification spec = new RequestSpecBuilder()
+                .setBaseUri("https://demoqa.com")
+                .setContentType(ContentType.JSON)
+                .build();
+        JSONObject requestBody = new JSONObject()
+                .put("userName", randomUserName)
+                .put("password", randomPassword);
+        String userId = given(spec).log().all()
+                .body(requestBody.toString())
+                .when()
+                .post("/Account/v1/User")
+                .then()
+                .statusCode(201)
+                .extract().response().jsonPath().get("userID");
+
+        String token = given(spec)
+                .body(requestBody.toString())
+                .when()
+                .header("book", "book.isbn", "9781449365035")
+                .post("/Account/v1/GenerateToken")
+                .then()
+                .statusCode(200)
+                .extract().response().jsonPath().get("token");
+
+        given(spec).auth().preemptive().oauth2(token).log().ifValidationFails(LogDetail.ALL)
+                .body("{\n" +
+                        "    \"userId\": \"" + userId + "\",\n" +
+                        "    \"collectionOfIsbns\": [\n" +
+                        "        {\n" +
+                        "            \"isbn\": \"9781449325862\"\n" +
+                        "        }\n" +
+                        "    ]\n" +
+                        "}")
+                .when()
+                .post("/BookStore/v1/Books")
+                .then().log().all()
+                .statusCode(201);
+
+        given(spec).auth().preemptive().oauth2(token).log().ifValidationFails(LogDetail.ALL)
+                .body("{\n" +
+                        "    \"userId\": \"" + userId + "\",\n" +
+                        "    \"collectionOfIsbns\": [\n" +
+                        "        {\n" +
+                        "            \"isbn\": \"9781449331818\"\n" +
+                        "        }\n" +
+                        "    ]\n" +
+                        "}")
+                .when()
+                .post("/BookStore/v1/Books")
+                .then().log().all()
+                .statusCode(201);
+
+        given(spec).auth().preemptive().oauth2(token).log().ifValidationFails(LogDetail.ALL)
+                .body("{\n" +
+                        "    \"userId\": \"" + userId + "\",\n" +
+                        "    \"collectionOfIsbns\": [\n" +
+                        "        {\n" +
+                        "            \"isbn\": \"9781449365035\"\n" +
+                        "        }\n" +
+                        "    ]\n" +
+                        "}")
+                .when()
+                .post("/BookStore/v1/Books")
+                .then().log().all()
+                .statusCode(201);
+    }
+
     @Test
     public void addingAnExistingUserTest() {
         RequestSpecification spec = new RequestSpecBuilder()

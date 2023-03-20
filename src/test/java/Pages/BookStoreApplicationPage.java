@@ -1,13 +1,19 @@
 package Pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import static Tests.BaseTest.wait;
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
+
 public class BookStoreApplicationPage {
     @FindBy(xpath = "//li[contains(., 'Login')]")
     public WebElement menuListLogin;
+    @FindBy(xpath = "//li[contains(., 'Profile')]")
+    public WebElement menuListProfile;
 
     @FindBy(xpath = "//button[@id = 'login']")
     private WebElement loginButton;
@@ -21,14 +27,19 @@ public class BookStoreApplicationPage {
     private WebElement deleteAccountButton;
     @FindBy(xpath = "//button[@id = 'submit' and text() ='Log out']")
     private WebElement logOutButton;
-    @FindBy(xpath = "//button[@id = 'submit' and text() ='Go To Book Store']")
-    private WebElement goToBookStoreButton;
+    @FindBy(xpath = "//button[@id = 'gotoStore']")
+    private WebElement gotoStore;
     @FindBy(xpath = "//button[@id = 'submit' and text() ='Delete All Books']")
     private WebElement deleteAllBooksButton;
     @FindBy(xpath = "//button[@id = 'closeSmallModal-ok']")
     private WebElement closeSmallModalOk;
     @FindBy(xpath = "//button[@id = 'closeSmallModal-cancel']")
     private WebElement closeSmallModalCancel;
+    @FindBy(xpath = "//button[@id = 'addNewRecordButton' and text() = 'Back To Book Store']")
+    private WebElement backToBookStoredButton;
+    @FindBy(xpath = "//button[@id = 'addNewRecordButton' and text() = 'Add To Your Collection']")
+    private WebElement addToYourCollectionButton;
+
     @FindBy(xpath = "//input[@id = 'userName']")
     public WebElement userName;
     @FindBy(xpath = "//input[@id = 'password']")
@@ -37,13 +48,34 @@ public class BookStoreApplicationPage {
     public WebElement firstName;
     @FindBy(xpath = "//input[@id = 'lastname']")
     public WebElement lastName;
-    @FindBy(xpath = "//div[contains(@class, 'modal-dialog')]")
-    public WebElement modalDialog;
+    @FindBy(xpath = "//input[@id = 'searchBox']")
+    private WebElement searchBox;
+
+    @FindBy(xpath = "//div[@id = 'ISBN-wrapper']//label[@id ='userName-value']")
+    public WebElement ISBNWrapper;
+    @FindBy(xpath = "//div[@id = 'title-wrapper']//label[@id ='userName-value']")
+    public WebElement titleWrapper;
+    @FindBy(xpath = "//div[@id = 'subtitle-wrapper']//label[@id ='userName-value']")
+    public WebElement subtitleWrapper;
+    @FindBy(xpath = "//div[@id = 'author-wrapper']//label[@id ='userName-value']")
+    public WebElement authorWrapper;
+    @FindBy(xpath = "//div[@id = 'publisher-wrapper']//label[@id ='userName-value']")
+    public WebElement publisherWrapper;
+    @FindBy(xpath = "//div[@id = 'pages-wrapper']//label[@id ='userName-value']")
+    public WebElement pagesWrapper;
+    @FindBy(xpath = "//div[@id = 'description-wrapper']//label[@id ='userName-value']")
+    public WebElement descriptionWrapper;
+    @FindBy(xpath = "//div[@id = 'website-wrapper']//label[@id ='userName-value']")
+    public WebElement websiteWrapper;
+
     @FindBy(xpath = "//p[@id = 'name']")
     public WebElement error;
 
     @FindBy(xpath = "//label[@id = 'userName-value']")
     public WebElement userNameValue;
+
+    @FindBy(xpath = "//span[@id ='delete-record-undefined']")
+    private WebElement deleteBook;
 
     public void clickLoginButton() {
         loginButton.click();
@@ -69,11 +101,11 @@ public class BookStoreApplicationPage {
         logOutButton.click();
     }
 
-    public void clickGoToBookStoreButton() {
-        goToBookStoreButton.click();
+    public void clickGotoStoreButton() {
+        gotoStore.click();
     }
 
-    public void clickDeleteAllBooksButtonn() {
+    public void clickDeleteAllBooksButton() {
         deleteAllBooksButton.click();
     }
 
@@ -83,6 +115,14 @@ public class BookStoreApplicationPage {
 
     public void clickCloseSmallModalCancelButton() {
         closeSmallModalCancel.click();
+    }
+
+    public void clickBackToBookStoredButton() {
+        backToBookStoredButton.click();
+    }
+
+    public void clickAddToYourCollectionButton() {
+        addToYourCollectionButton.click();
     }
 
     public void enterUserName(String username) {
@@ -103,6 +143,31 @@ public class BookStoreApplicationPage {
 
     public String getBorderColorInput(WebElement element) {
         return element.getCssValue("border-color");
+    }
+
+    public void enterSearchBox(String book) {
+        searchBox.clear();
+        searchBox.sendKeys(book);
+    }
+
+    public void clickDeleteBook() {
+        deleteBook.click();
+    }
+
+    private WebElement getBookId(String id) {
+        return wait.until(presenceOfElementLocated(By.xpath("//span[@id = 'see-book-" + id + "']")));
+    }
+
+    public void clickBook(String title) {
+        getBookId(title).click();
+    }
+
+    public boolean invisibilityBook(String title) {
+        return wait.until(invisibilityOfElementLocated(By.xpath("//span[@id = 'see-book-" + title + "']")));
+    }
+
+    public WebElement visibilityBook(String title) {
+        return wait.until(visibilityOf(getBookId(title)));
     }
 
 

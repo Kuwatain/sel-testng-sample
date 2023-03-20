@@ -3,6 +3,13 @@ package Tests;
 import Helpers.CalendarHelper;
 import Helpers.TableHelper;
 import Pages.*;
+import io.restassured.RestAssured;
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
+import io.restassured.http.ContentType;
+import io.restassured.specification.RequestSpecification;
+import org.json.JSONObject;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,6 +25,8 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static io.restassured.RestAssured.given;
+
 public class BaseTest {
     public WebDriver driver;
     public LandingPage landingPage;
@@ -31,7 +40,7 @@ public class BaseTest {
     public static Actions actions;
     public static WebDriverWait wait;
     CalendarHelper calendarHelper;
-//    public static  RequestSpecification spec;
+//    public static RequestSpecification spec;
 
 
     @BeforeMethod
