@@ -210,6 +210,10 @@ public class BookStoreApplicationTest extends BaseTest {
         AssertJUnit.assertEquals(alert.getText(), "No books available in your's collection!");
         alert.accept();
 
+        bookAppPage.clickLogOutButton();
+        bookAppPage.enterUserName(randomUserName);
+        bookAppPage.enterPassword(randomPassword);
+        bookAppPage.clickLoginButton();
         bookAppPage.invisibilityBook("Git Pocket Guide");
         bookAppPage.invisibilityBook("Learning JavaScript Design Patterns");
         bookAppPage.invisibilityBook("Speaking JavaScript");
