@@ -154,12 +154,12 @@ public class BookStoreApplicationPage {
         deleteBook.click();
     }
 
-    private WebElement getBookId(String id) {
+    private WebElement getBookById(String id) {
         return wait.until(presenceOfElementLocated(By.xpath("//span[@id = 'see-book-" + id + "']")));
     }
 
     public void clickBook(String title) {
-        getBookId(title).click();
+        getBookById(title).click();
     }
 
     public boolean invisibilityBook(String title) {
@@ -167,7 +167,7 @@ public class BookStoreApplicationPage {
     }
 
     public WebElement visibilityBook(String title) {
-        return wait.until(visibilityOf(getBookId(title)));
+        return wait.until(visibilityOf(getBookById(title)));
     }
 
 
