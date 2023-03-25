@@ -14,7 +14,7 @@ public class BookStoreApplicationTest extends BaseTest {
 
     @Test
     public void loginUserTest() {
-        addingAUser("Nikita", "123456Aa!", 201);
+        addingAUser("Nikita", "123456Aa!");
         driver.get("https://demoqa.com/");
 
         clickJS(landingPage.bookStoreApplication);
@@ -94,7 +94,7 @@ public class BookStoreApplicationTest extends BaseTest {
 
     @Test
     public void deleteUserTest() {
-        addingAUser("Gena", "123456Aa!", 201);
+        addingAUser("Gena", "123456Aa!");
         driver.get("https://demoqa.com/");
 
         clickJS(landingPage.bookStoreApplication);
