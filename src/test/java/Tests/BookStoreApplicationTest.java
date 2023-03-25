@@ -1,6 +1,6 @@
 package Tests;
 
-import org.apache.commons.lang3.RandomStringUtils;
+import Model.User;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.AssertJUnit;
@@ -11,6 +11,7 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.textToBePresentI
 import static org.testng.Assert.assertEquals;
 
 public class BookStoreApplicationTest extends BaseTest {
+
     @Test
     public void loginUserTest() {
         addingAUser("Nikita", "123456Aa!", 201);
@@ -121,16 +122,16 @@ public class BookStoreApplicationTest extends BaseTest {
 
     @Test
     public void addBookProfileUserTest() {
-        String randomUserName = RandomStringUtils.randomAlphabetic(15);
-        String randomPassword = RandomStringUtils.randomAlphanumeric(15) + "8Aa!";
-        creatingAUniqueUser(randomUserName, randomPassword);
+        User user = new User("asd", "asd", "asd@gmail.com");
+        creatingAUniqueUser(user);
+
         driver.get("https://demoqa.com");
 
         clickJS(landingPage.bookStoreApplication);
         clickJS(bookAppPage.menuListLogin);
 
-        bookAppPage.enterUserName(randomUserName);
-        bookAppPage.enterPassword(randomPassword);
+        bookAppPage.enterUserName(user.getUserName());
+        bookAppPage.enterPassword(user.getPassword());
         bookAppPage.clickLoginButton();
 
         bookAppPage.clickGotoStoreButton();
@@ -164,31 +165,30 @@ public class BookStoreApplicationTest extends BaseTest {
         bookAppPage.clickBackToBookStoredButton();
 
         bookAppPage.clickLogOutButton();
-        bookAppPage.enterUserName(randomUserName);
-        bookAppPage.enterPassword(randomPassword);
+        bookAppPage.enterUserName(user.getUserName());
+        bookAppPage.enterPassword(user.getPassword());
         bookAppPage.clickLoginButton();
         bookAppPage.visibilityBook("Git Pocket Guide");
     }
 
     @Test
     public void deleteBookProfileUserTest() {
-        String randomUserName = RandomStringUtils.randomAlphabetic(15);
-        String randomPassword = RandomStringUtils.randomAlphanumeric(15) + "8Aa!";
-        creatingAUniqueUserWithBooks(randomUserName, randomPassword);
+        User user = new User("asd", "asd", "asd@gmail.com");
+        creatingAUniqueUserWithBooks(user.getUserName(), user.getPassword());
+
         driver.get("https://demoqa.com");
 
         clickJS(landingPage.bookStoreApplication);
         clickJS(bookAppPage.menuListLogin);
 
-        bookAppPage.enterUserName(randomUserName);
-        bookAppPage.enterPassword(randomPassword);
+        bookAppPage.enterUserName(user.getUserName());
+        bookAppPage.enterPassword(user.getPassword());
         bookAppPage.clickLoginButton();
 
-        bookAppPage.enterSearchBox("Learning JavaScript Design Patterns");
-        bookAppPage.clickDeleteBook();
+        bookAppPage.clickButtonDeleteBook("Learning JavaScript Design Patterns");
         bookAppPage.clickCloseSmallModalCancelButton();
 
-        bookAppPage.clickDeleteBook();
+        bookAppPage.clickButtonDeleteBook("Learning JavaScript Design Patterns");
         bookAppPage.clickCloseSmallModalOkButton();
         wait.until(ExpectedConditions.alertIsPresent());
         Alert alert = driver.switchTo().alert();
@@ -211,8 +211,8 @@ public class BookStoreApplicationTest extends BaseTest {
         alert.accept();
 
         bookAppPage.clickLogOutButton();
-        bookAppPage.enterUserName(randomUserName);
-        bookAppPage.enterPassword(randomPassword);
+        bookAppPage.enterUserName(user.getUserName());
+        bookAppPage.enterPassword(user.getPassword());
         bookAppPage.clickLoginButton();
         bookAppPage.invisibilityBook("Git Pocket Guide");
         bookAppPage.invisibilityBook("Learning JavaScript Design Patterns");

@@ -150,8 +150,12 @@ public class BookStoreApplicationPage {
         searchBox.sendKeys(book);
     }
 
-    public void clickDeleteBook() {
-        deleteBook.click();
+    private WebElement getDeleteButtonBookById(String id) {
+        return wait.until(presenceOfElementLocated(By.xpath("//span[@id = 'see-book-" + id + "']/parent::div/parent::div/following-sibling::div//span")));
+    }
+
+    public void clickButtonDeleteBook(String title) {
+        getDeleteButtonBookById(title).click();
     }
 
     private WebElement getBookById(String id) {
