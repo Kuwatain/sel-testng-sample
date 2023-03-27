@@ -14,6 +14,7 @@ import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalTo;
 import static org.testng.AssertJUnit.assertEquals;
 
 
@@ -112,7 +113,7 @@ public class Api {
                 .post("/Account/v1/GenerateToken")
                 .then()
                 .assertThat()
-                .body(containsString("result"), containsString("User authorization failed."))
+                .body("result", equalTo("User authorization failed."))
                 .statusCode(200)
                 .extract().response();
     }
