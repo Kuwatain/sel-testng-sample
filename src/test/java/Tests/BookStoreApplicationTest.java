@@ -14,24 +14,22 @@ public class BookStoreApplicationTest extends BaseTest {
 
     @Test
     public void loginUserTest() {
-        addingAUser("Nikita", "123456Aa!");
+        User user = new User("asd", "asd", "asd@gmail.com");
+        creatingAUniqueUser(user);
         driver.get("https://demoqa.com/");
 
         clickJS(landingPage.bookStoreApplication);
         clickJS(bookAppPage.menuListLogin);
 
-        bookAppPage.enterUserName("Nikita");
-        bookAppPage.enterPassword("123456Aa!");
+        bookAppPage.enterUserName(user.getUserName());
+        bookAppPage.enterPassword(user.getPassword());
         bookAppPage.clickLoginButton();
-        wait.until(textToBePresentInElement(bookAppPage.userNameValue, "Nikita"));
+        wait.until(textToBePresentInElement(bookAppPage.userNameValue, user.getUserName()));
 
         bookAppPage.clickLogOutButton();
-        bookAppPage.enterUserName("Nikita");
-        bookAppPage.enterPassword("123456Aa!");
+        bookAppPage.enterUserName(user.getUserName());
+        bookAppPage.enterPassword(user.getPassword());
         bookAppPage.clickLoginButton();
-
-        bookAppPage.clickDeleteAccountButton();
-        bookAppPage.clickCloseSmallModalOkButton();
     }
 
     @Test

@@ -55,17 +55,4 @@ public class DataProviders {
                 },
         };
     }
-
-    @DataProvider(name = "Login Params")
-    public static Object[][] loginParams() {
-        return new Object[][]{
-                {
-                        new User
-                                (
-                                        "User3",
-                                        "123456Aa!"
-                                )
-                },
-        };
-    }
 }

@@ -31,7 +31,6 @@ public class User {
         this.department = department;
     }
 
-
     public User(
             String firstName,
             String lastName,
@@ -63,20 +62,6 @@ public class User {
     ) {
         this.userName = userName;
         this.password = password;
-        this.firstName = "Nikita";
-        this.lastName = "Rachkov";
-        this.email = "nikita@gmail.com";
-        this.gender = "Male";
-        this.number = "9655857796";
-        this.dateOfBirth = "08 March,1998";
-        this.subjects = "Civics, Hindi";
-        this.hobbies = "Sports, Reading, Music";
-        this.picture = "BaseTest.java";
-        this.currentAddress = "Kazan";
-        this.stateAndCity = "NCR Delhi";
-        this.age = "24";
-        this.salary = "0";
-        this.department = "Yerevan";
     }
 
 
@@ -144,10 +129,17 @@ public class User {
         return password;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
     public User setUserId(String userId) {
         this.userId = userId;
         return this;
-
     }
 
     public User setToken(String token) {

@@ -1,13 +1,12 @@
 package Tests.Api;
 
-import DataProviders.DataProviders;
 import Model.User;
+import POJO.Book;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.json.JSONObject;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -24,13 +23,10 @@ public class Api {
             .setContentType(ContentType.JSON)
             .build();
 
-
     public static Response addingAUser(String userName, String password, int statusCode) {
-        JSONObject requestBody = new JSONObject()
-                .put("userName", userName)
-                .put("password", password);
+        User user = new User(userName, password);
         return given().spec(spec)
-                .body(requestBody.toString())
+                .body(user)
                 .when()
                 .post("/Account/v1/User")
                 .then()
@@ -43,12 +39,8 @@ public class Api {
     }
 
     public static String creatingAUniqueUser(User user) {
-
-        JSONObject requestBody = new JSONObject()
-                .put("userName", user.getUserName())
-                .put("password", user.getPassword());
         String userId = given().spec(spec).log().all()
-                .body(requestBody.toString())
+                .body(user)
                 .when()
                 .post("/Account/v1/User")
                 .then()
@@ -59,11 +51,8 @@ public class Api {
     }
 
     public static String generateToken(User user) {
-        JSONObject requestBody = new JSONObject()
-                .put("userName", user.getUserName())
-                .put("password", user.getPassword());
         String token = given(spec).log().ifValidationFails(LogDetail.ALL)
-                .body(requestBody.toString())
+                .body(user)
                 .when()
                 .post("/Account/v1/GenerateToken")
                 .then()
@@ -73,17 +62,9 @@ public class Api {
         return token;
     }
 
-    public static void addBook(String token, String userId, String isbn) {
-
-        given(spec).auth().preemptive().oauth2(token).log().ifValidationFails(LogDetail.ALL)
-                .body("{\n" +
-                        "    \"userId\": \"" + userId + "\",\n" +
-                        "    \"collectionOfIsbns\": [\n" +
-                        "        {\n" +
-                        "            \"isbn\": \"" + isbn + "\"\n" +
-                        "        }\n" +
-                        "    ]\n" +
-                        "}")
+    public static void addBook(User user, Book book) {
+        given(spec).auth().preemptive().oauth2(user.getToken()).log().ifValidationFails(LogDetail.ALL)
+                .body(book.getIsbn())
                 .when()
                 .post("/BookStore/v1/Books")
                 .then().log().all()
@@ -92,44 +73,41 @@ public class Api {
 
     public static void creatingAUniqueUserWithBooks(String randomUserName, String randomPassword) {
         User user = new User(randomUserName, randomPassword);
-        String userId = creatingAUniqueUser(user);
-        String token = generateToken(user);
-        addBook(token, userId, "9781449325862");
-        addBook(token, userId, "9781449331818");
-        addBook(token, userId, "9781449365035");
+        creatingAUniqueUser(user);
+        generateToken(user);
+
+        Book gitPocketGuide = new Book(user, "9781449325862");
+        Book learningJavaScriptDesignPatterns = new Book(user, "9781449331818");
+        Book speakingJavaScript = new Book(user, "9781449365035");
+
+        addBook(user, gitPocketGuide);
+        addBook(user, learningJavaScriptDesignPatterns);
+        addBook(user, speakingJavaScript);
     }
 
-    @Test(dataProvider = "Login Params", dataProviderClass = DataProviders.class)
-    public void addingAnExistingUserTest(User user) {
-        JSONObject requestBody = new JSONObject()
-                .put("userName", user.getUserName())
-                .put("password", user.getPassword());
-        String userId = addingAUser(user.getUserName(), user.getPassword()).jsonPath().get("userID");
+    @Test
+    public void addingAnExistingUserTest() {
+        User user = new User("asd", "asd", "asd@gmail.com");
 
-        String token = given().spec(spec)
-                .body(requestBody.toString())
-                .when()
-                .post("/Account/v1/GenerateToken")
-                .then()
-                .statusCode(200)
-                .extract().response().jsonPath().get("token");
+        creatingAUniqueUser(user);
+        generateToken(user);
 
         given().spec(spec)
-                .body(requestBody.toString())
+                .body(user)
                 .when()
                 .post("/Account/v1/User")
                 .then()
                 .statusCode(406);
 
-        given().spec(spec).auth().preemptive().oauth2(token).log().ifValidationFails(LogDetail.ALL)
-                .body(requestBody.toString())
+        given().spec(spec).auth().preemptive().oauth2(user.getToken()).log().ifValidationFails(LogDetail.ALL)
+                .body(user)
                 .when()
-                .delete("/Account/v1/User/" + userId)
+                .delete("/Account/v1/User/" + user.getUserId())
                 .then()
                 .statusCode(204);
 
-        given().spec(spec).auth().preemptive().oauth2(token).log().ifValidationFails(LogDetail.ALL)
-                .body(requestBody.toString())
+        given().spec(spec).auth().preemptive().oauth2(user.getToken()).log().ifValidationFails(LogDetail.ALL)
+                .body(user)
                 .when()
                 .post("/Account/v1/GenerateToken")
                 .then()
