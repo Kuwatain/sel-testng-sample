@@ -23,13 +23,13 @@ public class CalendarHelper {
         if (calendarDay == "1")
             return driver.findElement(By.xpath("//div[contains(@aria-label, '" + calendarDay + "st')]"));
 
-         if (calendarDay == "2")
+        if (calendarDay == "2")
             return driver.findElement(By.xpath("//div[contains(@aria-label, '" + calendarDay + "nd')]"));
 
-         if (calendarDay == "3")
+        if (calendarDay == "3")
             return driver.findElement(By.xpath("//div[contains(@aria-label, '" + calendarDay + "rd')]"));
 
-         return driver.findElement(By.xpath("//div[contains(@aria-label, '" + month + " " + calendarDay + "')]"));
+        return driver.findElement(By.xpath("//div[contains(@aria-label, '" + month + " " + calendarDay + "')]"));
     }
 
     public void clickDatePicker(String year, String month, String day) {

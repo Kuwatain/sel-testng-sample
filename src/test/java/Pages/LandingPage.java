@@ -16,6 +16,8 @@ public class LandingPage {
     public WebElement widgets;
     @FindBy(xpath = "//div[contains(@class, 'card mt-4 top-card') and .='Interactions']")
     public WebElement interactions;
+    @FindBy(xpath = "//div[contains(@class, 'card mt-4 top-card') and .='Book Store Application']")
+    public WebElement bookStoreApplication;
 
     public WebDriver driver;
 

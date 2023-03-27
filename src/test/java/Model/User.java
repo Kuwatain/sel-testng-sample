@@ -1,5 +1,7 @@
 package Model;
 
+import org.apache.commons.lang3.RandomStringUtils;
+
 public class User {
     private String firstName;
     private String lastName;
@@ -15,6 +17,10 @@ public class User {
     private String hobbies;
     private String picture;
     private String stateAndCity;
+    private String userName;
+    private String password;
+    private String userId;
+    private String token;
 
     public User(String firstName, String lastName, String email, String age, String salary, String department) {
         this.firstName = firstName;
@@ -25,7 +31,6 @@ public class User {
         this.department = department;
     }
 
-
     public User(
             String firstName,
             String lastName,
@@ -34,10 +39,14 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.gender =  "Male";
+        this.userName = RandomStringUtils.randomAlphabetic(15);
+        this.password = RandomStringUtils.randomAlphanumeric(15) + "8Aa!";
+        this.userId = null;
+        this.token = null;
+        this.gender = "Male";
         this.number = "9655857796";
-        this.dateOfBirth =  "08 March,1998";
-        this.subjects =  "Civics, Hindi";
+        this.dateOfBirth = "08 March,1998";
+        this.subjects = "Civics, Hindi";
         this.hobbies = "Sports, Reading, Music";
         this.picture = "BaseTest.java";
         this.currentAddress = "Kazan";
@@ -46,6 +55,15 @@ public class User {
         this.salary = "0";
         this.department = "Yerevan";
     }
+
+    public User(
+            String userName,
+            String password
+    ) {
+        this.userName = userName;
+        this.password = password;
+    }
+
 
     public String getFirstName() {
         return firstName;
@@ -101,6 +119,32 @@ public class User {
 
     public String getStateAndCity() {
         return stateAndCity;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public User setUserId(String userId) {
+        this.userId = userId;
+        return this;
+    }
+
+    public User setToken(String token) {
+        this.token = token;
+        return this;
     }
 //        public  User  setAge(String age) {
 //        this.age = age;
